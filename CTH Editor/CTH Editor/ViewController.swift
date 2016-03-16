@@ -41,5 +41,9 @@ class ViewController: NSViewController {
 	@IBAction func pauseSong(sender: NSButton) {
 		songPlayer.pause()
 	}
+	
+	@IBAction func printData(sender: NSButton) {
+		songPlayer.printData()
+	}
 }
 

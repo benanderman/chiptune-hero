@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B54001E91C98D47C00AC434D /* spaceape.xm in Resources */ = {isa = PBXBuildFile; fileRef = B54001E81C98D47800AC434D /* spaceape.xm */; };
 		B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF581C9748DA00619754 /* AppDelegate.swift */; };
 		B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF5A1C9748DA00619754 /* ViewController.swift */; };
 		B5F2EF5D1C9748DA00619754 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF5C1C9748DA00619754 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B54001E81C98D47800AC434D /* spaceape.xm */ = {isa = PBXFileReference; lastKnownFileType = file; path = spaceape.xm; sourceTree = SOURCE_ROOT; };
 		B5F2EF551C9748DA00619754 /* CTH Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CTH Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F2EF581C9748DA00619754 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F2EF5A1C9748DA00619754 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				B5F2EF6E1C97531700619754 /* a_winter_kiss.xm */,
 				B5F2EF701C9755AF00619754 /* allsort.mod */,
+				B54001E81C98D47800AC434D /* spaceape.xm */,
 			);
 			name = Resources;
 			path = "CTH Editor";
@@ -169,6 +172,7 @@
 			files = (
 				B5F2EF5D1C9748DA00619754 /* Assets.xcassets in Resources */,
 				B5F2EF601C9748DA00619754 /* Main.storyboard in Resources */,
+				B54001E91C98D47C00AC434D /* spaceape.xm in Resources */,
 				B5F2EF711C9755AF00619754 /* allsort.mod in Resources */,
 				B5F2EF6F1C97532300619754 /* a_winter_kiss.xm in Resources */,
 			);
@@ -289,6 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "CTH Editor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -298,6 +303,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -305,6 +311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "CTH Editor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -336,6 +343,7 @@
 				B5F2EF661C9748DA00619754 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

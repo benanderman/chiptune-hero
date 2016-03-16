@@ -11,4 +11,6 @@
 
 #include "mikmod.h"
 
+extern void (*MikMod_KickCallback)(int sngpos, int patpos, int *channels, int *lengths, int len);
+
 #endif /* bridge_h */
