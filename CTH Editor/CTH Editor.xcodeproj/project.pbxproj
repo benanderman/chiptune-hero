@@ -17,6 +17,8 @@
 		B5F2EF6F1C97532300619754 /* a_winter_kiss.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF6E1C97531700619754 /* a_winter_kiss.xm */; };
 		B5F2EF711C9755AF00619754 /* allsort.mod in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF701C9755AF00619754 /* allsort.mod */; };
 		B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF721C975D1200619754 /* SongPlayer.swift */; };
+		B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */; };
+		B5F8D0371C9CA67F00086F85 /* VariadicWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +47,8 @@
 		B5F2EF6E1C97531700619754 /* a_winter_kiss.xm */ = {isa = PBXFileReference; lastKnownFileType = file; path = a_winter_kiss.xm; sourceTree = SOURCE_ROOT; };
 		B5F2EF701C9755AF00619754 /* allsort.mod */ = {isa = PBXFileReference; lastKnownFileType = file; path = allsort.mod; sourceTree = SOURCE_ROOT; };
 		B5F2EF721C975D1200619754 /* SongPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongPlayer.swift; sourceTree = "<group>"; };
+		B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariadicWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 				B5F2EF5E1C9748DA00619754 /* Main.storyboard */,
 				B5F2EF611C9748DA00619754 /* Info.plist */,
 				B5F2EF6C1C974EE000619754 /* bridge.h */,
+				B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */,
+				B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */,
 			);
 			path = "CTH Editor";
 			sourceTree = "<group>";
@@ -186,8 +192,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */,
+				B5F8D0371C9CA67F00086F85 /* VariadicWrapper.m in Sources */,
 				B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */,
 				B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */,
+				B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +255,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CTH Editor/bridge.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};

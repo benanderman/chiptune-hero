@@ -13,4 +13,8 @@
 
 extern void (*MikMod_KickCallback)(int sngpos, int patpos, int *channels, int *lengths, int len);
 
+// Provide non-variadic wrappers to these functions, because Swift doesn't support variadic functions
+void Player_MuteNV(SLONG channel);
+void Player_UnmuteNV(SLONG channel);
+
 #endif /* bridge_h */

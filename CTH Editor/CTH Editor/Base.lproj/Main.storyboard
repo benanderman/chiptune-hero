@@ -699,7 +699,7 @@
                                     <action selector="loadSong:" target="XfG-lQ-9wD" id="pMS-Xg-q0N"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r9T-Ld-brW">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r9T-Ld-brW">
                                 <rect key="frame" x="14" y="192" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fp5-Jz-mU5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -709,7 +709,7 @@
                                     <action selector="playSong:" target="XfG-lQ-9wD" id="jje-ow-KkG"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Zi-Q3-wWP">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Zi-Q3-wWP">
                                 <rect key="frame" x="80" y="192" width="77" height="32"/>
                                 <buttonCell key="cell" type="push" title="Pause" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7ub-OG-F3j">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -719,7 +719,7 @@
                                     <action selector="pauseSong:" target="XfG-lQ-9wD" id="76u-QE-cyD"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEy-YP-HTk">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kEy-YP-HTk">
                                 <rect key="frame" x="157" y="192" width="101" height="32"/>
                                 <buttonCell key="cell" type="push" title="Print Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kDY-II-WOb">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -729,18 +729,72 @@
                                     <action selector="printData:" target="XfG-lQ-9wD" id="MqO-jv-h5p"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LYD-I2-ujW">
+                                <rect key="frame" x="258" y="192" width="104" height="32"/>
+                                <buttonCell key="cell" type="push" title="Write Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tD1-n7-8Fj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="writeData:" target="XfG-lQ-9wD" id="hLk-Of-jgt"/>
+                                </connections>
+                            </button>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7E-SI-qth">
+                                <rect key="frame" x="20" y="20" width="440" height="121"/>
+                                <clipView key="contentView" id="QWY-UX-UN1">
+                                    <rect key="frame" x="1" y="1" width="438" height="119"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lv9-vi-Zc1">
+                                            <rect key="frame" x="0.0" y="25" width="181" height="94"/>
+                                        </view>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="u5H-Rt-VCQ">
+                                    <rect key="frame" x="1" y="104" width="438" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="F5v-Ha-R5o">
+                                    <rect key="frame" x="423" y="1" width="16" height="119"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="s8A-Rr-yKh">
+                                <rect key="frame" x="20" y="149" width="440" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BTX-33-3Nd"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1G6-a3-IBf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="03c-bl-fwa"/>
+                            <constraint firstItem="r9T-Ld-brW" firstAttribute="top" secondItem="bF2-Sl-dl1" secondAttribute="bottom" constant="8" id="11l-Aw-n0Y"/>
                             <constraint firstItem="dK2-Cx-6U4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="21" id="7bj-tb-oUt"/>
                             <constraint firstItem="bF2-Sl-dl1" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="91v-aT-hIS"/>
+                            <constraint firstAttribute="trailing" secondItem="s8A-Rr-yKh" secondAttribute="trailing" constant="20" id="9LW-YB-14K"/>
+                            <constraint firstItem="F7E-SI-qth" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="9jU-YO-kN3"/>
+                            <constraint firstItem="kEy-YP-HTk" firstAttribute="leading" secondItem="3Zi-Q3-wWP" secondAttribute="trailing" constant="12" id="AAx-bU-fio"/>
                             <constraint firstItem="bF2-Sl-dl1" firstAttribute="leading" secondItem="1G6-a3-IBf" secondAttribute="trailing" constant="8" id="BWg-Aq-E2D"/>
+                            <constraint firstItem="QWY-UX-UN1" firstAttribute="top" secondItem="s8A-Rr-yKh" secondAttribute="bottom" constant="9" id="Hty-M3-98x"/>
+                            <constraint firstItem="r9T-Ld-brW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JG4-Xx-Dao"/>
+                            <constraint firstItem="LYD-I2-ujW" firstAttribute="leading" secondItem="kEy-YP-HTk" secondAttribute="trailing" constant="12" id="SYe-c8-Qgo"/>
+                            <constraint firstAttribute="bottom" secondItem="F7E-SI-qth" secondAttribute="bottom" constant="20" id="UrX-tE-Ac8"/>
+                            <constraint firstItem="s8A-Rr-yKh" firstAttribute="top" secondItem="r9T-Ld-brW" secondAttribute="bottom" constant="20" id="VqW-J1-n5E"/>
                             <constraint firstItem="1G6-a3-IBf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="XBi-3b-CI6"/>
                             <constraint firstAttribute="trailing" secondItem="dK2-Cx-6U4" secondAttribute="trailing" constant="20" id="Xd4-ZD-TJy"/>
+                            <constraint firstItem="s8A-Rr-yKh" firstAttribute="top" secondItem="3Zi-Q3-wWP" secondAttribute="bottom" constant="20" symbolic="YES" id="eLR-pE-bev"/>
+                            <constraint firstItem="s8A-Rr-yKh" firstAttribute="top" secondItem="LYD-I2-ujW" secondAttribute="bottom" constant="20" symbolic="YES" id="hUk-aA-W4s"/>
                             <constraint firstItem="dK2-Cx-6U4" firstAttribute="leading" secondItem="bF2-Sl-dl1" secondAttribute="trailing" constant="8" id="mqI-iP-lIa"/>
+                            <constraint firstAttribute="trailing" secondItem="F7E-SI-qth" secondAttribute="trailing" constant="20" id="oQs-7T-fdG"/>
+                            <constraint firstItem="s8A-Rr-yKh" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="qBg-sl-rHx"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LYD-I2-ujW" secondAttribute="trailing" constant="20" id="qYU-bI-Vsb"/>
+                            <constraint firstItem="s8A-Rr-yKh" firstAttribute="top" secondItem="kEy-YP-HTk" secondAttribute="bottom" constant="20" symbolic="YES" id="uf7-3a-PzK"/>
+                            <constraint firstItem="3Zi-Q3-wWP" firstAttribute="leading" secondItem="r9T-Ld-brW" secondAttribute="trailing" constant="12" id="vsU-tF-ae1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="channelChecksContainer" destination="s8A-Rr-yKh" id="vce-nE-OYk"/>
+                        <outlet property="scrollView" destination="F7E-SI-qth" id="q53-d0-lwA"/>
                         <outlet property="songTextArea" destination="bF2-Sl-dl1" id="vFz-eh-ks1"/>
                     </connections>
                 </viewController>
