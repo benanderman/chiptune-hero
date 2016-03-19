@@ -8,7 +8,13 @@
 
 import Foundation
 
+protocol SongPlayerDelegate: class {
+	func songPlayerPositionChanged(songPlayer: SongPlayer)
+}
+
 class SongPlayer {
+	
+	weak var delegate: SongPlayerDelegate?
 	
 	struct Note {
 		let length: Int
@@ -52,6 +58,8 @@ class SongPlayer {
 			Player_Free(song!)
 			SongPlayer.samples.removeAll()
 			SongPlayer.patternLengths.removeAll()
+			pattern = 0
+			row = 0
 		}
 		songPath = path
 		loadData()
@@ -111,11 +119,17 @@ class SongPlayer {
 		} else {
 			return
 		}
-		let pattern = Int(Player_GetOrder())
-		let row = Int(Player_GetRow())
-		if pattern < SongPlayer.patternLengths.count-1 {
+		let newPattern = Int(Player_GetOrder())
+		let newRow = Int(Player_GetRow())
+		guard newPattern != pattern || newRow != row else { return }
+		if pattern < SongPlayer.patternLengths.count-1 || newPattern < pattern {
 			Player_Stop()
 			return
+		}
+		pattern = newPattern
+		row = newRow
+		if let del = delegate {
+			del.songPlayerPositionChanged(self)
 		}
 		if patterns.count == 0 {
 			updatePatternLengths(pattern, row: row)
