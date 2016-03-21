@@ -13,6 +13,8 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	@IBOutlet weak var songTextArea: NSTextField!
 	@IBOutlet weak var channelChecksContainer: NSView!
 	@IBOutlet weak var scrollView: NSScrollView!
+	@IBOutlet weak var speedSlider: NSSlider!
+	@IBOutlet weak var volumeSlider: NSSlider!
 	var playHead: NSBox?
 	
 	let songPlayer = SongPlayer()
@@ -58,11 +60,16 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		scrollView.documentView = view
 		scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: view.frame.size.height - scrollView.frame.size.height))
 		scrollView.reflectScrolledClipView(scrollView.contentView)
+		
+		speedSlider.maxValue = Double((songPlayer.speed ?? 1) * 4)
+		speedSlider.numberOfTickMarks = Int(speedSlider.maxValue)
+		speedSlider.integerValue = songPlayer.speed ?? 1
+		volumeSlider.integerValue = songPlayer.volume ?? 128
 	}
 	
 	func songPlayerPositionChanged(songPlayer: SongPlayer) {
 		guard playHead != nil else { return }
-		playHead?.frame.origin.y = CGFloat(songPlayer.totalRows - songPlayer.globalRow) * 18
+		playHead?.frame.origin.y = CGFloat(songPlayer.totalRows - songPlayer.globalRow - 1) * 18
 		if !scrollView.contentView.documentVisibleRect.contains(playHead!.frame) {
 			scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
 			scrollView.reflectScrolledClipView(scrollView.contentView)
@@ -73,6 +80,15 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		let channel = sender.tag
 		let mute = sender.state != NSOnState
 		songPlayer.setChannelMute(channel, mute: mute)
+	}
+	
+	@IBAction func updateSpeed(sender: NSSlider) {
+		songPlayer.speed = Int(round(sender.doubleValue))
+		sender.integerValue = songPlayer.speed ?? 1
+	}
+	
+	@IBAction func updateVolume(sender: NSSlider) {
+		songPlayer.volume = sender.integerValue
 	}
 
 	@IBAction func loadSong(sender: NSButton) {

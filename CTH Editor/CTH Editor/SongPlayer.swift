@@ -52,6 +52,28 @@ class SongPlayer {
 		return patternStarts.count > 0 ? patternStarts.last! + patterns.last! : 0
 	}
 	
+	var speed: Int? {
+		get {
+			guard song != nil else { return nil }
+			return Int(song!.memory.sngspd)
+		}
+		set {
+			guard song != nil else { return }
+			Player_SetSpeed(newValue == nil ? UWORD(song!.memory.initspeed) : UWORD(newValue!))
+		}
+	}
+	
+	var volume: Int? {
+		get {
+			guard song != nil else { return nil }
+			return Int(song!.memory.volume)
+		}
+		set {
+			guard song != nil else { return }
+			Player_SetVolume(newValue == nil ? SWORD(song!.memory.initvolume) : SWORD(newValue!))
+		}
+	}
+	
 	func openSong(path: String) {
 		if song != nil {
 			Player_Stop()

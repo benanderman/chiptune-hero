@@ -35,7 +35,7 @@ class SongNotesView: NSView {
 			}
 			if patternOffsets.contains(i) {
 				let path = NSBezierPath(rect: NSRect(x: 0, y: y, width: frame.size.width, height: 18))
-				NSColor.blackColor().colorWithAlphaComponent(0.3).set()
+				NSColor.blueColor().colorWithAlphaComponent(0.3).set()
 				path.fill()
 			}
 		}
