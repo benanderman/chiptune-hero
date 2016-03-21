@@ -74,6 +74,14 @@ class SongPlayer {
 		}
 	}
 	
+	func nextPosition() {
+		Player_NextPosition()
+	}
+	
+	func prevPosition() {
+		Player_PrevPosition()
+	}
+	
 	func openSong(path: String) {
 		if song != nil {
 			Player_Stop()
@@ -144,7 +152,7 @@ class SongPlayer {
 		let newPattern = Int(Player_GetOrder())
 		let newRow = Int(Player_GetRow())
 		guard newPattern != pattern || newRow != row else { return }
-		if pattern < SongPlayer.patternLengths.count-1 || newPattern < pattern {
+		if pattern < SongPlayer.patternLengths.count-1 || newPattern < pattern - 1 {
 			Player_Stop()
 			return
 		}

@@ -106,6 +106,14 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		songPlayer.pause()
 	}
 	
+	@IBAction func nextPosition(sender: AnyObject) {
+		songPlayer.nextPosition()
+	}
+	
+	@IBAction func prevPosition(sender: AnyObject) {
+		songPlayer.prevPosition()
+	}
+	
 	@IBAction func printData(sender: NSButton) {
 		songPlayer.printData()
 	}
