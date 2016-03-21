@@ -49,27 +49,24 @@ class ViewController: NSViewController, SongPlayerDelegate {
 			channelChecksContainer.addSubview(checkbox)
 		}
 		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
-		for sample in songPlayer.samples {
-			for note in sample.notes {
-				let y = view.frame.size.height - CGFloat(songPlayer.patternStarts[sample.pattern] + sample.row + 1) * 18
-				let box = NSBox(frame: NSRect(x: CGFloat(note.channel) * 36, y: y, width: 36, height: 18))
-				box.fillColor = NSColor.grayColor()
-				box.boxType = .Custom
-				view.addSubview(box)
-			}
-		}
+		let notesView = SongNotesView(samples: songPlayer.samples, patternOffsets: songPlayer.patternStarts, totalRows: songPlayer.totalRows, totalChannels: totalChannels)
+		view.addSubview(notesView)
 		playHead = NSBox(frame: NSRect(x: 0, y: view.frame.size.height - 18, width: CGFloat(totalChannels) * 36, height: 18))
 		playHead!.fillColor = NSColor.greenColor().colorWithAlphaComponent(0.4)
 		playHead!.boxType = .Custom
 		view.addSubview(playHead!)
 		scrollView.documentView = view
-		scrollView.contentView.scrollToPoint(NSPoint())
+		scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: view.frame.size.height - scrollView.frame.size.height))
+		scrollView.reflectScrolledClipView(scrollView.contentView)
 	}
 	
 	func songPlayerPositionChanged(songPlayer: SongPlayer) {
 		guard playHead != nil else { return }
 		playHead?.frame.origin.y = CGFloat(songPlayer.totalRows - songPlayer.globalRow) * 18
-		scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.origin.y - scrollView.frame.size.height / 2))
+		if !scrollView.contentView.documentVisibleRect.contains(playHead!.frame) {
+			scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
+			scrollView.reflectScrolledClipView(scrollView.contentView)
+		}
 	}
 	
 	func toggleMute(sender: NSButton) {

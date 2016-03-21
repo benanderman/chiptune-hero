@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B54001E91C98D47C00AC434D /* spaceape.xm in Resources */ = {isa = PBXBuildFile; fileRef = B54001E81C98D47800AC434D /* spaceape.xm */; };
+		B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */; };
 		B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF581C9748DA00619754 /* AppDelegate.swift */; };
 		B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF5A1C9748DA00619754 /* ViewController.swift */; };
 		B5F2EF5D1C9748DA00619754 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF5C1C9748DA00619754 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		B54001E81C98D47800AC434D /* spaceape.xm */ = {isa = PBXFileReference; lastKnownFileType = file; path = spaceape.xm; sourceTree = SOURCE_ROOT; };
+		B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongNotesView.swift; sourceTree = "<group>"; };
 		B5F2EF551C9748DA00619754 /* CTH Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CTH Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F2EF581C9748DA00619754 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F2EF5A1C9748DA00619754 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				B5F2EF581C9748DA00619754 /* AppDelegate.swift */,
 				B5F2EF5A1C9748DA00619754 /* ViewController.swift */,
 				B5F2EF721C975D1200619754 /* SongPlayer.swift */,
+				B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */,
 				B5F2EF5C1C9748DA00619754 /* Assets.xcassets */,
 				B5F2EF5E1C9748DA00619754 /* Main.storyboard */,
 				B5F2EF611C9748DA00619754 /* Info.plist */,
@@ -196,6 +199,7 @@
 				B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */,
 				B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */,
 				B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */,
+				B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

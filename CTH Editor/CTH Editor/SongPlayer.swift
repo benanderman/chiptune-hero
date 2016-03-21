@@ -114,7 +114,7 @@ class SongPlayer {
 	
 	func updatePlayState() {
 		if Player_Active() {
-			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(100_000_000))
+			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
 			dispatch_after(delay, dispatch_get_main_queue(), updatePlayState)
 		} else {
 			return
