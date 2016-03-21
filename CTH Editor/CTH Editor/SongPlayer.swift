@@ -140,7 +140,7 @@ class SongPlayer {
 		if pattern >= SongPlayer.patternLengths.count {
 			SongPlayer.patternLengths.append(0)
 		}
-		SongPlayer.patternLengths[pattern] = max(row, SongPlayer.patternLengths[pattern])
+		SongPlayer.patternLengths[pattern] = max(row + 1, SongPlayer.patternLengths[pattern])
 	}
 	
 	func printData() {
@@ -185,7 +185,7 @@ class SongPlayer {
 			var total = 0
 			for i in 0 ..< self.patterns.count {
 				patternStarts.append(total)
-				total += self.patterns[i] + 1
+				total += self.patterns[i]
 			}
 		}
 		if let samples = json["samples"].array {
