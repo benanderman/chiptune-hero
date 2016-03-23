@@ -8,6 +8,16 @@
 
 import Foundation
 
+extension NotesLayer {
+	convenience init(samples: [SongPlayer.SongSample], patternOffsets: [Int], rows: Int) {
+		self.init(rows: rows)
+		for sample in samples {
+			let index = patternOffsets[sample.pattern] + sample.row
+			notes[index] = sample.notes.map { $0.channel }
+		}
+	}
+}
+
 protocol SongPlayerDelegate: class {
 	func songPlayerPositionChanged(songPlayer: SongPlayer)
 }

@@ -50,13 +50,21 @@ class ViewController: NSViewController, SongPlayerDelegate {
 			checkbox.action = #selector(ViewController.toggleMute(_:))
 			channelChecksContainer.addSubview(checkbox)
 		}
+		
 		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
-		let notesView = SongNotesView(samples: songPlayer.samples, patternOffsets: songPlayer.patternStarts, totalRows: songPlayer.totalRows, totalChannels: totalChannels)
+		let songLayer = NotesLayer(samples: songPlayer.samples, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows)
+		let activeChannelsLayer = NotesLayer(rows: songLayer.rows, color: NSColor.redColor())
+		let layers = [songLayer, activeChannelsLayer]
+		let channels = songPlayer.totalChannels ?? 0
+		let notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: channels)
+		notesView.editingLayer = activeChannelsLayer
 		view.addSubview(notesView)
+		
 		playHead = NSBox(frame: NSRect(x: 0, y: view.frame.size.height - 18, width: CGFloat(totalChannels) * 36, height: 18))
-		playHead!.fillColor = NSColor.greenColor().colorWithAlphaComponent(0.4)
-		playHead!.boxType = .Custom
+		playHead?.fillColor = NSColor.greenColor().colorWithAlphaComponent(0.4)
+		playHead?.boxType = .Custom
 		view.addSubview(playHead!)
+		
 		scrollView.documentView = view
 		scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: view.frame.size.height - scrollView.frame.size.height))
 		scrollView.reflectScrolledClipView(scrollView.contentView)
