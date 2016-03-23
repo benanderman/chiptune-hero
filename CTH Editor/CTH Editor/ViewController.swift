@@ -47,7 +47,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
 			checkbox.state = NSOnState
 			checkbox.tag = i
 			checkbox.target = self
-			checkbox.action = Selector("toggleMute:")
+			checkbox.action = #selector(ViewController.toggleMute(_:))
 			channelChecksContainer.addSubview(checkbox)
 		}
 		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
