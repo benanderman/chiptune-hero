@@ -84,6 +84,7 @@ class SongNotesView: NSView {
 		self.layers = layers
 		self.rows = rows
 		self.columns = columns
+		self.patternOffsets = patternOffsets
 	}
 
 	required init?(coder: NSCoder) {

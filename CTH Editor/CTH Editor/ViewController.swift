@@ -18,6 +18,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	var playHead: NSBox?
 	
 	let songPlayer = SongPlayer()
+	var songSpec: SongSpec?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,12 +53,18 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		}
 		
 		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
+		
 		let songLayer = NotesLayer(samples: songPlayer.samples, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows)
-		let activeChannelsLayer = NotesLayer(rows: songLayer.rows, color: NSColor.redColor())
-		let layers = [songLayer, activeChannelsLayer]
+		if songSpec == nil {
+			let activeChannels = NotesLayer(rows: songLayer.rows, color: NSColor.redColor())
+			let playable = NotesLayer(rows: songLayer.rows, color: NSColor.yellowColor())
+			songSpec = SongSpec(activeChannels: activeChannels, playable: playable)
+		}
+		let layers = [songLayer, songSpec!.activeChannels, songSpec!.playable]
+		songPlayer.songSpec = songSpec
 		let channels = songPlayer.totalChannels ?? 0
 		let notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: channels)
-		notesView.editingLayer = activeChannelsLayer
+		notesView.editingLayer = songSpec!.activeChannels
 		view.addSubview(notesView)
 		
 		playHead = NSBox(frame: NSRect(x: 0, y: view.frame.size.height - 18, width: CGFloat(totalChannels) * 36, height: 18))
@@ -82,6 +89,10 @@ class ViewController: NSViewController, SongPlayerDelegate {
 			scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
 			scrollView.reflectScrolledClipView(scrollView.contentView)
 		}
+		for i in 0 ..< songPlayer.totalChannels! {
+			let checkbox = channelChecksContainer.subviews[i] as! NSButton
+			checkbox.state = songPlayer.channelIsMuted(i) ? NSOffState : NSOnState
+		}
 	}
 	
 	func toggleMute(sender: NSButton) {
@@ -103,6 +114,13 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		let path = NSBundle.mainBundle().pathForResource(songTextArea.stringValue, ofType: nil)
 		songPlayer.openSong(path!)
 		songPlayer.delegate = self
+		songSpec = nil
+		let specPath = path! + ".spec.json"
+		if let data = NSData(contentsOfFile: specPath) {
+			let json = JSON(data: data)
+			songSpec = SongSpec(json: json)
+		}
+		songPlayer.songSpec = songSpec
 		rebuildPlayerUI()
 	}
 	
@@ -128,6 +146,16 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	
 	@IBAction func writeData(sender: NSButton) {
 		songPlayer.writeData()
+	}
+	
+	@IBAction func writeSongSpec(sender: AnyObject) {
+		if let data = try? songSpec?.toJSON().rawData() {
+			data?.writeToFile(songPlayer.songPath + ".spec.json", atomically: false)
+		}
+	}
+	
+	@IBAction func updateSelectedChannels(sender: NSPopUpButton) {
+		songPlayer.playChannels = ChannelSet(rawValue: sender.selectedTag()) ?? .Custom
 	}
 }
 

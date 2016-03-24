@@ -83,6 +83,19 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem title="Print Song Data" id="gbK-4n-2uZ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="printData:" target="Ady-hI-5gd" id="02h-YD-wzQ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Save Song Data" id="9tv-A4-6HP">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="writeData:" target="Ady-hI-5gd" id="pIP-Nb-u60"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="52B-na-n8N"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
@@ -90,7 +103,7 @@
                                         </menuItem>
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
-                                                <action selector="saveDocument:" target="Ady-hI-5gd" id="teZ-XB-qJY"/>
+                                                <action selector="writeSongSpec:" target="Ady-hI-5gd" id="uRh-af-v4C"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
@@ -480,26 +493,6 @@
                                     <action selector="pauseSong:" target="XfG-lQ-9wD" id="76u-QE-cyD"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kEy-YP-HTk">
-                                <rect key="frame" x="157" y="204" width="101" height="32"/>
-                                <buttonCell key="cell" type="push" title="Print Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kDY-II-WOb">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="printData:" target="XfG-lQ-9wD" id="MqO-jv-h5p"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LYD-I2-ujW">
-                                <rect key="frame" x="258" y="204" width="104" height="32"/>
-                                <buttonCell key="cell" type="push" title="Write Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tD1-n7-8Fj">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="writeData:" target="XfG-lQ-9wD" id="hLk-Of-jgt"/>
-                                </connections>
-                            </button>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7E-SI-qth">
                                 <rect key="frame" x="20" y="20" width="440" height="112"/>
                                 <clipView key="contentView" id="QWY-UX-UN1">
@@ -516,7 +509,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="F5v-Ha-R5o">
-                                    <rect key="frame" x="424" y="1" width="15" height="110"/>
+                                    <rect key="frame" x="423" y="1" width="16" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -563,7 +556,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TWd-nN-NYT">
-                                <rect key="frame" x="362" y="204" width="49" height="32"/>
+                                <rect key="frame" x="157" y="204" width="49" height="32"/>
                                 <buttonCell key="cell" type="push" title="&lt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iPM-Ta-GkE">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -574,7 +567,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c3U-TP-TrQ">
-                                <rect key="frame" x="411" y="204" width="49" height="32"/>
+                                <rect key="frame" x="206" y="204" width="49" height="32"/>
                                 <buttonCell key="cell" type="push" title="&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZLT-Yh-UgP">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -584,35 +577,57 @@
                                     <action selector="nextPosition:" target="XfG-lQ-9wD" id="W0W-he-b6c"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vUE-wO-08t">
+                                <rect key="frame" x="259" y="213" width="65" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Channels:" id="TnO-lB-PsS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erP-yj-Ul0">
+                                <rect key="frame" x="328" y="208" width="85" height="26"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="CmH-p3-A3n">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="3xv-11-RCn">
+                                        <items>
+                                            <menuItem title="Custom" id="DTm-XJ-DE3"/>
+                                            <menuItem title="Active" tag="1" id="Jb7-6W-FnO"/>
+                                            <menuItem title="Inactive" tag="2" id="NXV-KL-i7K"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="updateSelectedChannels:" target="XfG-lQ-9wD" id="1R5-2w-YkI"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1G6-a3-IBf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="03c-bl-fwa"/>
                             <constraint firstItem="r9T-Ld-brW" firstAttribute="top" secondItem="bF2-Sl-dl1" secondAttribute="bottom" constant="8" id="11l-Aw-n0Y"/>
-                            <constraint firstItem="3Zi-Q3-wWP" firstAttribute="top" secondItem="kEy-YP-HTk" secondAttribute="top" id="1I8-a4-9kH"/>
                             <constraint firstItem="F7E-SI-qth" firstAttribute="top" secondItem="s8A-Rr-yKh" secondAttribute="bottom" constant="15" id="5dS-X4-aWn"/>
                             <constraint firstItem="dK2-Cx-6U4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="7bj-tb-oUt"/>
                             <constraint firstItem="fBx-Da-EF0" firstAttribute="leading" secondItem="6MU-5T-Xde" secondAttribute="trailing" constant="8" id="8h1-XL-VO6"/>
                             <constraint firstItem="bF2-Sl-dl1" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="91v-aT-hIS"/>
                             <constraint firstAttribute="trailing" secondItem="s8A-Rr-yKh" secondAttribute="trailing" constant="20" id="9LW-YB-14K"/>
                             <constraint firstItem="F7E-SI-qth" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="9jU-YO-kN3"/>
-                            <constraint firstItem="kEy-YP-HTk" firstAttribute="leading" secondItem="3Zi-Q3-wWP" secondAttribute="trailing" constant="12" id="AAx-bU-fio"/>
                             <constraint firstItem="bF2-Sl-dl1" firstAttribute="leading" secondItem="1G6-a3-IBf" secondAttribute="trailing" constant="8" id="BWg-Aq-E2D"/>
                             <constraint firstItem="qor-W6-F1x" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="BYN-CT-OnL"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fBx-Da-EF0" secondAttribute="trailing" constant="20" id="FTC-b4-MjP"/>
                             <constraint firstItem="qor-W6-F1x" firstAttribute="top" secondItem="sUb-o3-BWn" secondAttribute="top" id="HIL-Yt-Ggc"/>
-                            <constraint firstItem="TWd-nN-NYT" firstAttribute="leading" secondItem="LYD-I2-ujW" secondAttribute="trailing" constant="12" id="HKR-2B-oTX"/>
                             <constraint firstItem="r9T-Ld-brW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JG4-Xx-Dao"/>
-                            <constraint firstItem="LYD-I2-ujW" firstAttribute="leading" secondItem="kEy-YP-HTk" secondAttribute="trailing" constant="12" id="SYe-c8-Qgo"/>
-                            <constraint firstItem="kEy-YP-HTk" firstAttribute="top" secondItem="LYD-I2-ujW" secondAttribute="top" id="UQp-MI-wPL"/>
                             <constraint firstAttribute="bottom" secondItem="F7E-SI-qth" secondAttribute="bottom" constant="20" id="UrX-tE-Ac8"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c3U-TP-TrQ" secondAttribute="trailing" constant="20" id="V6l-kE-DEa"/>
                             <constraint firstItem="sUb-o3-BWn" firstAttribute="top" secondItem="6MU-5T-Xde" secondAttribute="top" id="Wk4-4u-2qy"/>
                             <constraint firstItem="1G6-a3-IBf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="XBi-3b-CI6"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dK2-Cx-6U4" secondAttribute="trailing" constant="20" id="Xd4-ZD-TJy"/>
                             <constraint firstItem="6MU-5T-Xde" firstAttribute="top" secondItem="fBx-Da-EF0" secondAttribute="top" id="cpJ-2a-i8u"/>
                             <constraint firstItem="6MU-5T-Xde" firstAttribute="leading" secondItem="sUb-o3-BWn" secondAttribute="trailing" constant="20" id="d8S-0F-Fyk"/>
+                            <constraint firstItem="erP-yj-Ul0" firstAttribute="leading" secondItem="vUE-wO-08t" secondAttribute="trailing" constant="8" id="ejn-0A-gpC"/>
+                            <constraint firstItem="vUE-wO-08t" firstAttribute="leading" secondItem="c3U-TP-TrQ" secondAttribute="trailing" constant="12" id="fVA-qx-ZM2"/>
                             <constraint firstItem="s8A-Rr-yKh" firstAttribute="top" secondItem="qor-W6-F1x" secondAttribute="bottom" constant="15" id="foc-U7-5ZX"/>
                             <constraint firstItem="sUb-o3-BWn" firstAttribute="leading" secondItem="qor-W6-F1x" secondAttribute="trailing" constant="8" id="gid-5E-rNw"/>
+                            <constraint firstItem="TWd-nN-NYT" firstAttribute="leading" secondItem="3Zi-Q3-wWP" secondAttribute="trailing" constant="12" id="hiP-ok-g0E"/>
                             <constraint firstItem="qor-W6-F1x" firstAttribute="top" secondItem="r9T-Ld-brW" secondAttribute="bottom" constant="12" id="lPL-ge-Bs5"/>
                             <constraint firstItem="r9T-Ld-brW" firstAttribute="top" secondItem="3Zi-Q3-wWP" secondAttribute="top" id="mcv-Q7-O8m"/>
                             <constraint firstItem="dK2-Cx-6U4" firstAttribute="leading" secondItem="bF2-Sl-dl1" secondAttribute="trailing" constant="8" id="mqI-iP-lIa"/>
@@ -620,8 +635,11 @@
                             <constraint firstItem="c3U-TP-TrQ" firstAttribute="leading" secondItem="TWd-nN-NYT" secondAttribute="trailing" constant="12" id="ohm-Sg-PH3"/>
                             <constraint firstItem="TWd-nN-NYT" firstAttribute="top" secondItem="c3U-TP-TrQ" secondAttribute="top" id="q7N-8j-OAB"/>
                             <constraint firstItem="s8A-Rr-yKh" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="qBg-sl-rHx"/>
-                            <constraint firstItem="LYD-I2-ujW" firstAttribute="top" secondItem="TWd-nN-NYT" secondAttribute="top" id="rqY-5A-CkB"/>
+                            <constraint firstItem="3Zi-Q3-wWP" firstAttribute="top" secondItem="TWd-nN-NYT" secondAttribute="top" id="uc1-lr-up5"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="erP-yj-Ul0" secondAttribute="trailing" constant="20" id="vmT-e7-xB2"/>
                             <constraint firstItem="3Zi-Q3-wWP" firstAttribute="leading" secondItem="r9T-Ld-brW" secondAttribute="trailing" constant="12" id="vsU-tF-ae1"/>
+                            <constraint firstItem="c3U-TP-TrQ" firstAttribute="centerY" secondItem="vUE-wO-08t" secondAttribute="centerY" id="yJ3-g0-EQh"/>
+                            <constraint firstItem="vUE-wO-08t" firstAttribute="centerY" secondItem="erP-yj-Ul0" secondAttribute="centerY" id="zbc-c6-ZuF"/>
                         </constraints>
                     </view>
                     <connections>

@@ -22,6 +22,12 @@ protocol SongPlayerDelegate: class {
 	func songPlayerPositionChanged(songPlayer: SongPlayer)
 }
 
+enum ChannelSet: Int {
+	case Custom = 0
+	case Active = 1
+	case Inactive = 2
+}
+
 class SongPlayer {
 	
 	weak var delegate: SongPlayerDelegate?
@@ -53,6 +59,9 @@ class SongPlayer {
 	// Play position
 	var pattern = 0
 	var row = 0
+	
+	var playChannels = ChannelSet.Custom
+	var songSpec: SongSpec?
 	
 	var globalRow: Int {
 		return patternStarts.count > 0 ? patternStarts[pattern] + row : 0
@@ -89,7 +98,12 @@ class SongPlayer {
 	}
 	
 	func prevPosition() {
-		Player_PrevPosition()
+		if (row < 6) {
+			Player_PrevPosition()
+		} else {
+			// Go to beginning of pattern
+			Player_SetPosition(UWORD(pattern))
+		}
 	}
 	
 	func openSong(path: String) {
@@ -144,6 +158,10 @@ class SongPlayer {
 		}
 	}
 	
+	func channelIsMuted(channel: Int) -> Bool {
+		return Player_Muted(UBYTE(channel))
+	}
+	
 	func update() {
 		if Player_Active() {
 			MikMod_Update()
@@ -171,8 +189,24 @@ class SongPlayer {
 		if let del = delegate {
 			del.songPlayerPositionChanged(self)
 		}
+		updateMutedChannels()
 		if patterns.count == 0 {
 			updatePatternLengths(pattern, row: row)
+		}
+	}
+	
+	func updateMutedChannels() {
+		if playChannels == .Custom || songSpec == nil {
+			return
+		}
+		var states = [Bool](count: totalChannels ?? 0, repeatedValue: false)
+		for col in songSpec!.activeChannels[globalRow] {
+			guard col < states.count else { return }
+			states[col] = true
+		}
+		let active = playChannels == .Active
+		for i in 0 ..< states.count {
+			setChannelMute(i, mute: active ? !states[i] : states[i])
 		}
 	}
 	
@@ -223,6 +257,7 @@ class SongPlayer {
 		if let patterns = json["patterns"].array {
 			self.patterns = patterns.map { $0.intValue }
 			var total = 0
+			patternStarts = []
 			for i in 0 ..< self.patterns.count {
 				patternStarts.append(total)
 				total += self.patterns[i]

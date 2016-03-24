@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B508EAE51CA31572002B90EA /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE41CA31572002B90EA /* NotesLayer.swift */; };
+		B508EAE71CA356D4002B90EA /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE61CA356D4002B90EA /* SongSpec.swift */; };
 		B54001E91C98D47C00AC434D /* spaceape.xm in Resources */ = {isa = PBXBuildFile; fileRef = B54001E81C98D47800AC434D /* spaceape.xm */; };
 		B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */; };
 		B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF581C9748DA00619754 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		B508EAE41CA31572002B90EA /* NotesLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesLayer.swift; path = ../Sources/NotesLayer.swift; sourceTree = "<group>"; };
+		B508EAE61CA356D4002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B54001E81C98D47800AC434D /* spaceape.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = spaceape.xm; path = ../songs/spaceape.xm; sourceTree = SOURCE_ROOT; };
 		B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongNotesView.swift; sourceTree = "<group>"; };
 		B5F2EF551C9748DA00619754 /* CTH Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CTH Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,8 +73,10 @@
 			isa = PBXGroup;
 			children = (
 				B508EAE41CA31572002B90EA /* NotesLayer.swift */,
+				B508EAE61CA356D4002B90EA /* SongSpec.swift */,
 			);
 			name = "Common Sources";
+			path = ../Sources;
 			sourceTree = "<group>";
 		};
 		B5F2EF4C1C9748DA00619754 = {
@@ -208,6 +212,7 @@
 				B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */,
 				B5F8D0371C9CA67F00086F85 /* VariadicWrapper.m in Sources */,
 				B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */,
+				B508EAE71CA356D4002B90EA /* SongSpec.swift in Sources */,
 				B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */,
 				B508EAE51CA31572002B90EA /* NotesLayer.swift in Sources */,
 				B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */,
