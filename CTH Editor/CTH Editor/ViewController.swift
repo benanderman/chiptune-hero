@@ -15,7 +15,9 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	@IBOutlet weak var scrollView: NSScrollView!
 	@IBOutlet weak var speedSlider: NSSlider!
 	@IBOutlet weak var volumeSlider: NSSlider!
+	
 	var playHead: NSBox?
+	var notesView: SongNotesView?
 	
 	let songPlayer = SongPlayer()
 	var songSpec: SongSpec?
@@ -63,9 +65,9 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		let layers = [songLayer, songSpec!.activeChannels, songSpec!.playable]
 		songPlayer.songSpec = songSpec
 		let channels = songPlayer.totalChannels ?? 0
-		let notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: channels)
-		notesView.editingLayer = songSpec!.activeChannels
-		view.addSubview(notesView)
+		notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: channels)
+		notesView!.editingLayer = songSpec!.activeChannels
+		view.addSubview(notesView!)
 		
 		playHead = NSBox(frame: NSRect(x: 0, y: view.frame.size.height - 18, width: CGFloat(totalChannels) * 36, height: 18))
 		playHead?.fillColor = NSColor.greenColor().colorWithAlphaComponent(0.4)
@@ -156,6 +158,11 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	
 	@IBAction func updateSelectedChannels(sender: NSPopUpButton) {
 		songPlayer.playChannels = ChannelSet(rawValue: sender.selectedTag()) ?? .Custom
+	}
+	
+	@IBAction func updateEditingLayer(sender: NSPopUpButton) {
+		let layer = sender.selectedTag() == 0 ? songSpec?.activeChannels : songSpec?.playable
+		notesView?.editingLayer = layer
 	}
 }
 

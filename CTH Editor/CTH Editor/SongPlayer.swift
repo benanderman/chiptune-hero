@@ -186,9 +186,7 @@ class SongPlayer {
 		}
 		pattern = newPattern
 		row = newRow
-		if let del = delegate {
-			del.songPlayerPositionChanged(self)
-		}
+		delegate?.songPlayerPositionChanged(self)
 		updateMutedChannels()
 		if patterns.count == 0 {
 			updatePatternLengths(pattern, row: row)
