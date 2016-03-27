@@ -124,7 +124,7 @@ typedef char               CHAR;
 
 /* BOOL:  0=false, <>0 true -- 16 bits on Amiga, int-wide on others. */
 #if !(defined(_MIKMOD_OS2) || defined(_MIKMOD_WIN32) || defined(_MIKMOD_AMIGA))
-typedef int                BOOL;
+typedef bool                BOOL;
 #endif
 
 /* 1 byte, signed and unsigned: */
@@ -163,7 +163,7 @@ typedef int __mikmod_typetest [
      && (sizeof(SWORD)==2) && (sizeof(UWORD)==2)
      && (sizeof(SLONG)==4) && (sizeof(ULONG)==4)
 #ifndef _MIKMOD_AMIGA
-     && (sizeof(BOOL) == sizeof(int))
+     && (sizeof(BOOL) == sizeof(unsigned char))
 #endif
      && (sizeof(CHAR) == sizeof(char))
    ) * 2 - 1 ];

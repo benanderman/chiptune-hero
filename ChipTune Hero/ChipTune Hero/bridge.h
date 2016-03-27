@@ -12,4 +12,8 @@
 #include "SDL.h"
 #include "mikmod.h"
 
+// Provide non-variadic wrappers to these functions, because Swift doesn't support variadic functions
+void Player_MuteNV(SLONG channel);
+void Player_UnmuteNV(SLONG channel);
+
 #endif /* bridge_h */

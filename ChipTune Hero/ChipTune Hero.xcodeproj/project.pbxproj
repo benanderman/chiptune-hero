@@ -16,6 +16,8 @@
 		5292ED471CA4629000F7849C /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5292ED461CA4629000F7849C /* StarParticle.sks */; };
 		B508EADD1CA2351B002B90EA /* libmikmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B575ACA51CA19D52003F90F4 /* libmikmod.a */; };
 		B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */ = {isa = PBXBuildFile; fileRef = B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */; };
+		B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */; };
+		B508EAF01CA4811D002B90EA /* VariadicWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */; };
 		B5418E261CA1CFE400E108C9 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E251CA1CFE400E108C9 /* CoreAudio.framework */; };
 		B5418E281CA1CFEB00E108C9 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E271CA1CFEB00E108C9 /* GameController.framework */; };
 		B5418E2A1CA1CFF900E108C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */; };
@@ -25,6 +27,8 @@
 		B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B575AC9A1CA198C4003F90F4 /* Assets.xcassets */; };
 		B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B575AC9C1CA198C4003F90F4 /* LaunchScreen.storyboard */; };
 		B575ACA81CA19D52003F90F4 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B575ACA61CA19D52003F90F4 /* libSDL2.a */; };
+		B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE91CA4811D002B90EA /* NotesLayer.swift */; };
+		B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEA1CA4811D002B90EA /* SongSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		5292ED441CA4628700F7849C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5292ED461CA4629000F7849C /* StarParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticle.sks; sourceTree = "<group>"; };
 		B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = a_winter_kiss.xm; path = ../songs/a_winter_kiss.xm; sourceTree = "<group>"; };
+		B508EAE91CA4811D002B90EA /* NotesLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesLayer.swift; path = ../Sources/NotesLayer.swift; sourceTree = "<group>"; };
+		B508EAEA1CA4811D002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
+		B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
+		B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VariadicWrapper.m; path = ../Sources/VariadicWrapper.m; sourceTree = "<group>"; };
 		B5418E211CA1C90200E108C9 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B5418E221CA1CE6900E108C9 /* mikmod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mikmod.h; path = include/mikmod.h; sourceTree = "<group>"; };
 		B5418E231CA1CF9700E108C9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -78,9 +86,21 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		B508EAE81CA48108002B90EA /* Common Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B508EAE91CA4811D002B90EA /* NotesLayer.swift */,
+				B508EAEA1CA4811D002B90EA /* SongSpec.swift */,
+				B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */,
+				B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */,
+			);
+			name = "Common Sources";
+			sourceTree = "<group>";
+		};
 		B575AC831CA198C4003F90F4 = {
 			isa = PBXGroup;
 			children = (
+				B508EAE81CA48108002B90EA /* Common Sources */,
 				B575AC8E1CA198C4003F90F4 /* ChipTune Hero */,
 				B575ACA91CA19D57003F90F4 /* Libraries */,
 				B508EAE01CA2F5D6002B90EA /* Resources */,
@@ -206,10 +226,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B508EAF01CA4811D002B90EA /* VariadicWrapper.m in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
 				5292ED431CA4627600F7849C /* GameScene.swift in Sources */,
+				B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */,
 				B575AC901CA198C4003F90F4 /* AppDelegate.swift in Sources */,
+				B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */,
+				B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */,
 				5292ED411CA4624A00F7849C /* ChannelNode.swift in Sources */,
 				52135E491CA4B6410095E2E8 /* SwiftyTimer.swift in Sources */,
 			);

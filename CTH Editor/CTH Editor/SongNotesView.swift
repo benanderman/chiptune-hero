@@ -36,7 +36,7 @@ class SongNotesView: NSView {
 		for note in layer[rowIndex] {
 			let rect = NSRect(x: CGFloat(note) * colW, y: y, width: colW, height: rowH)
 			let path = NSBezierPath(rect: rect)
-			layer.color.colorWithAlphaComponent(0.5).set()
+			layer.color.nsColor.colorWithAlphaComponent(0.5).set()
 			path.fill()
 			NSColor.blackColor().colorWithAlphaComponent(0.3).set()
 			path.stroke()

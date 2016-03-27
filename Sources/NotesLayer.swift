@@ -7,16 +7,22 @@
 //
 
 import Foundation
-import Cocoa
 
 class NotesLayer {
+  struct Color {
+    let red: Double
+    let green: Double
+    let blue: Double
+    let alpha: Double
+  }
+  
 	var notes = [[Int]?]()
-	var color: NSColor
+	var color: Color
 	var rows: Int {
 		return notes.count
 	}
 	
-	init(rows: Int, color: NSColor = NSColor.blackColor()) {
+	init(rows: Int, color: Color = Color(red: 0, green: 0, blue: 0, alpha: 1)) {
 		self.notes = [[Int]?](count: rows, repeatedValue: nil)
 		self.color = color
 	}
@@ -26,11 +32,11 @@ class NotesLayer {
 			$0.arrayValue.count != 0 ? $0.arrayValue.map { $0.intValue } : nil
 		}
 		
-		let red = CGFloat(json["color"]["red"].doubleValue)
-		let green = CGFloat(json["color"]["green"].doubleValue)
-		let blue = CGFloat(json["color"]["blue"].doubleValue)
-		let alpha = CGFloat(json["color"]["alpha"].doubleValue)
-		color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
+		let red = json["color"]["red"].doubleValue
+		let green = json["color"]["green"].doubleValue
+		let blue = json["color"]["blue"].doubleValue
+		let alpha = json["color"]["alpha"].doubleValue
+    color = Color(red: red, green: green, blue: blue, alpha: alpha)
 	}
 	
 	subscript(index: Int) -> [Int] {
@@ -62,7 +68,7 @@ class NotesLayer {
 	}
 	
 	func toJSON() -> JSON {
-		let rgba = ["red": color.redComponent, "green": color.greenComponent, "blue": color.blueComponent, "alpha": color.alphaComponent]
+		let rgba = ["red": color.red, "green": color.green, "blue": color.blue, "alpha": color.alpha]
 		let nonOptionalNotes = (0 ..< rows).map { self[$0] }
 		let dict: [String:AnyObject] = ["color": rgba, "notes": nonOptionalNotes]
 		return JSON(dict)

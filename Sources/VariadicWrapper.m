@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "bridge.h"
+#include "mikmod.h"
 
 void Player_MuteNV(SLONG channel)
 {

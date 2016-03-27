@@ -58,8 +58,8 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		
 		let songLayer = NotesLayer(samples: songPlayer.samples, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows)
 		if songSpec == nil {
-			let activeChannels = NotesLayer(rows: songLayer.rows, color: NSColor.redColor())
-			let playable = NotesLayer(rows: songLayer.rows, color: NSColor.yellowColor())
+      let activeChannels = NotesLayer(rows: songLayer.rows, color: .init(nsColor: NSColor.redColor()))
+      let playable = NotesLayer(rows: songLayer.rows, color: .init(nsColor: NSColor.yellowColor()))
 			songSpec = SongSpec(activeChannels: activeChannels, playable: playable)
 		}
 		let layers = [songLayer, songSpec!.activeChannels, songSpec!.playable]
