@@ -27,6 +27,7 @@
 		B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B575AC9A1CA198C4003F90F4 /* Assets.xcassets */; };
 		B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B575AC9C1CA198C4003F90F4 /* LaunchScreen.storyboard */; };
 		B575ACA81CA19D52003F90F4 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B575ACA61CA19D52003F90F4 /* libSDL2.a */; };
+		B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */; };
 		B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE91CA4811D002B90EA /* NotesLayer.swift */; };
 		B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEA1CA4811D002B90EA /* SongSpec.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		B575AC9F1CA198C4003F90F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B575ACA51CA19D52003F90F4 /* libmikmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmikmod.a; path = lib/libmikmod.a; sourceTree = SOURCE_ROOT; };
 		B575ACA61CA19D52003F90F4 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = lib/libSDL2.a; sourceTree = SOURCE_ROOT; };
+		B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongPlayer.swift; path = ../Sources/SongPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				B508EAE91CA4811D002B90EA /* NotesLayer.swift */,
 				B508EAEA1CA4811D002B90EA /* SongSpec.swift */,
 				B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */,
+				B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */,
 				B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */,
 			);
 			name = "Common Sources";
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B508EAF01CA4811D002B90EA /* VariadicWrapper.m in Sources */,
+				B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
 				5292ED431CA4627600F7849C /* GameScene.swift in Sources */,

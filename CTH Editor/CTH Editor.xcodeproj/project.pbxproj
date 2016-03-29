@@ -79,6 +79,7 @@
 				B508EAE41CA31572002B90EA /* NotesLayer.swift */,
 				B508EAE61CA356D4002B90EA /* SongSpec.swift */,
 				B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */,
+				B5F2EF721C975D1200619754 /* SongPlayer.swift */,
 				B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */,
 			);
 			name = "Common Sources";
@@ -109,7 +110,6 @@
 			children = (
 				B5F2EF581C9748DA00619754 /* AppDelegate.swift */,
 				B5F2EF5A1C9748DA00619754 /* ViewController.swift */,
-				B5F2EF721C975D1200619754 /* SongPlayer.swift */,
 				B5CEF33B1CA9E63B00FD1467 /* SongInfoManager.swift */,
 				B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */,
 				B5D059891CA7AADE00803648 /* Extensions.swift */,

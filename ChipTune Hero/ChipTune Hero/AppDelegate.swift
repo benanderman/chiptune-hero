@@ -28,13 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		initMikMod()
-		let path = NSBundle.mainBundle().pathForResource("a_winter_kiss.xm", ofType: nil)
-		let song = Player_Load(path!, 128, false)
-		guard song != nil else {
-			print("Could not load module, reason: \(String.fromCString(MikMod_strerror(MikMod_errno)))")
-			return false
-		}
-		Player_Start(song)
 		return true
 	}
 
