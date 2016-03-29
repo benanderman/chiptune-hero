@@ -11,6 +11,7 @@
 		B508EAE71CA356D4002B90EA /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE61CA356D4002B90EA /* SongSpec.swift */; };
 		B54001E91C98D47C00AC434D /* spaceape.xm in Resources */ = {isa = PBXBuildFile; fileRef = B54001E81C98D47800AC434D /* spaceape.xm */; };
 		B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */; };
+		B5CEF33C1CA9E63B00FD1467 /* SongInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF33B1CA9E63B00FD1467 /* SongInfoManager.swift */; };
 		B5D0598A1CA7AADE00803648 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D059891CA7AADE00803648 /* Extensions.swift */; };
 		B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF581C9748DA00619754 /* AppDelegate.swift */; };
 		B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF5A1C9748DA00619754 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 		B508EAE61CA356D4002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B54001E81C98D47800AC434D /* spaceape.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = spaceape.xm; path = ../songs/spaceape.xm; sourceTree = SOURCE_ROOT; };
 		B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongNotesView.swift; sourceTree = "<group>"; };
+		B5CEF33B1CA9E63B00FD1467 /* SongInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfoManager.swift; sourceTree = "<group>"; };
 		B5D059891CA7AADE00803648 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B5F2EF551C9748DA00619754 /* CTH Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CTH Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F2EF581C9748DA00619754 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				B5F2EF581C9748DA00619754 /* AppDelegate.swift */,
 				B5F2EF5A1C9748DA00619754 /* ViewController.swift */,
 				B5F2EF721C975D1200619754 /* SongPlayer.swift */,
+				B5CEF33B1CA9E63B00FD1467 /* SongInfoManager.swift */,
 				B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */,
 				B5D059891CA7AADE00803648 /* Extensions.swift */,
 				B5F2EF5C1C9748DA00619754 /* Assets.xcassets */,
@@ -220,6 +223,7 @@
 				B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */,
 				B508EAE51CA31572002B90EA /* NotesLayer.swift in Sources */,
 				B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */,
+				B5CEF33C1CA9E63B00FD1467 /* SongInfoManager.swift in Sources */,
 				B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

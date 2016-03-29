@@ -15,16 +15,17 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	@IBOutlet weak var scrollView: NSScrollView!
 	@IBOutlet weak var speedSlider: NSSlider!
 	@IBOutlet weak var volumeSlider: NSSlider!
+  @IBOutlet weak var editingLayerPopUp: NSPopUpButton!
 	
 	var playHead: NSBox?
 	var notesView: SongNotesView?
 	
 	let songPlayer = SongPlayer()
+  let songInfoManager = SongInfoManager()
 	var songSpec: SongSpec?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
 	}
 	
 	override func viewWillAppear() {
@@ -41,9 +42,13 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		for view in channelChecksContainer.subviews {
 			view.removeFromSuperview()
 		}
-		guard let totalChannels = songPlayer.totalChannels else {
+    scrollView.documentView = nil
+		guard let totalChannels = songInfoManager.totalChannels else {
 			return
 		}
+    guard songInfoManager.samples.count > 0 && songSpec != nil else {
+      return
+    }
 		for i in 0 ..< totalChannels {
 			let checkbox = NSButton(frame: NSRect(x: CGFloat(i) * 36, y: 0, width: 18, height: 18))
 			checkbox.setButtonType(.SwitchButton)
@@ -54,18 +59,11 @@ class ViewController: NSViewController, SongPlayerDelegate {
 			channelChecksContainer.addSubview(checkbox)
 		}
 		
-		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
+		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songInfoManager.totalRows * 18)))
 		
-		let songLayer = NotesLayer(samples: songPlayer.samples, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows)
-		if songSpec == nil {
-      let activeChannels = NotesLayer(rows: songLayer.rows, color: .init(nsColor: NSColor.redColor()))
-      let playable = NotesLayer(rows: songLayer.rows, color: .init(nsColor: NSColor.yellowColor()))
-			songSpec = SongSpec(activeChannels: activeChannels, playable: playable)
-		}
+		let songLayer = NotesLayer(samples: songInfoManager.samples, patternOffsets: songInfoManager.patternStarts, rows: songInfoManager.totalRows)
 		let layers = [songLayer, songSpec!.activeChannels, songSpec!.playable]
-		songPlayer.songSpec = songSpec
-		let channels = songPlayer.totalChannels ?? 0
-		notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: channels)
+		notesView = SongNotesView(layers: layers, patternOffsets: songInfoManager.patternStarts, rows: songInfoManager.totalRows, columns: totalChannels)
 		notesView!.editingLayer = songSpec!.activeChannels
 		view.addSubview(notesView!)
 		
@@ -82,6 +80,8 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		speedSlider.numberOfTickMarks = Int(speedSlider.maxValue)
 		speedSlider.integerValue = songPlayer.speed ?? 1
 		volumeSlider.integerValue = songPlayer.volume ?? 128
+    
+    updateEditingLayer(editingLayerPopUp)
 	}
 	
 	func songPlayerPositionChanged(songPlayer: SongPlayer) {
@@ -113,16 +113,23 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	}
 
 	@IBAction func loadSong(sender: NSButton) {
-		let path = NSBundle.mainBundle().pathForResource(songTextArea.stringValue, ofType: nil)
+    let path = NSBundle.mainBundle().pathForResource(songTextArea.stringValue, ofType: nil)
+    songPlayer.delegate = self
+    songPlayer.dataDelegate = songInfoManager
 		songPlayer.openSong(path!)
-		songPlayer.delegate = self
 		songSpec = nil
 		let specPath = path! + ".spec.json"
 		if let data = NSData(contentsOfFile: specPath) {
 			let json = JSON(data: data)
 			songSpec = SongSpec(json: json)
-		}
-		songPlayer.songSpec = songSpec
+    }
+    if songSpec == nil && songInfoManager.samples.count > 0 {
+      let activeChannels = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.redColor()))
+      let playable = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.yellowColor()))
+      songSpec = SongSpec(activeChannels: activeChannels, playable: playable, patterns: songInfoManager.patterns)
+    }
+    songPlayer.songSpec = songSpec
+    
 		rebuildPlayerUI()
 	}
 	
@@ -143,11 +150,11 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	}
 	
 	@IBAction func printData(sender: NSButton) {
-		songPlayer.printData()
+		songInfoManager.printData()
 	}
 	
 	@IBAction func writeData(sender: NSButton) {
-		songPlayer.writeData()
+		songInfoManager.writeData()
 	}
 	
 	@IBAction func writeSongSpec(sender: AnyObject) {

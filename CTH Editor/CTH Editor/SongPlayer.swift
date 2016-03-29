@@ -8,18 +8,12 @@
 
 import Foundation
 
-extension NotesLayer {
-	convenience init(samples: [SongPlayer.SongSample], patternOffsets: [Int], rows: Int) {
-		self.init(rows: rows)
-		for sample in samples {
-			let index = patternOffsets[sample.pattern] + sample.row
-			notes[index] = sample.notes.map { $0.channel }
-		}
-	}
-}
-
 protocol SongPlayerDelegate: class {
 	func songPlayerPositionChanged(songPlayer: SongPlayer)
+}
+
+protocol SongDataDelegate: SongPlayerDelegate {
+  func songPlayerLoadedSong(songPlayer: SongPlayer)
 }
 
 enum ChannelSet: Int {
@@ -31,44 +25,29 @@ enum ChannelSet: Int {
 class SongPlayer {
 	
 	weak var delegate: SongPlayerDelegate?
-	
-	struct Note {
-		let length: Int
-		let channel: Int
-	}
-	
-	struct SongSample {
-		let pattern: Int
-		let row: Int
-		let notes: [Note]
-	}
-	
-	// Because of how MikMod works, and how closures being used as C function pointers work,
-	// you can only record this information for one song at a time (but you can also only
-	// play one song at a time).
-	static var samples = [SongSample]()
-	static var patternLengths = [Int]()
+  weak var dataDelegate: SongDataDelegate?
 	
 	var song: UnsafeMutablePointer<MODULE>?
 	var songPath = ""
-	var samples = [SongSample]()
-	var patterns = [Int]()
-	var patternStarts = [Int]()
-	var totalChannels: Int?
 	
 	// Play position
 	var pattern = 0
 	var row = 0
 	
 	var playChannels = ChannelSet.Custom
-	var songSpec: SongSpec?
+  var songSpec: SongSpec?
+  var patterns = [Int]()
+  var patternStarts = [Int]()
+  var totalChannels: Int? {
+    return song != nil ? Int(song!.memory.totalchn) : 0
+  }
 	
 	var globalRow: Int {
-		return patternStarts.count > 0 ? patternStarts[pattern] + row : 0
+		return songSpec?.patternStarts.count > pattern ? songSpec!.patternStarts[pattern] + row : 0
 	}
 	
 	var totalRows: Int {
-		return patternStarts.count > 0 ? patternStarts.last! + patterns.last! : 0
+		return songSpec?.patternStarts.count > 0 ? songSpec!.patternStarts.last! + songSpec!.patterns.last! : 0
 	}
 	
 	var speed: Int? {
@@ -110,25 +89,10 @@ class SongPlayer {
 		if song != nil {
 			Player_Stop()
 			Player_Free(song!)
-			SongPlayer.samples.removeAll()
-			SongPlayer.patternLengths.removeAll()
 			pattern = 0
 			row = 0
 		}
 		songPath = path
-		loadData()
-		
-		if samples.count == 0 {
-			MikMod_KickCallback = { sngpos, patpos, channels, lengths, len -> Void in
-				var notes = [Note]()
-				for i in 0 ..< Int(len) {
-					let note = Note(length: Int(lengths.advancedBy(i).memory), channel: Int(channels.advancedBy(i).memory))
-					notes.append(note)
-				}
-				let sample = SongSample(pattern: Int(sngpos), row: Int(patpos), notes: notes)
-				SongPlayer.samples.append(sample)
-			}
-		}
 		
 		song = Player_Load(path, 128, false)
 		guard song != nil else {
@@ -136,6 +100,7 @@ class SongPlayer {
 			return
 		}
 		song?.memory.loop = false
+    dataDelegate?.songPlayerLoadedSong(self)
 	}
 	
 	func startPlaying() {
@@ -180,21 +145,21 @@ class SongPlayer {
 		let newPattern = Int(Player_GetOrder())
 		let newRow = Int(Player_GetRow())
 		guard newPattern != pattern || newRow != row else { return }
-		if pattern < SongPlayer.patternLengths.count-1 || newPattern < pattern - 1 {
+		if newPattern < pattern - 1 {
 			Player_Stop()
+      pattern = 0
+      row = 0
 			return
 		}
 		pattern = newPattern
-		row = newRow
-		delegate?.songPlayerPositionChanged(self)
+    row = newRow
+    delegate?.songPlayerPositionChanged(self)
+    dataDelegate?.songPlayerPositionChanged(self)
 		updateMutedChannels()
-		if patterns.count == 0 {
-			updatePatternLengths(pattern, row: row)
-		}
 	}
 	
 	func updateMutedChannels() {
-		if playChannels == .Custom || songSpec == nil {
+		guard playChannels != .Custom && songSpec != nil else {
 			return
 		}
 		var states = [Bool](count: totalChannels ?? 0, repeatedValue: false)
@@ -205,74 +170,6 @@ class SongPlayer {
 		let active = playChannels == .Active
 		for i in 0 ..< states.count {
 			setChannelMute(i, mute: active ? !states[i] : states[i])
-		}
-	}
-	
-	func updatePatternLengths(pattern: Int, row: Int) {
-		if pattern >= SongPlayer.patternLengths.count {
-			SongPlayer.patternLengths.append(0)
-		}
-		SongPlayer.patternLengths[pattern] = max(row + 1, SongPlayer.patternLengths[pattern])
-	}
-	
-	func printData() {
-		for sample in SongPlayer.samples {
-			var output = "\(sample.pattern)-\(sample.row): "
-			var last = 0
-			for note in sample.notes {
-				for _ in 0 ..< (note.channel - last) {
-					output += "| "
-				}
-				last = note.channel
-				output += "|\(note.length)"
-			}
-			print(output)
-		}
-	}
-	
-	func writeData() {
-		let samples = SongPlayer.samples.map {
-			[
-				"pattern": $0.pattern,
-				"row": $0.row,
-				"notes": $0.notes.map { ["length": $0.length, "channel": $0.channel] }
-			]
-		}
-		let json = JSON(["samples": samples, "patterns": SongPlayer.patternLengths])
-		do {
-			let data = try json.rawData()
-			data.writeToFile(songPath + ".json", atomically: false)
-		} catch {
-			return
-		}
-	}
-	
-	func loadData() {
-		guard let data = NSData(contentsOfFile: songPath + ".json") else {
-			return
-		}
-		let json = JSON(data: data)
-		if let patterns = json["patterns"].array {
-			self.patterns = patterns.map { $0.intValue }
-			var total = 0
-			patternStarts = []
-			for i in 0 ..< self.patterns.count {
-				patternStarts.append(total)
-				total += self.patterns[i]
-			}
-		}
-		if let samples = json["samples"].array {
-			self.samples = samples.map {
-				SongSample(pattern: $0["pattern"].intValue, row: $0["row"].intValue, notes: $0["notes"].arrayValue.map {
-						Note(length: $0["length"].intValue, channel: $0["channel"].intValue)
-					})
-			}
-		}
-		totalChannels = 0
-		for sample in self.samples {
-			for note in sample.notes {
-				totalChannels = max(note.channel + 1, totalChannels!)
-			}
 		}
 	}
 	
