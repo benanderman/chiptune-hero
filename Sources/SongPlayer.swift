@@ -39,7 +39,7 @@ class SongPlayer {
   var patterns = [Int]()
   var patternStarts = [Int]()
   var totalChannels: Int? {
-    return song != nil ? Int(song!.memory.totalchn) : 0
+    return song != nil ? Int(song!.memory.numchn) : 0
   }
 	
 	var globalRow: Int {
