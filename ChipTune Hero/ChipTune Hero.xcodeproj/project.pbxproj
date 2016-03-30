@@ -28,6 +28,8 @@
 		B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B575AC9C1CA198C4003F90F4 /* LaunchScreen.storyboard */; };
 		B575ACA81CA19D52003F90F4 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B575ACA61CA19D52003F90F4 /* libSDL2.a */; };
 		B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */; };
+		B5CEF3401CAB03E500FD1467 /* a_winter_kiss.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */; };
+		B5CEF3421CAB2DA900FD1467 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF3411CAB2DA900FD1467 /* Game.swift */; };
 		B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE91CA4811D002B90EA /* NotesLayer.swift */; };
 		B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEA1CA4811D002B90EA /* SongSpec.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		B575ACA51CA19D52003F90F4 /* libmikmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmikmod.a; path = lib/libmikmod.a; sourceTree = SOURCE_ROOT; };
 		B575ACA61CA19D52003F90F4 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = lib/libSDL2.a; sourceTree = SOURCE_ROOT; };
 		B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongPlayer.swift; path = ../Sources/SongPlayer.swift; sourceTree = "<group>"; };
+		B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = a_winter_kiss.xm.spec.json; path = ../songs/a_winter_kiss.xm.spec.json; sourceTree = "<group>"; };
+		B5CEF3411CAB2DA900FD1467 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Sources/Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 		B508EAE01CA2F5D6002B90EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */,
 				B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */,
 			);
 			name = Resources;
@@ -91,11 +96,12 @@
 		B508EAE81CA48108002B90EA /* Common Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */,
 				B508EAE91CA4811D002B90EA /* NotesLayer.swift */,
 				B508EAEA1CA4811D002B90EA /* SongSpec.swift */,
-				B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */,
 				B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */,
-				B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */,
+				B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */,
+				B5CEF3411CAB2DA900FD1467 /* Game.swift */,
 			);
 			name = "Common Sources";
 			sourceTree = "<group>";
@@ -217,6 +223,7 @@
 				B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */,
 				5292ED471CA4629000F7849C /* StarParticle.sks in Resources */,
 				B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */,
+				B5CEF3401CAB03E500FD1467 /* a_winter_kiss.xm.spec.json in Resources */,
 				B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */,
 				B575AC991CA198C4003F90F4 /* Main.storyboard in Resources */,
 			);
@@ -236,6 +243,7 @@
 				5292ED431CA4627600F7849C /* GameScene.swift in Sources */,
 				B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */,
 				B575AC901CA198C4003F90F4 /* AppDelegate.swift in Sources */,
+				B5CEF3421CAB2DA900FD1467 /* Game.swift in Sources */,
 				B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */,
 				B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */,
 				5292ED411CA4624A00F7849C /* ChannelNode.swift in Sources */,
