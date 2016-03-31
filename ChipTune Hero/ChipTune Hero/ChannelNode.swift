@@ -10,21 +10,11 @@ import SpriteKit
 
 class ChannelNode: SKSpriteNode {
   
-  let window: SKSpriteNode
+  var blocks = Set<NoteNode>()
   
   override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-    
-    self.window = SKSpriteNode(texture: nil, color: k.Color.Window, size: CGSizeMake(size.width, size.width))
-    super.init(texture: texture, color: color, size: size)
-    
-    self.window.position = CGPointMake(0, -size.height/2 + window.size.width/2)
-    self.window.zPosition = zPosition + 10
-    self.window.userInteractionEnabled = false
-    self.window.name = "Window"
-    
-    self.userInteractionEnabled = true
+    super.init(texture: texture, color: color.colorWithAlphaComponent(0.5), size: size)
     self.zPosition = 1
-    self.addChild(self.window)
     
   }
   
@@ -32,57 +22,50 @@ class ChannelNode: SKSpriteNode {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func startBlock(beats: Int) {
-    
+  func startBlock(beats: Int, rowId: Int) {
     let height: CGFloat = size.width * CGFloat(beats)
     let block = NoteNode(color: UIColor(white: 1.0, alpha: 0.9), size: CGSizeMake(size.width, height))
-    block.position = CGPointMake(0, frame.midY + frame.width + height/2)
+    block.rowId = rowId
+    block.position = CGPointMake(0, -frame.size.height)
     block.name = "Block"
     block.zPosition = 5
     
+    blocks.insert(block)
     addChild(block)
-    
-    let x = k.Time.Fall/Double(arc4random_uniform(8))
-    block.runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.scaleBy(0.95, duration: x), SKAction.scaleBy(1.05, duration: x)])))
-    block.runAction(SKAction.moveToY(-frame.midY - frame.width, duration: k.Time.Fall)) {
-      block.removeFromParent()
+  }
+  
+  func updateBlockPositions(position: Double) {
+    for block in blocks {
+      let bottom = -frame.size.height / 2 + block.frame.height / 2
+      block.position.y = bottom + block.frame.height * (CGFloat(block.rowId) - CGFloat(position))
+      if block.position.y > frame.size.height {
+        block.removeFromParent()
+        blocks.remove(block)
+      }
     }
   }
   
-  var startSuccess = false
-  
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    
-    guard let block = childNodeWithName("Block") as? NoteNode else { return }
-    
-    if self.window.intersectsNode(block) {
-      startSuccess = true
-      return
-    }
-    
-    block.color = UIColor.redColor()
-    startSuccess = false
-    
-  }
-  
-  override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    
-    if let block = childNodeWithName("Block") as? NoteNode {
-      if self.window.intersectsNode(block) && startSuccess {
+  func rowWasPlayed(row: Int) {
+    for block in blocks {
+      if (block.rowId == row) {
         let starSprite = SKSpriteNode(imageNamed: "Star")
-        
+
         starSprite.setScale(0.5)
-        starSprite.position = window.position
-        addChild(starSprite)
+        starSprite.position = block.position
+        blocks.remove(block)
+        block.removeFromParent()
         
+        addChild(starSprite)
+
         let emitter: SKEmitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("StarParticle", ofType: "sks")!) as! SKEmitterNode
         emitter.particlePosition = CGPointMake(0, starSprite.size.height)
         emitter.targetNode = self
         starSprite.addChild(emitter)
-        
+
+        let duration = NSTimeInterval(1.25)
         let doneAction = SKAction.fadeOutWithDuration(5)
-        let riseAction = SKAction.moveToY(900, duration: k.Time.Fall)
-        let spinAction = SKAction.rotateByAngle(CGFloat(3.14 * k.Time.Fall * 3), duration: k.Time.Fall * 3)
+        let riseAction = SKAction.moveToY(900, duration: duration)
+        let spinAction = SKAction.rotateByAngle(CGFloat(3.14 * duration * 3), duration: duration * 3)
         emitter.runAction(SKAction.fadeOutWithDuration(1))
         starSprite.runAction(riseAction)
         starSprite.runAction(spinAction)
@@ -90,11 +73,15 @@ class ChannelNode: SKSpriteNode {
         starSprite.runAction(doneAction) {
           starSprite.removeFromParent()
         }
-        return
       }
-      
-      block.color = UIColor.redColor()
-      
+    }
+  }
+  
+  func failedToPlayRow(row: Int) {
+    for block in blocks {
+      if (block.rowId == row) {
+        block.color = UIColor.redColor().colorWithAlphaComponent(0.5)
+      }
     }
   }
 }

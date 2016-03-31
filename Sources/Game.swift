@@ -15,7 +15,7 @@ protocol GameDelegate {
 
 class Game: SongPlayerDelegate {
   enum Button: Int {
-    case One = 1
+    case One = 0
     case Two
     case Three
     case Four
@@ -35,15 +35,22 @@ class Game: SongPlayerDelegate {
   init(songPath: String) {
     songPlayer.delegate = self
     songPlayer.openSong(songPath)
+    let specPath = songPath + ".spec.json"
+    if let data = NSData(contentsOfFile: specPath) {
+      let json = JSON(data: data)
+      songPlayer.songSpec = SongSpec(json: json)
+    }
   }
   
   func startGame() {
     lastRowChange = NSDate().timeIntervalSince1970
     songPlayer.startPlaying()
+    songPlayer.speed = songPlayer.speed! * 2
   }
   
   func buttonDown(button: Button) {
     buttonsDown.insert(button)
+    checkIfRowPlayed()
   }
   
   func buttonUp(button: Button) {
@@ -54,6 +61,10 @@ class Game: SongPlayerDelegate {
     let now = NSDate().timeIntervalSince1970
     lastRowTime = now - lastRowChange
     lastRowChange = now
+    let lastRow = Int(position - 1)
+    if notes[lastRow].count > 0 && lastRowPlayed != lastRow {
+      handleFailedToPlayRow(lastRow)
+    }
   }
   
   // MARK: Private
@@ -73,7 +84,7 @@ class Game: SongPlayerDelegate {
     }
     if buttons == row {
       handlePlayedRow(rowId)
-    } else if row.isSubsetOf(buttons) {
+    } else if buttons.subtract(row).count != 0 {
       // The player pressed too many buttons
       handleFailedToPlayRow(rowId)
     }

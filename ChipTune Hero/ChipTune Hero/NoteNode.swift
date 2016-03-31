@@ -9,7 +9,5 @@
 import SpriteKit
 
 class NoteNode: SKSpriteNode {
-    
-    
-    
+    var rowId = 0
 }

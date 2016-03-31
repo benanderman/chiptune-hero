@@ -8,134 +8,98 @@
 
 import SpriteKit
 
-public struct k {
-  
-  public struct Name {
-    public static let Channel1 = "ChipTuneHero-Channel1"
-    public static let Channel2 = "ChipTuneHero-Channel2"
-    public static let Channel3 = "ChipTuneHero-Channel3"
-    public static let Channel4 = "ChipTuneHero-Channel4"
+private struct k {
+  struct Name {
+    static let ChannelName = "ChipTuneHero-Channel"
   }
   
-  public struct Color {
-    public static let Channel1 = UIColor.redColor()
-    public static let Channel2 = UIColor.blueColor()
-    public static let Channel3 = UIColor.purpleColor()
-    public static let Channel4 = UIColor.greenColor()
-    public static let Window   = UIColor(white: 0.3, alpha: 0.3)
-  }
-  
-  public struct Time {
-    public static let Fall = NSTimeInterval(1.25)
-  }
-  
-}
-
-struct ChannelGenerator {
-  
-  let channel: ChannelNode
-  let beats: Int
-  let intervalCount: Int
-  let startOn: Bool
-  
-  init(channel: ChannelNode, beats: Int, intervalCount: Int, startOn: Bool) {
-    self.channel = channel
-    self.beats = beats
-    self.intervalCount = intervalCount
-    self.startOn = startOn
-    
-    isOn = startOn
-    interval = intervalCount
-  }
-  
-  var isOn: Bool
-  var interval: Int
-  
-  mutating func next() {
-    
-    if isOn {
-      channel.startBlock(beats)
-    }
-    
-    interval -= 1
-    if interval < 0 {
-      isOn = !isOn
-      interval = intervalCount
-    }
-    
-    let hue = CGFloat(Double(arc4random_uniform(120) + 90)/Double(255))
-    let sat = CGFloat(Double(arc4random_uniform(120) + 100)/Double(255))
-    let bri = CGFloat(Double(arc4random_uniform(120) + 50)/Double(255))
-    
-    channel.color = UIColor(hue: hue, saturation: sat, brightness: bri, alpha: 1.0)
+  struct Color {
+    static let Channels = [UIColor.redColor(),
+                           UIColor.blueColor(),
+                           UIColor.purpleColor(),
+                           UIColor.greenColor()]
+    static let Window   = UIColor(white: 0.0, alpha: 0.3)
   }
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
+  let channelCount = 4
+  var channels = [ChannelNode]()
+  var lastAddedRow = 0
+  var buttonsNode: ButtonsNode
+  weak var game: Game!
   
-  let channel1: ChannelNode
-  let channel2: ChannelNode
-  let channel3: ChannelNode
-  let channel4: ChannelNode
-  
-  var timer1: NSTimer!
-  
-  override init(size: CGSize) {
+  init(size: CGSize, game: Game) {
     
-    let channelWidth = size.width/4
+    let channelWidth = size.width / CGFloat(channelCount)
     let channelSize = CGSizeMake(channelWidth - 2, size.height)
     
-    self.channel1 = ChannelNode(color: k.Color.Channel1, size: channelSize)
-    self.channel2 = ChannelNode(color: k.Color.Channel2, size: channelSize)
-    self.channel3 = ChannelNode(color: k.Color.Channel3, size: channelSize)
-    self.channel4 = ChannelNode(color: k.Color.Channel4, size: channelSize)
+    self.game = game
+    
+    for i in 0 ..< channelCount {
+      let channel = ChannelNode(color: k.Color.Channels[i], size: channelSize)
+      channels.append(channel)
+    }
+    
+    buttonsNode = ButtonsNode(texture: nil, color: k.Color.Window, size: CGSize(width: size.width, height: channelWidth))
     
     super.init(size: size)
     
-    self.channel1.position = CGPointMake(channelWidth * 0.5, self.frame.midY)
-    self.channel1.name = k.Name.Channel1
+    self.game.delegate = self
     
-    self.channel2.position = CGPointMake(channelWidth * 1.5, self.frame.midY)
-    self.channel2.name = k.Name.Channel2
-    
-    self.channel3.position = CGPointMake(channelWidth * 2.5, self.frame.midY)
-    self.channel3.name = k.Name.Channel3
-    
-    self.channel4.position = CGPointMake(channelWidth * 3.5, self.frame.midY)
-    self.channel4.name = k.Name.Channel4
-    
-    addChild(self.channel1)
-    addChild(self.channel2)
-    addChild(self.channel3)
-    addChild(self.channel4)
-    
-    
-    
-    var ch1 = ChannelGenerator(channel: channel1, beats: 1, intervalCount: 8, startOn: true)
-    var ch2 = ChannelGenerator(channel: channel2, beats: 2, intervalCount: 4, startOn: false)
-    var ch3 = ChannelGenerator(channel: channel3, beats: 1, intervalCount: 7, startOn: false)
-    var ch4 = ChannelGenerator(channel: channel4, beats: 2, intervalCount: 5, startOn: true)
-    
-    
-    NSTimer.every(k.Time.Fall/4.second) {
-      ch1.next()
-      ch2.next()
-      ch3.next()
-      ch4.next()
+    for i in 0 ..< channelCount {
+      self.channels[i].position = CGPointMake(channelWidth * (0.5 + CGFloat(i)), frame.midY)
+      self.channels[i].name = "\(k.Name.ChannelName)\(i)"
+      addChild(self.channels[i])
     }
+    
+    buttonsNode.position = CGPoint(x: frame.midX, y: buttonsNode.size.height / 2)
+    buttonsNode.zPosition = 6
+    buttonsNode.userInteractionEnabled = true
+    buttonsNode.delegate = self
+    self.addChild(buttonsNode)
+  }
+  
+  override func update(currentTime: NSTimeInterval) {
+    let position = game.position
+    
+    let rowsOnScreen = Int(frame.height / channels[0].frame.width) + 1
+    if lastAddedRow < Int(position) + rowsOnScreen - 1 {
+      for i in lastAddedRow + 1 ..< Int(position) + rowsOnScreen {
+        let row = game.notes[i]
+        for channelIndex in row {
+          channels[channelIndex].startBlock(1, rowId: i)
+        }
+      }
+    }
+    lastAddedRow = Int(position) + rowsOnScreen - 1
+    
+    for i in 0 ..< 4 {
+      channels[i].updateBlockPositions(position)
+    }
+  }
+  
+  func gameDidPlayRow(game: Game, row: Int) {
+    for channel in channels {
+      channel.rowWasPlayed(row)
+    }
+  }
+  
+  func gameDidFailRow(game: Game, row: Int) {
+    for channel in channels {
+      channel.failedToPlayRow(row)
+    }
+  }
+  
+  func buttonsNodeButtonDown(buttonId: Int) {
+    game.buttonDown(Game.Button(rawValue: buttonId)!)
+  }
+  
+  func buttonsNodeButtonUp(buttonId: Int) {
+    game.buttonUp(Game.Button(rawValue: buttonId)!)
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  func sendChannel1Block() {
-    print("Hello")
-  }
-  
-  
-  
-  func sendBlockOnChannel(channel: ChannelNode) {
-    //        channel.startBlock()
   }
 }

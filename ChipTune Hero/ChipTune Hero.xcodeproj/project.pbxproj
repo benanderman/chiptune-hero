@@ -30,6 +30,7 @@
 		B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */; };
 		B5CEF3401CAB03E500FD1467 /* a_winter_kiss.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */; };
 		B5CEF3421CAB2DA900FD1467 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF3411CAB2DA900FD1467 /* Game.swift */; };
+		B5CEF3441CACA66400FD1467 /* ButtonsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF3431CACA66400FD1467 /* ButtonsNode.swift */; };
 		B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE91CA4811D002B90EA /* NotesLayer.swift */; };
 		B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEA1CA4811D002B90EA /* SongSpec.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongPlayer.swift; path = ../Sources/SongPlayer.swift; sourceTree = "<group>"; };
 		B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = a_winter_kiss.xm.spec.json; path = ../songs/a_winter_kiss.xm.spec.json; sourceTree = "<group>"; };
 		B5CEF3411CAB2DA900FD1467 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Sources/Game.swift; sourceTree = "<group>"; };
+		B5CEF3431CACA66400FD1467 /* ButtonsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				52135E4A1CA4BB900095E2E8 /* NoteNode.swift */,
 				5292ED441CA4628700F7849C /* GameViewController.swift */,
 				52135E481CA4B6410095E2E8 /* SwiftyTimer.swift */,
+				B5CEF3431CACA66400FD1467 /* ButtonsNode.swift */,
 				B575AC971CA198C4003F90F4 /* Main.storyboard */,
 				5292ED461CA4629000F7849C /* StarParticle.sks */,
 				52135E461CA49D090095E2E8 /* TestScene.sks */,
@@ -192,7 +195,7 @@
 				TargetAttributes = {
 					B575AC8B1CA198C4003F90F4 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 55SVD8WGE3;
+						DevelopmentTeam = QD667438AY;
 					};
 				};
 			};
@@ -240,6 +243,7 @@
 				B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
+				B5CEF3441CACA66400FD1467 /* ButtonsNode.swift in Sources */,
 				5292ED431CA4627600F7849C /* GameScene.swift in Sources */,
 				B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */,
 				B575AC901CA198C4003F90F4 /* AppDelegate.swift in Sources */,

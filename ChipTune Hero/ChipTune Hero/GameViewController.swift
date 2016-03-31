@@ -10,16 +10,18 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-  var songPlayer = SongPlayer()
+  var game: Game!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     guard let skview = view as? SKView else { fatalError() }
     
-    skview.presentScene(GameScene(size: view.bounds.size))
     let path = NSBundle.mainBundle().pathForResource("a_winter_kiss.xm", ofType: nil)
-    songPlayer.openSong(path!)
-    songPlayer.startPlaying()
+    game = Game(songPath: path!)
+    
+    skview.presentScene(GameScene(size: view.bounds.size, game: game))
+    
+    game.startGame()
   }
   
   override func shouldAutorotate() -> Bool {
