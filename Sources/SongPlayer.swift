@@ -73,10 +73,12 @@ class SongPlayer {
 	}
 	
 	func nextPosition() {
+    lastNavigation = NSDate()
 		Player_NextPosition()
 	}
 	
-	func prevPosition() {
+  func prevPosition() {
+    lastNavigation = NSDate()
 		if (row < 6) {
 			Player_PrevPosition()
 		} else {
@@ -114,6 +116,10 @@ class SongPlayer {
 	func pause() {
 		Player_TogglePause()
 	}
+  
+  func stop() {
+    Player_Stop()
+  }
 	
 	func setChannelMute(channel: Int, mute: Bool) {
 		if mute {
@@ -130,11 +136,12 @@ class SongPlayer {
 	func update() {
 		if Player_Active() {
 			MikMod_Update()
-			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10 * Double(NSEC_PER_SEC)))
+			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC))
 			dispatch_after(delay, dispatch_get_main_queue(), update)
 		}
 	}
 	
+  private var lastNavigation = NSDate()
 	func updatePlayState() {
 		if Player_Active() {
 			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
@@ -145,7 +152,8 @@ class SongPlayer {
 		let newPattern = Int(Player_GetOrder())
 		let newRow = Int(Player_GetRow())
 		guard newPattern != pattern || newRow != row else { return }
-		if newPattern < pattern - 1 {
+    let navigating = lastNavigation.timeIntervalSinceNow < 1
+		if !navigating && (newPattern < pattern || (newPattern != pattern + 1 && newRow < row)) {
 			Player_Stop()
       pattern = 0
       row = 0

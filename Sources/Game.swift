@@ -8,9 +8,11 @@
 
 import Foundation
 
-protocol GameDelegate {
+protocol GameDelegate: class {
   func gameDidPlayRow(game: Game, row: Int)
   func gameDidFailRow(game: Game, row: Int)
+  func gameDidLose(game: Game)
+  func gameDidWin(game: Game)
 }
 
 class Game: SongPlayerDelegate {
@@ -21,7 +23,7 @@ class Game: SongPlayerDelegate {
     case Four
   }
   
-  var delegate: GameDelegate?
+  weak var delegate: GameDelegate?
   
   var notes: NotesLayer {
     return songPlayer.songSpec?.playable ?? NotesLayer(rows: 0)
@@ -30,6 +32,32 @@ class Game: SongPlayerDelegate {
   var position: Double {
     let elapsed = NSDate().timeIntervalSince1970 - lastRowChange
     return Double(songPlayer.globalRow) + min(1, elapsed / lastRowTime)
+  }
+  
+  // MARK: Stats
+  var notesPlayed: Int {
+    return notesPlayedOrMissed.reduce(0) { $0 + ($1 == true ? 1 : 0) }
+  }
+  var notesMissed: Int {
+    return notesPlayedOrMissed.reduce(0) { $0 + ($1 == false ? 1 : 0) }
+  }
+  
+  var streak: Int {
+    return notesPlayedOrMissed.reverse().reduce((sum: 0, foundMissed: false)) {
+      if $1 && !$0.foundMissed {
+        return (sum: $0.sum + 1, foundMissed: false)
+      } else {
+        return (sum: $0.sum, foundMissed: true)
+      }
+    }.sum
+  }
+  
+  var multiplier: Int {
+    return streak / 10 + 1
+  }
+  
+  var health: Double {
+    return Double(healthInternal) / Double(Game.maxHealth)
   }
   
   init(songPath: String) {
@@ -46,6 +74,15 @@ class Game: SongPlayerDelegate {
     lastRowChange = NSDate().timeIntervalSince1970
     songPlayer.startPlaying()
     songPlayer.speed = songPlayer.speed! * 2
+  }
+  
+  func loseGame() {
+    songPlayer.stop()
+    delegate?.gameDidLose(self)
+  }
+  
+  func winGame() {
+    delegate?.gameDidWin(self)
   }
   
   func buttonDown(button: Button) {
@@ -73,6 +110,9 @@ class Game: SongPlayerDelegate {
   private var lastRowChange: NSTimeInterval = 0
   private var lastRowTime: NSTimeInterval = 1
   private var lastRowPlayed = 0
+  private var notesPlayedOrMissed = [Bool]()
+  private static let maxHealth = 200
+  private var healthInternal = maxHealth / 2
   
   private func checkIfRowPlayed() {
     let rowId = Int(round(position))
@@ -85,13 +125,16 @@ class Game: SongPlayerDelegate {
     if buttons == row {
       handlePlayedRow(rowId)
     } else if buttons.subtract(row).count != 0 {
-      // The player pressed too many buttons
+      // The player pressed a wrong button
       handleFailedToPlayRow(rowId)
     }
   }
   
   private func handleFailedToPlayRow(row: Int) {
     songPlayer.playChannels = .Inactive
+    notesPlayedOrMissed.append(false)
+    healthInternal = max(0, healthInternal - 3)
+    checkLoseCondition()
     delegate?.gameDidFailRow(self, row: row)
   }
   
@@ -101,6 +144,14 @@ class Game: SongPlayerDelegate {
     for i in 0 ..< (songPlayer.totalChannels ?? 0) {
       songPlayer.setChannelMute(i, mute: false)
     }
+    notesPlayedOrMissed.append(true)
+    healthInternal = min(Game.maxHealth, healthInternal + 2 * multiplier)
     delegate?.gameDidPlayRow(self, row: row)
+  }
+  
+  private func checkLoseCondition() {
+    if health == 0 {
+      loseGame()
+    }
   }
 }

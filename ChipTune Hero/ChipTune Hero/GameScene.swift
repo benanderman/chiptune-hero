@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-private struct k {
+struct k {
   struct Name {
     static let ChannelName = "ChipTuneHero-Channel"
   }
@@ -20,6 +20,10 @@ private struct k {
                            UIColor.greenColor()]
     static let Window   = UIColor(white: 0.0, alpha: 0.3)
   }
+  
+  struct Notification {
+    static let GameLost = "GameLost"
+  }
 }
 
 class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
@@ -27,7 +31,8 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   var channels = [ChannelNode]()
   var lastAddedRow = 0
   var buttonsNode: ButtonsNode
-  weak var game: Game!
+  var healthNode = HealthNode()
+  var game: Game!
   
   init(size: CGSize, game: Game) {
     
@@ -58,6 +63,11 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     buttonsNode.userInteractionEnabled = true
     buttonsNode.delegate = self
     self.addChild(buttonsNode)
+    
+    healthNode.setHealth(game.health)
+    healthNode.zPosition = 7
+    healthNode.position = CGPoint(x: size.width - healthNode.size.width, y: size.height - healthNode.size.height / 2 - healthNode.size.width / 2)
+    self.addChild(healthNode)
   }
   
   override func update(currentTime: NSTimeInterval) {
@@ -68,6 +78,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
       for i in lastAddedRow + 1 ..< Int(position) + rowsOnScreen {
         let row = game.notes[i]
         for channelIndex in row {
+          guard channelIndex < channels.count else { continue }
           channels[channelIndex].startBlock(1, rowId: i)
         }
       }
@@ -83,12 +94,22 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     for channel in channels {
       channel.rowWasPlayed(row)
     }
+    healthNode.setHealth(game.health)
   }
   
   func gameDidFailRow(game: Game, row: Int) {
     for channel in channels {
       channel.failedToPlayRow(row)
     }
+    healthNode.setHealth(game.health)
+  }
+  
+  func gameDidLose(game: Game) {
+    NSNotificationCenter.defaultCenter().postNotificationName(k.Notification.GameLost, object: self)
+  }
+  
+  func gameDidWin(game: Game) {
+    
   }
   
   func buttonsNodeButtonDown(buttonId: Int) {

@@ -19,9 +19,14 @@ class GameViewController: UIViewController {
     let path = NSBundle.mainBundle().pathForResource("a_winter_kiss.xm", ofType: nil)
     game = Game(songPath: path!)
     
-    skview.presentScene(GameScene(size: view.bounds.size, game: game))
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(gameLost), name: k.Notification.GameLost, object: nil)
     
+    skview.presentScene(GameScene(size: view.bounds.size, game: game))
     game.startGame()
+  }
+  
+  func gameLost() {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   override func shouldAutorotate() -> Bool {
@@ -43,5 +48,9 @@ class GameViewController: UIViewController {
   
   override func prefersStatusBarHidden() -> Bool {
     return true
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 }
