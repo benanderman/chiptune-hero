@@ -19,6 +19,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	
 	var playHead: NSBox?
 	var notesView: SongNotesView?
+  var scrollOnNextRow = false
 	
 	let songPlayer = SongPlayer()
   let songInfoManager = SongInfoManager()
@@ -87,15 +88,23 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	func songPlayerPositionChanged(songPlayer: SongPlayer) {
 		guard playHead != nil else { return }
 		playHead?.frame.origin.y = CGFloat(songPlayer.totalRows - songPlayer.globalRow - 1) * 18
-		if !scrollView.contentView.documentVisibleRect.contains(playHead!.frame) {
-			scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
-			scrollView.reflectScrolledClipView(scrollView.contentView)
-		}
+    if scrollOnNextRow {
+      scrollToPlayHead()
+      scrollOnNextRow = false
+    }
 		for i in 0 ..< songPlayer.totalChannels! {
 			let checkbox = channelChecksContainer.subviews[i] as! NSButton
 			checkbox.state = songPlayer.channelIsMuted(i) ? NSOffState : NSOnState
 		}
 	}
+  
+  func scrollToPlayHead() {
+    guard playHead != nil else { return }
+    if !scrollView.contentView.documentVisibleRect.contains(playHead!.frame) {
+      scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
+      scrollView.reflectScrolledClipView(scrollView.contentView)
+    }
+  }
 	
 	func toggleMute(sender: NSButton) {
 		let channel = sender.tag
@@ -134,7 +143,8 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	}
 	
 	@IBAction func playSong(sender: NSButton) {
-		songPlayer.startPlaying()
+    songPlayer.startPlaying()
+    scrollOnNextRow = true
 	}
 	
 	@IBAction func pauseSong(sender: NSButton) {
@@ -142,11 +152,13 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	}
 	
 	@IBAction func nextPosition(sender: AnyObject) {
-		songPlayer.nextPosition()
+    songPlayer.nextPosition()
+    scrollOnNextRow = true
 	}
 	
 	@IBAction func prevPosition(sender: AnyObject) {
 		songPlayer.prevPosition()
+    scrollOnNextRow = true
 	}
 	
 	@IBAction func printData(sender: NSButton) {

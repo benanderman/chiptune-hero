@@ -76,7 +76,9 @@ class SongInfoManager: SongDataDelegate {
   }
   
   func songPlayerPositionChanged(songPlayer: SongPlayer) {
-    updatePatternLengths(songPlayer.pattern, row: songPlayer.row)
+    if samples.count == 0 {
+      updatePatternLengths(songPlayer.pattern, row: songPlayer.row)
+    }
   }
   
   func printData() {
