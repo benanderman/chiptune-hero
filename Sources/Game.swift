@@ -60,6 +60,8 @@ class Game: SongPlayerDelegate {
     return Double(healthInternal) / Double(Game.maxHealth)
   }
   
+  var score = 0
+  
   init(songPath: String) {
     songPlayer.delegate = self
     songPlayer.openSong(songPath)
@@ -146,6 +148,7 @@ class Game: SongPlayerDelegate {
     }
     notesPlayedOrMissed.append(true)
     healthInternal = min(Game.maxHealth, healthInternal + 2 * multiplier)
+    score += multiplier
     delegate?.gameDidPlayRow(self, row: row)
   }
   

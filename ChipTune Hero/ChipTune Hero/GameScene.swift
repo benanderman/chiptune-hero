@@ -28,11 +28,14 @@ struct k {
 
 class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   let channelCount = 4
-  var channels = [ChannelNode]()
   var lastAddedRow = 0
-  var buttonsNode: ButtonsNode
-  var healthNode = HealthNode()
   var game: Game!
+  
+  var channels = [ChannelNode]()
+  var buttonsNode: ButtonsNode
+  var healthNode: HealthNode
+  var scoreNode: SKLabelNode
+  var multiplierNode: SKLabelNode
   
   init(size: CGSize, game: Game) {
     
@@ -47,6 +50,9 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     }
     
     buttonsNode = ButtonsNode(texture: nil, color: k.Color.Window, size: CGSize(width: size.width, height: channelWidth))
+    healthNode = HealthNode()
+    scoreNode = SKLabelNode(text: "\(game.score)")
+    multiplierNode = SKLabelNode(text: "x\(game.multiplier)")
     
     super.init(size: size)
     
@@ -68,6 +74,20 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     healthNode.zPosition = 7
     healthNode.position = CGPoint(x: size.width - healthNode.size.width, y: size.height - healthNode.size.height / 2 - healthNode.size.width / 2)
     self.addChild(healthNode)
+    
+    scoreNode.horizontalAlignmentMode = .Left
+    scoreNode.verticalAlignmentMode = .Top
+    scoreNode.fontSize = 14
+    scoreNode.position = CGPoint(x: 10, y: size.height - 10)
+    scoreNode.zPosition = 8
+    self.addChild(scoreNode)
+    
+    multiplierNode.horizontalAlignmentMode = .Left
+    multiplierNode.verticalAlignmentMode = .Top
+    multiplierNode.fontSize = 14
+    multiplierNode.position = CGPoint(x: 10, y: scoreNode.frame.minY - 10)
+    multiplierNode.zPosition = 9
+    self.addChild(multiplierNode)
   }
   
   override func update(currentTime: NSTimeInterval) {
@@ -95,6 +115,8 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
       channel.rowWasPlayed(row)
     }
     healthNode.setHealth(game.health)
+    scoreNode.text = "\(game.score)"
+    multiplierNode.text = "x\(game.multiplier)"
   }
   
   func gameDidFailRow(game: Game, row: Int) {

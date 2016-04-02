@@ -17,18 +17,24 @@ class HealthNode: SKSpriteNode {
     
     super.init(texture: nil, color: UIColor.clearColor(), size: size)
     
+    let border = SKShapeNode(rectOfSize: CGSize(width: size.width + 2, height: size.height + 2))
+    border.strokeColor = UIColor.blackColor()
+    border.fillColor = UIColor(white: 0, alpha: 0.3)
+    border.zPosition = 1
+    self.addChild(border)
+    
     for i in 0 ..< 16 {
       let percent = CGFloat(i) / 15
       let color = UIColor(hue: (1 - percent) * (120 / 360), saturation: 1.0, brightness: 0.8, alpha: 1.0)
       let sprite = SKSpriteNode(color: color, size: CGSize(width: size.width, height: size.height / 16))
       sprite.position = CGPoint(x: frame.midX, y: frame.maxY - sprite.size.height * (CGFloat(i) + 0.5))
-      sprite.zPosition = 7
+      sprite.zPosition = 2
       self.addChild(sprite)
     }
     
     shade.anchorPoint = CGPoint(x: 0, y: 0)
     shade.position = CGPoint(x: frame.minX, y: frame.maxY)
-    shade.zPosition = 8
+    shade.zPosition = 3
     self.addChild(shade)
   }
   
