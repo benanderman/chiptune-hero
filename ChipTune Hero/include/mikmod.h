@@ -124,7 +124,7 @@ typedef char               CHAR;
 
 /* BOOL:  0=false, <>0 true -- 16 bits on Amiga, int-wide on others. */
 #if !(defined(_MIKMOD_OS2) || defined(_MIKMOD_WIN32) || defined(_MIKMOD_AMIGA))
-typedef bool                BOOL;
+typedef bool               BOOL;
 #endif
 
 /* 1 byte, signed and unsigned: */

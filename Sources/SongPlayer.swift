@@ -123,9 +123,9 @@ class SongPlayer {
 	
 	func setChannelMute(channel: Int, mute: Bool) {
 		if mute {
-			Player_MuteNV(Int32(channel))
+			Player_MuteNV(SLONG(channel))
 		} else {
-			Player_UnmuteNV(Int32(channel))
+			Player_UnmuteNV(SLONG(channel))
 		}
 	}
 	

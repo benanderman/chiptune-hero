@@ -57,7 +57,7 @@
 		B5418E271CA1CFEB00E108C9 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B5418E2B1CA1D00B00E108C9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		B575AC8C1CA198C4003F90F4 /* ChipTune Hero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChipTune Hero.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B575AC8C1CA198C4003F90F4 /* Chiptune Hero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chiptune Hero.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B575AC8F1CA198C4003F90F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B575AC981CA198C4003F90F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B575AC9A1CA198C4003F90F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		B575AC8D1CA198C4003F90F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B575AC8C1CA198C4003F90F4 /* ChipTune Hero.app */,
+				B575AC8C1CA198C4003F90F4 /* Chiptune Hero.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,9 +172,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B575AC8B1CA198C4003F90F4 /* ChipTune Hero */ = {
+		B575AC8B1CA198C4003F90F4 /* Chiptune Hero */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B575ACA21CA198C4003F90F4 /* Build configuration list for PBXNativeTarget "ChipTune Hero" */;
+			buildConfigurationList = B575ACA21CA198C4003F90F4 /* Build configuration list for PBXNativeTarget "Chiptune Hero" */;
 			buildPhases = (
 				B575AC881CA198C4003F90F4 /* Sources */,
 				B575AC891CA198C4003F90F4 /* Frameworks */,
@@ -184,9 +184,9 @@
 			);
 			dependencies = (
 			);
-			name = "ChipTune Hero";
+			name = "Chiptune Hero";
 			productName = "ChipTune Hero";
-			productReference = B575AC8C1CA198C4003F90F4 /* ChipTune Hero.app */;
+			productReference = B575AC8C1CA198C4003F90F4 /* Chiptune Hero.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -218,7 +218,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B575AC8B1CA198C4003F90F4 /* ChipTune Hero */,
+				B575AC8B1CA198C4003F90F4 /* Chiptune Hero */,
 			);
 		};
 /* End PBXProject section */
@@ -305,6 +305,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -322,7 +323,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "include/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -351,6 +352,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -362,7 +364,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "include/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -382,10 +384,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.ChipTune-Hero";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.chiptune-hero";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChipTune Hero/bridge.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -401,10 +404,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.ChipTune-Hero";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.chiptune-hero";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChipTune Hero/bridge.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -420,7 +424,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B575ACA21CA198C4003F90F4 /* Build configuration list for PBXNativeTarget "ChipTune Hero" */ = {
+		B575ACA21CA198C4003F90F4 /* Build configuration list for PBXNativeTarget "Chiptune Hero" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B575ACA31CA198C4003F90F4 /* Debug */,

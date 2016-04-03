@@ -6,7 +6,9 @@
 //  Copyright © 2016 Ben Anderman. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+// Inside mikmod.h, BOOL is defined as bool, but bool doesn't exist in this context
+#define bool char
+
 #include "mikmod.h"
 
 void Player_MuteNV(SLONG channel)
