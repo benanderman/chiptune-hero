@@ -123,6 +123,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     for channel in channels {
       channel.failedToPlayRow(row)
     }
+    multiplierNode.text = "x\(game.multiplier)"
     healthNode.setHealth(game.health)
   }
   

@@ -35,6 +35,8 @@
 		B5CEF3481CADB36500FD1467 /* HealthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF3471CADB36500FD1467 /* HealthNode.swift */; };
 		B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE91CA4811D002B90EA /* NotesLayer.swift */; };
 		B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEA1CA4811D002B90EA /* SongSpec.swift */; };
+		B5D6E4521CB0C86200F7FFAA /* _sunlight_.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */; };
+		B5D6E4531CB0C86200F7FFAA /* _sunlight_.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5D6E4511CB0C86200F7FFAA /* _sunlight_.xm.spec.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		B5CEF3431CACA66400FD1467 /* ButtonsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsNode.swift; sourceTree = "<group>"; };
 		B5CEF3451CADAAC800FD1467 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		B5CEF3471CADB36500FD1467 /* HealthNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthNode.swift; sourceTree = "<group>"; };
+		B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = _sunlight_.xm; path = ../songs/_sunlight_.xm; sourceTree = "<group>"; };
+		B5D6E4511CB0C86200F7FFAA /* _sunlight_.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = _sunlight_.xm.spec.json; path = ../songs/_sunlight_.xm.spec.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 		B508EAE01CA2F5D6002B90EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */,
+				B5D6E4511CB0C86200F7FFAA /* _sunlight_.xm.spec.json */,
 				B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */,
 				B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */,
 			);
@@ -232,6 +238,8 @@
 				B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */,
 				5292ED471CA4629000F7849C /* StarParticle.sks in Resources */,
 				B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */,
+				B5D6E4521CB0C86200F7FFAA /* _sunlight_.xm in Resources */,
+				B5D6E4531CB0C86200F7FFAA /* _sunlight_.xm.spec.json in Resources */,
 				B5CEF3401CAB03E500FD1467 /* a_winter_kiss.xm.spec.json in Resources */,
 				B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */,
 				B575AC991CA198C4003F90F4 /* Main.storyboard in Resources */,

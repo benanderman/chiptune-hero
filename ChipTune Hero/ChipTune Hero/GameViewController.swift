@@ -11,12 +11,12 @@ import SpriteKit
 
 class GameViewController: UIViewController {
   var game: Game!
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  var songName: String?
+  
+  override func viewWillAppear(animated: Bool) {
     guard let skview = view as? SKView else { fatalError() }
     
-    let path = NSBundle.mainBundle().pathForResource("a_winter_kiss.xm", ofType: nil)
+    let path = NSBundle.mainBundle().pathForResource(songName, ofType: nil)
     game = Game(songPath: path!)
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(gameLost), name: k.Notification.GameLost, object: nil)

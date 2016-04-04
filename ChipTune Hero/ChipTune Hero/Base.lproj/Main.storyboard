@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main Menu View Controller-->
         <scene sceneID="QuK-cv-wtE">
             <objects>
-                <viewController id="9oO-yK-TQJ" sceneMemberID="viewController">
+                <viewController id="9oO-yK-TQJ" customClass="MainMenuViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mWh-jr-Arh"/>
                         <viewControllerLayoutGuide type="bottom" id="Jct-Kq-bPs"/>
@@ -17,18 +17,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yz3-7y-VSk">
-                                <rect key="frame" x="263" y="285" width="75" height="30"/>
-                                <state key="normal" title="New Game"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="F5i-9l-WyR"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cD-xz-63r">
+                                <rect key="frame" x="246" y="266" width="108" height="68"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yz3-7y-VSk">
+                                        <rect key="frame" x="0.0" y="0.0" width="108" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="A Winter Kiss"/>
+                                        <connections>
+                                            <segue destination="BV1-FR-VrT" kind="show" identifier="a_winter_kiss" id="F5i-9l-WyR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUa-Ix-HVm">
+                                        <rect key="frame" x="21" y="38" width="67" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Sunlight"/>
+                                        <connections>
+                                            <segue destination="BV1-FR-VrT" kind="show" identifier="sunlight" id="cXq-AW-2N2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="hSU-sf-E4e"/>
+                                    <constraint firstAttribute="width" constant="108" id="jSh-Sb-Eoy"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Yz3-7y-VSk" firstAttribute="centerX" secondItem="EIq-6n-sGq" secondAttribute="centerX" id="5h9-RU-Aus"/>
-                            <constraint firstItem="Yz3-7y-VSk" firstAttribute="centerY" secondItem="EIq-6n-sGq" secondAttribute="centerY" id="KCh-3m-SPV"/>
+                            <constraint firstItem="1cD-xz-63r" firstAttribute="centerX" secondItem="EIq-6n-sGq" secondAttribute="centerX" id="p8z-IT-9IY"/>
+                            <constraint firstItem="1cD-xz-63r" firstAttribute="centerY" secondItem="EIq-6n-sGq" secondAttribute="centerY" id="zGn-bx-Fif"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -55,4 +74,7 @@
             <point key="canvasLocation" x="378" y="300"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cXq-AW-2N2"/>
+    </inferredMetricsTieBreakers>
 </document>
