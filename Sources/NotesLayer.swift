@@ -68,9 +68,12 @@ class NotesLayer {
 	}
 	
 	func toJSON() -> JSON {
-		let rgba = ["red": color.red, "green": color.green, "blue": color.blue, "alpha": color.alpha]
-		let nonOptionalNotes = (0 ..< rows).map { self[$0] }
-		let dict: [String:AnyObject] = ["color": rgba, "notes": nonOptionalNotes]
+    let rgba = ["red": JSON(floatLiteral: color.red),
+		            "green": JSON(floatLiteral: color.green),
+		            "blue": JSON(floatLiteral: color.blue),
+		            "alpha": JSON(floatLiteral: color.alpha)]
+		let nonOptionalNotes = (0 ..< rows).map { JSON(self[$0] as! AnyObject) }
+		let dict: [String:JSON] = ["color": JSON(rgba), "notes": JSON(nonOptionalNotes)]
 		return JSON(dict)
 	}
 }

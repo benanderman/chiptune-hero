@@ -41,6 +41,6 @@ class SongSpec {
 		return JSON([
 			"activeChannels": activeChannels.toJSON(),
 			"playable": playable.toJSON(),
-      "patterns": JSON(patterns)])
+      "patterns": JSON(patterns.map { JSON(integerLiteral: $0) })])
 	}
 }

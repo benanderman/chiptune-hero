@@ -10,6 +10,7 @@ import Foundation
 
 protocol SongPlayerDelegate: class {
 	func songPlayerPositionChanged(songPlayer: SongPlayer)
+  func songPlayerSongEnded(songPlayer: SongPlayer)
 }
 
 protocol SongDataDelegate: SongPlayerDelegate {
@@ -152,11 +153,12 @@ class SongPlayer {
 		let newPattern = Int(Player_GetOrder())
 		let newRow = Int(Player_GetRow())
 		guard newPattern != pattern || newRow != row else { return }
-    let navigating = lastNavigation.timeIntervalSinceNow < 1
+    let navigating = NSDate().timeIntervalSinceDate(lastNavigation) < 1
 		if !navigating && (newPattern < pattern || (newPattern != pattern + 1 && newRow < row)) {
 			Player_Stop()
       pattern = 0
       row = 0
+      delegate?.songPlayerSongEnded(self)
 			return
 		}
 		pattern = newPattern

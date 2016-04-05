@@ -105,8 +105,9 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     }
     lastAddedRow = Int(position) + rowsOnScreen - 1
     
+    let currentRow = game.currentRow
     for i in 0 ..< 4 {
-      channels[i].updateBlockPositions(position)
+      channels[i].updateBlockPositions(position, currentRow: currentRow)
     }
   }
   

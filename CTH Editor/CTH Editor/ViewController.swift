@@ -98,6 +98,10 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		}
 	}
   
+  func songPlayerSongEnded(songPlayer: SongPlayer) {
+    
+  }
+  
   func scrollToPlayHead() {
     guard playHead != nil else { return }
     if !scrollView.contentView.documentVisibleRect.contains(playHead!.frame) {

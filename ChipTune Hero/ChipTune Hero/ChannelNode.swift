@@ -34,8 +34,13 @@ class ChannelNode: SKSpriteNode {
     addChild(block)
   }
   
-  func updateBlockPositions(position: Double) {
+  func updateBlockPositions(position: Double, currentRow: Int) {
     for block in blocks {
+      if block.rowId == currentRow {
+        block.color = block.color.colorWithAlphaComponent(1.0)
+      } else {
+        block.color = block.color.colorWithAlphaComponent(0.75)
+      }
       let bottom = -frame.size.height / 2 + block.frame.height / 2
       block.position.y = bottom + block.frame.height * (CGFloat(block.rowId) - CGFloat(position))
       if block.position.y > frame.size.height {

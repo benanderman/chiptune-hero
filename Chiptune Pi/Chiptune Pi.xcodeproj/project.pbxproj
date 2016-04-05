@@ -1,0 +1,92 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		B57C0A641CB40C94004D36DE /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
+		B57C0A661CB40DEF004D36DE /* NotesLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesLayer.swift; path = ../Sources/NotesLayer.swift; sourceTree = "<group>"; };
+		B57C0A671CB40DEF004D36DE /* SongSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
+		B57C0A681CB40DEF004D36DE /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
+		B57C0A691CB40DEF004D36DE /* SongPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongPlayer.swift; path = ../Sources/SongPlayer.swift; sourceTree = "<group>"; };
+		B57C0A6A1CB40DEF004D36DE /* VariadicWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VariadicWrapper.m; path = ../Sources/VariadicWrapper.m; sourceTree = "<group>"; };
+		B57C0A6B1CB4137C004D36DE /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Sources/Game.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		B57C0A5D1CB33F39004D36DE = {
+			isa = PBXGroup;
+			children = (
+				B57C0A651CB40DE1004D36DE /* Common Sources */,
+				B57C0A641CB40C94004D36DE /* bridge.h */,
+			);
+			sourceTree = "<group>";
+		};
+		B57C0A651CB40DE1004D36DE /* Common Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B57C0A661CB40DEF004D36DE /* NotesLayer.swift */,
+				B57C0A671CB40DEF004D36DE /* SongSpec.swift */,
+				B57C0A681CB40DEF004D36DE /* SwiftyJSON.swift */,
+				B57C0A691CB40DEF004D36DE /* SongPlayer.swift */,
+				B57C0A6B1CB4137C004D36DE /* Game.swift */,
+				B57C0A6A1CB40DEF004D36DE /* VariadicWrapper.m */,
+			);
+			name = "Common Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		B57C0A5E1CB33F39004D36DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+			};
+			buildConfigurationList = B57C0A611CB33F39004D36DE /* Build configuration list for PBXProject "Chiptune Pi" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B57C0A5D1CB33F39004D36DE;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		B57C0A621CB33F39004D36DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		B57C0A631CB33F39004D36DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B57C0A611CB33F39004D36DE /* Build configuration list for PBXProject "Chiptune Pi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B57C0A621CB33F39004D36DE /* Debug */,
+				B57C0A631CB33F39004D36DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B57C0A5E1CB33F39004D36DE /* Project object */;
+}

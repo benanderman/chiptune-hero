@@ -68,6 +68,10 @@ class SongInfoManager: SongDataDelegate {
     }
   }
   
+  func songPlayerSongEnded(songPlayer: SongPlayer) {
+    
+  }
+  
   func updatePatternLengths(pattern: Int, row: Int) {
     if pattern >= SongInfoManager.patternLengths.count {
       SongInfoManager.patternLengths.append(0)

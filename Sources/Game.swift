@@ -34,6 +34,12 @@ class Game: SongPlayerDelegate {
     return Double(songPlayer.globalRow) + min(1, elapsed / lastRowTime)
   }
   
+  var currentRow: Int {
+    var rowId = Int(position)
+    rowId += position - Double(rowId) > 0.5 ? 1 : 0
+    return rowId
+  }
+  
   // MARK: Stats
   var notesPlayed: Int {
     return notesPlayedOrMissed.reduce(0) { $0 + ($1 == true ? 1 : 0) }
@@ -106,6 +112,10 @@ class Game: SongPlayerDelegate {
     }
   }
   
+  func songPlayerSongEnded(songPlayer: SongPlayer) {
+    winGame()
+  }
+  
   // MARK: Private
   private var songPlayer = SongPlayer()
   private var buttonsDown = Set<Button>()
@@ -117,7 +127,7 @@ class Game: SongPlayerDelegate {
   private var healthInternal = maxHealth / 2
   
   private func checkIfRowPlayed() {
-    let rowId = Int(round(position))
+    let rowId = currentRow
     let row = Set(notes[rowId])
     let buttons = Set(buttonsDown.map { $0.rawValue })
     if lastRowPlayed == rowId {
