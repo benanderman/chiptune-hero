@@ -20,13 +20,21 @@ class SongSpec {
     self.patterns = patterns
     updatePatternStarts()
 	}
+  
+  init(dict: [String:Any]) {
+    activeChannels = NotesLayer(dict: dict["activeChannels"] as! [String:Any])
+    playable = NotesLayer(dict: dict["playable"] as! [String:Any])
+    patterns = (dict["patterns"] as! [Any]).map { Int($0 as! Double) }
+  }
 	
+#if USE_SWIFTYJSON
 	init(json: JSON) {
 		activeChannels = NotesLayer(json: json["activeChannels"])
 		playable = NotesLayer(json: json["playable"])
     patterns = json["patterns"].arrayValue.map { $0.intValue }
     updatePatternStarts()
 	}
+#endif
   
   func updatePatternStarts() {
     patternStarts.removeAll()
@@ -37,10 +45,12 @@ class SongSpec {
     }
   }
 	
+#if USE_SWIFTYJSON
 	func toJSON() -> JSON {
 		return JSON([
 			"activeChannels": activeChannels.toJSON(),
 			"playable": playable.toJSON(),
       "patterns": JSON(patterns.map { JSON(integerLiteral: $0) })])
 	}
+#endif
 }

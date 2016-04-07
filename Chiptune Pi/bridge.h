@@ -10,6 +10,7 @@
 #define bridge_h
 
 #import "mikmod.h"
+#import "Sources/RPI.h"
 
 // Provide non-variadic wrappers to these functions, because Swift doesn't support variadic functions
 void Player_MuteNV(SLONG channel);

@@ -21,8 +21,13 @@ struct k {
     static let Window   = UIColor(white: 0.0, alpha: 0.3)
   }
   
+  struct Text {
+    static let GameWon = "Song Complete"
+    static let GameLost = "Game Over"
+  }
+  
   struct Notification {
-    static let GameLost = "GameLost"
+    static let GameEnded = "GameEnded"
   }
 }
 
@@ -30,12 +35,14 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   let channelCount = 4
   var lastAddedRow = 0
   var game: Game!
+  var gameEnded = false
   
   var channels = [ChannelNode]()
   var buttonsNode: ButtonsNode
   var healthNode: HealthNode
   var scoreNode: SKLabelNode
   var multiplierNode: SKLabelNode
+  var gameEndedNode: SKLabelNode
   
   init(size: CGSize, game: Game) {
     
@@ -53,10 +60,13 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     healthNode = HealthNode()
     scoreNode = SKLabelNode(text: "\(game.score)")
     multiplierNode = SKLabelNode(text: "x\(game.multiplier)")
+    gameEndedNode = SKLabelNode(text: "")
     
     super.init(size: size)
     
     self.game.delegate = self
+    
+    self.userInteractionEnabled = false
     
     for i in 0 ..< channelCount {
       self.channels[i].position = CGPointMake(channelWidth * (0.5 + CGFloat(i)), frame.midY)
@@ -77,17 +87,22 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     
     scoreNode.horizontalAlignmentMode = .Left
     scoreNode.verticalAlignmentMode = .Top
-    scoreNode.fontSize = 14
+    scoreNode.fontSize = 16
     scoreNode.position = CGPoint(x: 10, y: size.height - 10)
     scoreNode.zPosition = 8
     self.addChild(scoreNode)
     
     multiplierNode.horizontalAlignmentMode = .Left
     multiplierNode.verticalAlignmentMode = .Top
-    multiplierNode.fontSize = 14
+    multiplierNode.fontSize = 16
     multiplierNode.position = CGPoint(x: 10, y: scoreNode.frame.minY - 10)
     multiplierNode.zPosition = 9
     self.addChild(multiplierNode)
+    
+    gameEndedNode.fontSize = 24
+    gameEndedNode.zPosition = 10
+    gameEndedNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+    self.addChild(gameEndedNode)
   }
   
   override func update(currentTime: NSTimeInterval) {
@@ -129,11 +144,21 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   }
   
   func gameDidLose(game: Game) {
-    NSNotificationCenter.defaultCenter().postNotificationName(k.Notification.GameLost, object: self)
+    gameEnded = true
+    gameEndedNode.text = k.Text.GameLost
+    self.userInteractionEnabled = true
   }
   
   func gameDidWin(game: Game) {
-    
+    gameEnded = true
+    gameEndedNode.text = k.Text.GameWon
+    self.userInteractionEnabled = true
+  }
+  
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    if gameEnded {
+      NSNotificationCenter.defaultCenter().postNotificationName(k.Notification.GameEnded, object: self)
+    }
   }
   
   func buttonsNodeButtonDown(buttonId: Int) {

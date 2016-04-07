@@ -27,6 +27,7 @@ class NotesLayer {
 		self.color = color
 	}
 	
+#if USE_SWIFTYJSON
 	init(json: JSON) {
 		notes = json["notes"].arrayValue.map {
 			$0.arrayValue.count != 0 ? $0.arrayValue.map { $0.intValue } : nil
@@ -38,6 +39,22 @@ class NotesLayer {
 		let alpha = json["color"]["alpha"].doubleValue
     color = Color(red: red, green: green, blue: blue, alpha: alpha)
 	}
+#endif
+  
+  // Gross so that it works on non-Darwin
+  init(dict: [String:Any]) {
+    notes = (dict["notes"] as! [Any]).map {
+      let array = $0 as! [Any]
+      return array.count != 0 ? array.map { Int($0 as! Double) } : nil
+    }
+    
+    let dictColor = dict["color"] as! [String:Any]
+    let red = dictColor["red"] as! Double
+    let green = dictColor["green"] as! Double
+    let blue = dictColor["blue"] as! Double
+    let alpha = dictColor["alpha"] as! Double
+    color = Color(red: red, green: green, blue: blue, alpha: alpha)
+  }
 	
 	subscript(index: Int) -> [Int] {
 		guard index >= 0 && index < notes.count else { return [] }
@@ -66,14 +83,13 @@ class NotesLayer {
 		}
 		notes[row] = notes[row]?.filter { $0 != column }
 	}
-	
-	func toJSON() -> JSON {
-    let rgba = ["red": JSON(floatLiteral: color.red),
-		            "green": JSON(floatLiteral: color.green),
-		            "blue": JSON(floatLiteral: color.blue),
-		            "alpha": JSON(floatLiteral: color.alpha)]
-		let nonOptionalNotes = (0 ..< rows).map { JSON(self[$0] as! AnyObject) }
-		let dict: [String:JSON] = ["color": JSON(rgba), "notes": JSON(nonOptionalNotes)]
-		return JSON(dict)
-	}
+  
+#if USE_SWIFTYJSON
+  func toJSON() -> JSON {
+    let rgba = ["red": color.red, "green": color.green, "blue": color.blue, "alpha": color.alpha]
+    let nonOptionalNotes = (0 ..< rows).map { self[$0] }
+    let dict: [String:AnyObject] = ["color": rgba, "notes": nonOptionalNotes]
+    return JSON(dict)
+  }
+#endif
 }

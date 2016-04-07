@@ -12,15 +12,22 @@
 		B57C0A671CB40DEF004D36DE /* SongSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B57C0A681CB40DEF004D36DE /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
 		B57C0A691CB40DEF004D36DE /* SongPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongPlayer.swift; path = ../Sources/SongPlayer.swift; sourceTree = "<group>"; };
-		B57C0A6A1CB40DEF004D36DE /* VariadicWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VariadicWrapper.m; path = ../Sources/VariadicWrapper.m; sourceTree = "<group>"; };
+		B57C0A6A1CB40DEF004D36DE /* VariadicWrapper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = VariadicWrapper.c; path = ../Sources/VariadicWrapper.c; sourceTree = "<group>"; };
 		B57C0A6B1CB4137C004D36DE /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Sources/Game.swift; sourceTree = "<group>"; };
+		B57C0A6D1CB451C8004D36DE /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		B57C0A6F1CB59015004D36DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = Sources/main.swift; sourceTree = "<group>"; };
+		B57C0A711CB5E548004D36DE /* RPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RPI.h; path = Sources/RPI.h; sourceTree = "<group>"; };
+		B57C0A721CB5E59A004D36DE /* RPI.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = RPI.c; path = Sources/RPI.c; sourceTree = "<group>"; };
+		B57C0A731CB5EBAB004D36DE /* gpio_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = gpio_test.c; path = Sources/gpio_test.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		B57C0A5D1CB33F39004D36DE = {
 			isa = PBXGroup;
 			children = (
+				B57C0A6C1CB435B1004D36DE /* Sources */,
 				B57C0A651CB40DE1004D36DE /* Common Sources */,
+				B57C0A6D1CB451C8004D36DE /* Makefile */,
 				B57C0A641CB40C94004D36DE /* bridge.h */,
 			);
 			sourceTree = "<group>";
@@ -33,9 +40,20 @@
 				B57C0A681CB40DEF004D36DE /* SwiftyJSON.swift */,
 				B57C0A691CB40DEF004D36DE /* SongPlayer.swift */,
 				B57C0A6B1CB4137C004D36DE /* Game.swift */,
-				B57C0A6A1CB40DEF004D36DE /* VariadicWrapper.m */,
+				B57C0A6A1CB40DEF004D36DE /* VariadicWrapper.c */,
 			);
 			name = "Common Sources";
+			sourceTree = "<group>";
+		};
+		B57C0A6C1CB435B1004D36DE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B57C0A6F1CB59015004D36DE /* main.swift */,
+				B57C0A711CB5E548004D36DE /* RPI.h */,
+				B57C0A721CB5E59A004D36DE /* RPI.c */,
+				B57C0A731CB5EBAB004D36DE /* gpio_test.c */,
+			);
+			name = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

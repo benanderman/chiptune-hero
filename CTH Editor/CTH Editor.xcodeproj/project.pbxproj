@@ -24,7 +24,7 @@
 		B5F2EF711C9755AF00619754 /* allsort.mod in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF701C9755AF00619754 /* allsort.mod */; };
 		B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF721C975D1200619754 /* SongPlayer.swift */; };
 		B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */; };
-		B5F8D0371C9CA67F00086F85 /* VariadicWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */; };
+		B5F8D0371C9CA67F00086F85 /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,7 +60,7 @@
 		B5F2EF701C9755AF00619754 /* allsort.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = allsort.mod; path = ../songs/allsort.mod; sourceTree = SOURCE_ROOT; };
 		B5F2EF721C975D1200619754 /* SongPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongPlayer.swift; sourceTree = "<group>"; };
 		B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariadicWrapper.m; sourceTree = "<group>"; };
+		B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VariadicWrapper.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 				B508EAE61CA356D4002B90EA /* SongSpec.swift */,
 				B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */,
 				B5F2EF721C975D1200619754 /* SongPlayer.swift */,
-				B5F8D0361C9CA67F00086F85 /* VariadicWrapper.m */,
+				B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */,
 			);
 			name = "Common Sources";
 			path = ../Sources;
@@ -221,7 +221,7 @@
 			files = (
 				B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */,
 				B5D0598A1CA7AADE00803648 /* Extensions.swift in Sources */,
-				B5F8D0371C9CA67F00086F85 /* VariadicWrapper.m in Sources */,
+				B5F8D0371C9CA67F00086F85 /* VariadicWrapper.c in Sources */,
 				B5F2EF591C9748DA00619754 /* AppDelegate.swift in Sources */,
 				B508EAE71CA356D4002B90EA /* SongSpec.swift in Sources */,
 				B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */,
@@ -342,6 +342,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -360,6 +361,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

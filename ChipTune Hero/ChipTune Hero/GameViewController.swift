@@ -19,13 +19,13 @@ class GameViewController: UIViewController {
     let path = NSBundle.mainBundle().pathForResource(songName, ofType: nil)
     game = Game(songPath: path!)
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(gameLost), name: k.Notification.GameLost, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameEnded), name: k.Notification.GameEnded, object: nil)
     
     skview.presentScene(GameScene(size: view.bounds.size, game: game))
     game.startGame()
   }
   
-  func gameLost() {
+  func GameEnded() {
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   

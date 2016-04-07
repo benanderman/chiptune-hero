@@ -1,5 +1,5 @@
 //
-//  VariadicWrapper.m
+//  VariadicWrapper.c
 //  CTH Editor
 //
 //  Created by Ben Anderman on 3/18/16.

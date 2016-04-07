@@ -17,7 +17,7 @@
 		B508EADD1CA2351B002B90EA /* libmikmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B575ACA51CA19D52003F90F4 /* libmikmod.a */; };
 		B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */ = {isa = PBXBuildFile; fileRef = B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */; };
 		B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */; };
-		B508EAF01CA4811D002B90EA /* VariadicWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */; };
+		B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */; };
 		B5418E261CA1CFE400E108C9 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E251CA1CFE400E108C9 /* CoreAudio.framework */; };
 		B5418E281CA1CFEB00E108C9 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E271CA1CFEB00E108C9 /* GameController.framework */; };
 		B5418E2A1CA1CFF900E108C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */; };
@@ -51,7 +51,7 @@
 		B508EAE91CA4811D002B90EA /* NotesLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesLayer.swift; path = ../Sources/NotesLayer.swift; sourceTree = "<group>"; };
 		B508EAEA1CA4811D002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
-		B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VariadicWrapper.m; path = ../Sources/VariadicWrapper.m; sourceTree = "<group>"; };
+		B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VariadicWrapper.c; path = ../Sources/VariadicWrapper.c; sourceTree = "<group>"; };
 		B5418E211CA1C90200E108C9 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B5418E221CA1CE6900E108C9 /* mikmod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mikmod.h; path = include/mikmod.h; sourceTree = "<group>"; };
 		B5418E231CA1CF9700E108C9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -108,7 +108,7 @@
 		B508EAE81CA48108002B90EA /* Common Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B508EAEC1CA4811D002B90EA /* VariadicWrapper.m */,
+				B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */,
 				B508EAE91CA4811D002B90EA /* NotesLayer.swift */,
 				B508EAEA1CA4811D002B90EA /* SongSpec.swift */,
 				B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */,
@@ -254,7 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5CEF3481CADB36500FD1467 /* HealthNode.swift in Sources */,
-				B508EAF01CA4811D002B90EA /* VariadicWrapper.m in Sources */,
+				B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */,
 				B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
@@ -392,6 +392,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.chiptune-hero";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -412,6 +413,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.chiptune-hero";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

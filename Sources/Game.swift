@@ -73,8 +73,13 @@ class Game: SongPlayerDelegate {
     songPlayer.openSong(songPath)
     let specPath = songPath + ".spec.json"
     if let data = NSData(contentsOfFile: specPath) {
-      let json = JSON(data: data)
-      songPlayer.songSpec = SongSpec(json: json)
+      #if USE_SWIFTYJSON
+        let json = JSON(data: data)
+        songPlayer.songSpec = SongSpec(json: json)
+      #else
+        let dict = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as! [String:Any]
+        songPlayer.songSpec = SongSpec(dict: dict)
+      #endif
     }
   }
   
