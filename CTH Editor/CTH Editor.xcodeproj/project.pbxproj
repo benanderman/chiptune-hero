@@ -342,7 +342,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON -DGCD_AVAILABLE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -361,7 +361,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON -DGCD_AVAILABLE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

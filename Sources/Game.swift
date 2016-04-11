@@ -89,6 +89,10 @@ class Game: SongPlayerDelegate {
     songPlayer.speed = songPlayer.speed! * 2
   }
   
+  func update() {
+    songPlayer.update()
+  }
+  
   func loseGame() {
     songPlayer.stop()
     delegate?.gameDidLose(self)

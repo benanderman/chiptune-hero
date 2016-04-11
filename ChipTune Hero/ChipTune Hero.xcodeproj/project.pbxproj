@@ -392,7 +392,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON -DGCD_AVAILABLE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.chiptune-hero";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -413,7 +413,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON";
+				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON -DGCD_AVAILABLE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.chiptune-hero";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

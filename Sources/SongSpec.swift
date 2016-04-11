@@ -25,6 +25,7 @@ class SongSpec {
     activeChannels = NotesLayer(dict: dict["activeChannels"] as! [String:Any])
     playable = NotesLayer(dict: dict["playable"] as! [String:Any])
     patterns = (dict["patterns"] as! [Any]).map { Int($0 as! Double) }
+    updatePatternStarts()
   }
 	
 #if USE_SWIFTYJSON

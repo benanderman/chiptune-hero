@@ -19,6 +19,9 @@
 		B57C0A711CB5E548004D36DE /* RPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RPI.h; path = Sources/RPI.h; sourceTree = "<group>"; };
 		B57C0A721CB5E59A004D36DE /* RPI.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = RPI.c; path = Sources/RPI.c; sourceTree = "<group>"; };
 		B57C0A731CB5EBAB004D36DE /* gpio_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = gpio_test.c; path = Sources/gpio_test.c; sourceTree = "<group>"; };
+		B5EE000D1CB6E87D00365559 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameManager.swift; path = Sources/GameManager.swift; sourceTree = "<group>"; };
+		B5EE000E1CB6F19100365559 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		B5EE000F1CB7362400365559 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Display.swift; path = Sources/Display.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -28,6 +31,7 @@
 				B57C0A6C1CB435B1004D36DE /* Sources */,
 				B57C0A651CB40DE1004D36DE /* Common Sources */,
 				B57C0A6D1CB451C8004D36DE /* Makefile */,
+				B5EE000E1CB6F19100365559 /* build.sh */,
 				B57C0A641CB40C94004D36DE /* bridge.h */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				B57C0A6F1CB59015004D36DE /* main.swift */,
+				B5EE000D1CB6E87D00365559 /* GameManager.swift */,
+				B5EE000F1CB7362400365559 /* Display.swift */,
 				B57C0A711CB5E548004D36DE /* RPI.h */,
 				B57C0A721CB5E59A004D36DE /* RPI.c */,
 				B57C0A731CB5EBAB004D36DE /* gpio_test.c */,

@@ -67,9 +67,9 @@ void set_gpio_to_alternate(int pin, int function) {
 
 void set_gpio_value(int pin, bool value) {
   if (value) {
-    GPIO_SET = 1 << 4;
+    GPIO_SET = 1 << pin;
   } else {
-    GPIO_CLR = 1 << 4;
+    GPIO_CLR = 1 << pin;
   }
 }
 

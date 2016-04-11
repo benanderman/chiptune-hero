@@ -30,6 +30,7 @@ class SongPlayer {
 	
 	var song: UnsafeMutablePointer<MODULE>?
 	var songPath = ""
+  private var lastNavigation = NSDate()
 	
 	// Play position
 	var pattern = 0
@@ -109,8 +110,7 @@ class SongPlayer {
 	func startPlaying() {
 		if let module = song {
 			Player_Start(module)
-			update()
-			updatePlayState()
+			auto_update()
 		}
 	}
 	
@@ -133,23 +133,21 @@ class SongPlayer {
 	func channelIsMuted(channel: Int) -> Bool {
 		return Player_Muted(UBYTE(channel))
 	}
+  
+  func auto_update() {
+  #if GCD_AVAILABLE
+    if Player_Active() {
+      let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
+      dispatch_after(delay, dispatch_get_main_queue(), auto_update)
+      update()
+    }
+  #endif
+  }
+  
 	
 	func update() {
-		if Player_Active() {
-			MikMod_Update()
-			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC))
-			dispatch_after(delay, dispatch_get_main_queue(), update)
-		}
-	}
-	
-  private var lastNavigation = NSDate()
-	func updatePlayState() {
-		if Player_Active() {
-			let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
-			dispatch_after(delay, dispatch_get_main_queue(), updatePlayState)
-		} else {
-			return
-		}
+    guard Player_Active() else { return }
+    MikMod_Update()
 		let newPattern = Int(Player_GetOrder())
 		let newRow = Int(Player_GetRow())
 		guard newPattern != pattern || newRow != row else { return }
