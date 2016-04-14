@@ -35,7 +35,6 @@ class GameManager: GameDelegate {
       
       let value = get_gpio_value(17)
       if value != oldValue {
-        print("New button state: \(value)")
         if value {
           game.buttonDown(.One)
         } else {
@@ -50,9 +49,12 @@ class GameManager: GameDelegate {
 //        set_gpio_value(4, row.contains(0))
         let intPos = Int(round(position))
         var col = [Bool]()
-        for i in intPos ..< intPos + 8 {
+        for i in intPos ..< intPos + 9 {
+          col.append(game.notes[i].contains(0))
           col.append(game.notes[i].contains(0))
         }
+        let offset = 1 - (intPos - Int(position))
+        col = [Bool](col[0 + offset ..< col.count - (2 - offset)])
         Display.setDisplay(col)
         oldPosition = position
       }
@@ -60,18 +62,18 @@ class GameManager: GameDelegate {
   }
   
   func gameDidPlayRow(game: Game, row: Int) {
-    print("Played row: \(row)")
+    print("😇  Played row: \(row)")
   }
   
   func gameDidFailRow(game: Game, row: Int) {
-    print("Failed row: \(row)")
+    print("😡  Failed row: \(row)")
   }
   
   func gameDidLose(game: Game) {
-    print("Game over")
+    print("💩  Game over")
   }
   
   func gameDidWin(game: Game) {
-    print("Game won")
+    print("👌  Game won")
   }
 }

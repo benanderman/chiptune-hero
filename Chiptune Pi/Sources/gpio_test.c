@@ -29,6 +29,8 @@ int main()
     set_gpio_value(4, value);
     set_gpio_value(20, true);
     set_gpio_value(20, false);
+    set_gpio_value(21, true);
+    set_gpio_value(21, false);
     usleep(100000);
   }
   
