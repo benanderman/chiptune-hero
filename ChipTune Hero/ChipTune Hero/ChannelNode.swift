@@ -11,15 +11,35 @@ import SpriteKit
 class ChannelNode: SKSpriteNode {
   
   var blocks = Set<NoteNode>()
+  var lines = SKShapeNode()
+  var lines2 = SKShapeNode()
   
   override init(texture: SKTexture?, color: UIColor, size: CGSize) {
     super.init(texture: texture, color: color.colorWithAlphaComponent(0.5), size: size)
-    self.zPosition = 1
-    
+    setupLines()
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func setupLines() {
+    let lineCount = Int(size.height / size.width) + 2
+    let path = CGPathCreateMutable()
+    let path2 = CGPathCreateMutable()
+    for i in 0 ... lineCount {
+      let usePath = i % 2 == 0 ? path : path2
+      let y = CGFloat(i) * size.width - size.height / 2
+      CGPathMoveToPoint(usePath, nil, -size.width / 2, y)
+      CGPathAddLineToPoint(usePath, nil, size.width / 2, y)
+    }
+    lines.path = path
+    lines2.path = path2
+    lines.strokeColor = UIColor(white: 0, alpha: 0.2)
+    lines2.strokeColor = UIColor(white: 0, alpha: 0.5)
+    lines2.lineWidth = 2
+    addChild(lines)
+    addChild(lines2)
   }
   
   func startBlock(beats: Int, rowId: Int) {
@@ -48,6 +68,9 @@ class ChannelNode: SKSpriteNode {
         blocks.remove(block)
       }
     }
+    let pos = CGPoint(x: 0, y: (CGFloat(position) % 2) * -size.width)
+    lines.position = pos
+    lines2.position = pos
   }
   
   func rowWasPlayed(row: Int) {

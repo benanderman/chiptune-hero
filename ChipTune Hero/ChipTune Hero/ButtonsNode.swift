@@ -14,17 +14,51 @@ protocol ButtonsNodeDelegate: class {
 }
 
 class ButtonsNode : SKSpriteNode {
-  var buttonCount = 4
+  let buttonCount: Int
+  let buttonColor: UIColor
+  let activeColor: UIColor
   var touchesToButtons = [UITouch:Int]()
+  var buttons = [SKSpriteNode]()
   
   weak var delegate: ButtonsNodeDelegate?
+  
+  init(color: UIColor, activeColor: UIColor, buttonCount: Int, size: CGSize) {
+    self.buttonCount = buttonCount
+    self.buttonColor = color
+    self.activeColor = activeColor
+    
+    super.init(texture: nil, color: UIColor.clearColor(), size: size)
+    
+    let buttonSize = size.width / CGFloat(buttonCount)
+    for i in 0 ..< 4 {
+      let button = SKSpriteNode(color: color, size: CGSize(width: buttonSize, height: buttonSize))
+      let y = buttonSize / 2 - size.height / 2
+      button.position = CGPoint(x: (CGFloat(i) + 0.5) * buttonSize - (size.width / 2), y: y)
+      addChild(button)
+      buttons.append(button)
+    }
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func buttonDown(buttonId: Int) {
+    delegate?.buttonsNodeButtonDown(buttonId)
+    buttons[buttonId].color = activeColor
+  }
+  
+  func buttonUp(buttonId: Int) {
+    delegate?.buttonsNodeButtonUp(buttonId)
+    buttons[buttonId].color = buttonColor
+  }
   
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     super.touchesBegan(touches, withEvent: event)
     for touch in touches {
       let buttonId = buttonIdForTouch(touch)
       touchesToButtons[touch] = buttonId
-      delegate?.buttonsNodeButtonDown(buttonId)
+      buttonDown(buttonId)
     }
   }
   
@@ -33,8 +67,8 @@ class ButtonsNode : SKSpriteNode {
     for touch in touches {
       let buttonId = buttonIdForTouch(touch)
       if buttonId != touchesToButtons[touch] {
-        delegate?.buttonsNodeButtonUp(touchesToButtons[touch]!)
-        delegate?.buttonsNodeButtonDown(buttonId)
+        buttonUp(touchesToButtons[touch]!)
+        buttonDown(buttonId)
         touchesToButtons[touch] = buttonId
       }
     }
@@ -43,14 +77,14 @@ class ButtonsNode : SKSpriteNode {
   override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
     super.touchesCancelled(touches, withEvent: event)
     for buttonId in touchesToButtons.values {
-      delegate?.buttonsNodeButtonUp(buttonId)
+      buttonUp(buttonId)
     }
   }
   
   override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
     super.touchesEnded(touches, withEvent: event)
     for touch in touches {
-      delegate?.buttonsNodeButtonUp(touchesToButtons[touch]!)
+      buttonUp(touchesToButtons[touch]!)
     }
   }
   

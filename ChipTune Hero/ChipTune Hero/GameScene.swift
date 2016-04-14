@@ -14,11 +14,12 @@ struct k {
   }
   
   struct Color {
-    static let Channels = [UIColor.redColor(),
-                           UIColor.blueColor(),
-                           UIColor.purpleColor(),
-                           UIColor.greenColor()]
-    static let Window   = UIColor(white: 0.0, alpha: 0.3)
+    static let Channels        = [UIColor.redColor(),
+                                  UIColor.blueColor(),
+                                  UIColor.purpleColor(),
+                                  UIColor.greenColor()]
+    static let Buttons         =  UIColor(white: 0.0, alpha: 0.3)
+    static let ButtonsActive   =  UIColor(white: 1.0, alpha: 0.3)
   }
   
   struct Text {
@@ -56,7 +57,10 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
       channels.append(channel)
     }
     
-    buttonsNode = ButtonsNode(texture: nil, color: k.Color.Window, size: CGSize(width: size.width, height: channelWidth))
+    buttonsNode = ButtonsNode(color: k.Color.Buttons,
+                              activeColor: k.Color.ButtonsActive,
+                              buttonCount: 4,
+                              size: CGSize(width: size.width, height: channelWidth * 1.5))
     healthNode = HealthNode()
     scoreNode = SKLabelNode(text: "\(game.score)")
     multiplierNode = SKLabelNode(text: "x\(game.multiplier)")
