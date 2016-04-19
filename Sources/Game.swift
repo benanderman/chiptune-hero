@@ -34,6 +34,8 @@ class Game: SongPlayerDelegate {
     return Double(songPlayer.globalRow) + min(1, elapsed / lastRowTime)
   }
   
+  var gameEnded = false
+  
   var currentRow: Int {
     var rowId = Int(position)
     rowId += position - Double(rowId) > 0.5 ? 1 : 0
@@ -86,7 +88,7 @@ class Game: SongPlayerDelegate {
   func startGame() {
     lastRowChange = NSDate().timeIntervalSince1970
     songPlayer.startPlaying()
-    songPlayer.speed = songPlayer.speed! * 2
+    songPlayer.speed = songPlayer.speed! * 6
   }
   
   func update() {
@@ -94,20 +96,24 @@ class Game: SongPlayerDelegate {
   }
   
   func loseGame() {
+    gameEnded = true
     songPlayer.stop()
     delegate?.gameDidLose(self)
   }
   
   func winGame() {
+    gameEnded = true
     delegate?.gameDidWin(self)
   }
   
   func buttonDown(button: Button) {
+    guard gameEnded == false else { return }
     buttonsDown.insert(button)
     checkIfRowPlayed()
   }
   
   func buttonUp(button: Button) {
+    guard gameEnded == false else { return }
     buttonsDown.remove(button)
   }
   
