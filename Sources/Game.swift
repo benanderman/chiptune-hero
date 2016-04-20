@@ -88,7 +88,7 @@ class Game: SongPlayerDelegate {
   func startGame() {
     lastRowChange = NSDate().timeIntervalSince1970
     songPlayer.startPlaying()
-    songPlayer.speed = songPlayer.speed! * 6
+    songPlayer.speed = songPlayer.speed! * 2
   }
   
   func update() {
@@ -138,8 +138,9 @@ class Game: SongPlayerDelegate {
   private var lastRowTime: NSTimeInterval = 1
   private var lastRowPlayed = 0
   private var notesPlayedOrMissed = [Bool]()
+  private var rowsMissed = [Int:Int]()
   private static let maxHealth = 200
-  private var healthInternal = maxHealth / 2
+  private var healthInternal = Int(Float(maxHealth) * 0.75)
   
   private func checkIfRowPlayed() {
     let rowId = currentRow
@@ -160,7 +161,18 @@ class Game: SongPlayerDelegate {
   private func handleFailedToPlayRow(row: Int) {
     songPlayer.playChannels = .Inactive
     notesPlayedOrMissed.append(false)
-    healthInternal = max(0, healthInternal - 3)
+    
+    // Lose 3 health the first time you miss a row, 1 the second time, 0 subsequent times
+    // The 0 is mainly to deal with multi-note rows causing you to lose lots of health
+    var healthLoss = 3
+    var newMissed = 1
+    if let missed = rowsMissed[row] {
+      healthLoss = missed == 1 ? 1 : 0
+      newMissed = 2
+    }
+    rowsMissed[row] = newMissed
+    healthInternal = max(0, healthInternal - healthLoss)
+    
     checkLoseCondition()
     delegate?.gameDidFailRow(self, row: row)
   }

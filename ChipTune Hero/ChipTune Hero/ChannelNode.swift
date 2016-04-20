@@ -24,11 +24,11 @@ class ChannelNode: SKSpriteNode {
   }
   
   func setupLines() {
-    let lineCount = Int(size.height / size.width) + 2
+    let lineCount = Int(size.height / size.width) + 4
     let path = CGPathCreateMutable()
     let path2 = CGPathCreateMutable()
     for i in 0 ... lineCount {
-      let usePath = i % 2 == 0 ? path : path2
+      let usePath = i % 4 == 0 ? path2 : path
       let y = CGFloat(i) * size.width - size.height / 2
       CGPathMoveToPoint(usePath, nil, -size.width / 2, y)
       CGPathAddLineToPoint(usePath, nil, size.width / 2, y)
@@ -68,7 +68,7 @@ class ChannelNode: SKSpriteNode {
         blocks.remove(block)
       }
     }
-    let pos = CGPoint(x: 0, y: (CGFloat(position) % 2) * -size.width)
+    let pos = CGPoint(x: 0, y: (CGFloat(position) % 4) * -size.width)
     lines.position = pos
     lines2.position = pos
   }
