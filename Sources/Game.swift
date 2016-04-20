@@ -61,7 +61,7 @@ class Game: SongPlayerDelegate {
   }
   
   var multiplier: Int {
-    return streak / 10 + 1
+    return max(streak / 10 + 1, 5)
   }
   
   var health: Double {
