@@ -11,9 +11,10 @@ import Glibc
 
 class GameManager: GameDelegate {
   let game: Game
+  let buttonPins: [Int32] = [4, 17, 27, 22]
   
   init(path: String) {
-    game = Game(songPath: "../songs/a_winter_kiss.xm")
+    game = Game(songPath: path)
     game.delegate = self
   }
   
@@ -22,8 +23,11 @@ class GameManager: GameDelegate {
     
     Display.setup()
     
-    set_gpio_to_input(17)
-    var oldValue = true
+    for pin in buttonPins {
+      set_gpio_to_input(pin)
+    }
+    
+    var oldButtonValues = [Bool](count: 4, repeatedValue: true)
     var oldPosition = game.position
     
     while true {
@@ -33,29 +37,34 @@ class GameManager: GameDelegate {
       var ret = timespec()
       nanosleep(&ts, &ret)
       
-      let value = get_gpio_value(17)
-      if value != oldValue {
-        if value {
-          game.buttonDown(.One)
-        } else {
-          game.buttonUp(.One)
+      for i in 0 ..< 4 {
+        let value = get_gpio_value(buttonPins[i])
+        if value != oldButtonValues[i] {
+          if value {
+            game.buttonDown(Game.Button(rawValue: i)!)
+          } else {
+            game.buttonUp(Game.Button(rawValue: i)!)
+          }
+          oldButtonValues[i] = value
         }
-        oldValue = value
       }
       
       let position = game.position
       if position != oldPosition {
-//        let row = game.notes[Int(round(position))]
-//        set_gpio_value(4, row.contains(0))
         let intPos = Int(round(position))
-        var col = [Bool]()
+        var cols = [[Bool]]()
         for i in intPos ..< intPos + 9 {
-          col.append(game.notes[i].contains(0))
-          col.append(game.notes[i].contains(0))
+          let row = game.notes[i].reduce([false, false, false, false]) {
+            var result = $0
+            result[$1] = true
+            return result
+          }
+          cols.append(row)
+          cols.append(row)
         }
         let offset = 1 - (intPos - Int(position))
-        col = [Bool](col[0 + offset ..< col.count - (2 - offset)])
-        Display.setDisplay(col)
+        cols = [[Bool]](cols[0 + offset ..< cols.count - (2 - offset)])
+        Display.setDisplay(cols)
         oldPosition = position
       }
     }
