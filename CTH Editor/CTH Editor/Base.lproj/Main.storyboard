@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -454,38 +453,9 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="CTH_Editor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="496" height="282"/>
+                        <rect key="frame" x="0.0" y="0.0" width="496" height="252"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1G6-a3-IBf">
-                                <rect key="frame" x="18" y="245" width="39" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Song:" id="qip-0O-EQ9">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bF2-Sl-dl1">
-                                <rect key="frame" x="63" y="240" width="331" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="331" id="luT-cQ-XWy"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="a_winter_kiss.xm" drawsBackground="YES" id="joJ-c1-xqw">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dK2-Cx-6U4">
-                                <rect key="frame" x="396" y="234" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Load" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="G9J-H4-BDg">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="loadSong:" target="XfG-lQ-9wD" id="pMS-Xg-q0N"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r9T-Ld-brW">
                                 <rect key="frame" x="14" y="204" width="52" height="32"/>
                                 <buttonCell key="cell" type="push" title="▶︎" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fp5-Jz-mU5">
@@ -620,18 +590,22 @@ IA
                                     <action selector="updateEditingLayer:" target="XfG-lQ-9wD" id="VMD-oJ-5F0"/>
                                 </connections>
                             </popUpButton>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="169" translatesAutoresizingMaskIntoConstraints="NO" id="1jn-0k-tYi">
+                                <rect key="frame" x="163" y="34" width="169" height="85"/>
+                                <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Please click play, and wait for the song to finish, to allow the editor to extract information about the structure of the song." id="G0c-9p-Vtp">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="1G6-a3-IBf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="03c-bl-fwa"/>
-                            <constraint firstItem="r9T-Ld-brW" firstAttribute="top" secondItem="bF2-Sl-dl1" secondAttribute="bottom" constant="8" id="11l-Aw-n0Y"/>
+                            <constraint firstItem="F7E-SI-qth" firstAttribute="height" relation="greaterThanOrEqual" secondItem="1jn-0k-tYi" secondAttribute="height" constant="20" id="2OA-go-avB"/>
                             <constraint firstItem="F7E-SI-qth" firstAttribute="top" secondItem="s8A-Rr-yKh" secondAttribute="bottom" constant="15" id="5dS-X4-aWn"/>
-                            <constraint firstItem="dK2-Cx-6U4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="7bj-tb-oUt"/>
                             <constraint firstItem="erP-yj-Ul0" firstAttribute="centerY" secondItem="027-wl-g7Z" secondAttribute="centerY" id="7nz-Ow-Ql4"/>
                             <constraint firstItem="fBx-Da-EF0" firstAttribute="leading" secondItem="6MU-5T-Xde" secondAttribute="trailing" constant="8" id="8h1-XL-VO6"/>
-                            <constraint firstItem="bF2-Sl-dl1" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="91v-aT-hIS"/>
                             <constraint firstAttribute="trailing" secondItem="s8A-Rr-yKh" secondAttribute="trailing" constant="20" id="9LW-YB-14K"/>
                             <constraint firstItem="F7E-SI-qth" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="9jU-YO-kN3"/>
-                            <constraint firstItem="bF2-Sl-dl1" firstAttribute="leading" secondItem="1G6-a3-IBf" secondAttribute="trailing" constant="8" id="BWg-Aq-E2D"/>
                             <constraint firstItem="qor-W6-F1x" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="BYN-CT-OnL"/>
                             <constraint firstItem="3Zi-Q3-wWP" firstAttribute="centerY" secondItem="vUE-wO-08t" secondAttribute="centerY" id="Eap-qy-eBX"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fBx-Da-EF0" secondAttribute="trailing" constant="20" id="FTC-b4-MjP"/>
@@ -639,12 +613,12 @@ IA
                             <constraint firstItem="r9T-Ld-brW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JG4-Xx-Dao"/>
                             <constraint firstItem="vUE-wO-08t" firstAttribute="leading" secondItem="3Zi-Q3-wWP" secondAttribute="trailing" constant="12" id="Jcf-RZ-rQh"/>
                             <constraint firstItem="3tJ-T0-yTx" firstAttribute="centerY" secondItem="027-wl-g7Z" secondAttribute="centerY" id="OlV-sc-XgQ"/>
+                            <constraint firstItem="r9T-Ld-brW" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="TLb-KZ-XAN"/>
                             <constraint firstAttribute="bottom" secondItem="F7E-SI-qth" secondAttribute="bottom" constant="20" id="UrX-tE-Ac8"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3tJ-T0-yTx" secondAttribute="trailing" constant="20" id="VfR-nA-zht"/>
                             <constraint firstItem="3tJ-T0-yTx" firstAttribute="leading" secondItem="027-wl-g7Z" secondAttribute="trailing" constant="8" id="Wdv-SZ-mbl"/>
                             <constraint firstItem="sUb-o3-BWn" firstAttribute="top" secondItem="6MU-5T-Xde" secondAttribute="top" id="Wk4-4u-2qy"/>
-                            <constraint firstItem="1G6-a3-IBf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="XBi-3b-CI6"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dK2-Cx-6U4" secondAttribute="trailing" constant="20" id="Xd4-ZD-TJy"/>
+                            <constraint firstItem="1jn-0k-tYi" firstAttribute="centerY" secondItem="F7E-SI-qth" secondAttribute="centerY" id="YaD-Ed-bP0"/>
                             <constraint firstItem="027-wl-g7Z" firstAttribute="leading" secondItem="erP-yj-Ul0" secondAttribute="trailing" constant="12" id="b7A-zT-jIk"/>
                             <constraint firstItem="6MU-5T-Xde" firstAttribute="top" secondItem="fBx-Da-EF0" secondAttribute="top" id="cpJ-2a-i8u"/>
                             <constraint firstItem="6MU-5T-Xde" firstAttribute="leading" secondItem="sUb-o3-BWn" secondAttribute="trailing" constant="20" id="d8S-0F-Fyk"/>
@@ -653,9 +627,9 @@ IA
                             <constraint firstItem="sUb-o3-BWn" firstAttribute="leading" secondItem="qor-W6-F1x" secondAttribute="trailing" constant="8" id="gid-5E-rNw"/>
                             <constraint firstItem="qor-W6-F1x" firstAttribute="top" secondItem="r9T-Ld-brW" secondAttribute="bottom" constant="12" id="lPL-ge-Bs5"/>
                             <constraint firstItem="r9T-Ld-brW" firstAttribute="top" secondItem="3Zi-Q3-wWP" secondAttribute="top" id="mcv-Q7-O8m"/>
-                            <constraint firstItem="dK2-Cx-6U4" firstAttribute="leading" secondItem="bF2-Sl-dl1" secondAttribute="trailing" constant="8" id="mqI-iP-lIa"/>
                             <constraint firstAttribute="trailing" secondItem="F7E-SI-qth" secondAttribute="trailing" constant="20" id="oQs-7T-fdG"/>
                             <constraint firstItem="s8A-Rr-yKh" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="qBg-sl-rHx"/>
+                            <constraint firstItem="1jn-0k-tYi" firstAttribute="centerX" secondItem="F7E-SI-qth" secondAttribute="centerX" id="rUn-jR-c2u"/>
                             <constraint firstItem="3Zi-Q3-wWP" firstAttribute="leading" secondItem="r9T-Ld-brW" secondAttribute="trailing" constant="12" id="vsU-tF-ae1"/>
                             <constraint firstItem="vUE-wO-08t" firstAttribute="centerY" secondItem="erP-yj-Ul0" secondAttribute="centerY" id="zbc-c6-ZuF"/>
                         </constraints>
@@ -663,15 +637,15 @@ IA
                     <connections>
                         <outlet property="channelChecksContainer" destination="s8A-Rr-yKh" id="vce-nE-OYk"/>
                         <outlet property="editingLayerPopUp" destination="3tJ-T0-yTx" id="Qsx-DA-OJk"/>
+                        <outlet property="infoExtractionMessage" destination="1jn-0k-tYi" id="X9s-Uo-3CF"/>
                         <outlet property="scrollView" destination="F7E-SI-qth" id="q53-d0-lwA"/>
-                        <outlet property="songTextArea" destination="bF2-Sl-dl1" id="vFz-eh-ks1"/>
                         <outlet property="speedSlider" destination="sUb-o3-BWn" id="tAH-Ud-S36"/>
                         <outlet property="volumeSlider" destination="fBx-Da-EF0" id="Yjp-h3-NvM"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="83" y="661"/>
+            <point key="canvasLocation" x="83" y="676"/>
         </scene>
     </scenes>
 </document>

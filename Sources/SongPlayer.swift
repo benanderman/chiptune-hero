@@ -140,6 +140,8 @@ class SongPlayer {
       let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
       dispatch_after(delay, dispatch_get_main_queue(), auto_update)
       update()
+    } else {
+      songEnded()
     }
   #endif
   }
@@ -153,10 +155,7 @@ class SongPlayer {
 		guard newPattern != pattern || newRow != row else { return }
     let navigating = NSDate().timeIntervalSinceDate(lastNavigation) < 1
 		if !navigating && (newPattern < pattern || (newPattern != pattern + 1 && newRow < row)) {
-			Player_Stop()
-      pattern = 0
-      row = 0
-      delegate?.songPlayerSongEnded(self)
+			songEnded()
 			return
 		}
 		pattern = newPattern
@@ -165,6 +164,13 @@ class SongPlayer {
     dataDelegate?.songPlayerPositionChanged(self)
 		updateMutedChannels()
 	}
+  
+  func songEnded() {
+    Player_Stop()
+    pattern = 0
+    row = 0
+    delegate?.songPlayerSongEnded(self)
+  }
 	
 	func updateMutedChannels() {
 		guard playChannels != .Custom && songSpec != nil else {

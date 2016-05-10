@@ -111,14 +111,19 @@ class SongInfoManager: SongDataDelegate {
     let json = JSON(["samples": samples, "patterns": SongInfoManager.patternLengths])
     do {
       let data = try json.rawData()
-      data.writeToFile(songPath + ".json", atomically: false)
+      if let path = songInfoPathForSong(songPath) {
+        data.writeToFile(path, atomically: false)
+      }
     } catch {
       return
     }
   }
   
   func loadData() {
-    guard let data = NSData(contentsOfFile: songPath + ".json") else {
+    guard let path = songInfoPathForSong(songPath) else {
+      return
+    }
+    guard let data = NSData(contentsOfFile: path) else {
       return
     }
     let json = JSON(data: data)
@@ -144,5 +149,16 @@ class SongInfoManager: SongDataDelegate {
         totalChannels = max(note.channel + 1, totalChannels!)
       }
     }
+  }
+  
+  func songInfoPathForSong(path: String) -> String? {
+    guard let data = NSData(contentsOfFile: path) else {
+      return nil
+    }
+    
+    let cachesDirectories = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
+    let cacheDirectory = cachesDirectories.first!.URLByAppendingPathComponent("\(NSBundle.mainBundle().bundleIdentifier!)")
+    try! NSFileManager.defaultManager().createDirectoryAtURL(cacheDirectory, withIntermediateDirectories: true, attributes: nil)
+    return NSURL(string: "\(data.hash).json", relativeToURL: cacheDirectory)?.path
   }
 }

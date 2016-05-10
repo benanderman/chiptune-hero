@@ -10,12 +10,12 @@ import Cocoa
 
 class ViewController: NSViewController, SongPlayerDelegate {
 	
-	@IBOutlet weak var songTextArea: NSTextField!
 	@IBOutlet weak var channelChecksContainer: NSView!
 	@IBOutlet weak var scrollView: NSScrollView!
 	@IBOutlet weak var speedSlider: NSSlider!
 	@IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var editingLayerPopUp: NSPopUpButton!
+  @IBOutlet weak var infoExtractionMessage: NSTextField!
 	
 	var playHead: NSBox?
 	var notesView: SongNotesView?
@@ -37,19 +37,35 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		didSet {
 			
 		}
-	}
+  }
+  
+  func openDocument(sender: AnyObject) {
+    let openPanel = NSOpenPanel.init()
+    openPanel.canChooseDirectories = false
+    openPanel.canChooseFiles = true
+    openPanel.allowsMultipleSelection = false
+    openPanel.beginSheetModalForWindow(NSApp.mainWindow!, completionHandler: { (result: Int) in
+      if result == NSFileHandlingPanelOKButton {
+        let url = openPanel.URLs.first!
+        self.loadSongWithPath(url.path!)
+      }
+    });
+  }
 	
 	func rebuildPlayerUI () {
 		for view in channelChecksContainer.subviews {
 			view.removeFromSuperview()
 		}
+    infoExtractionMessage.hidden = false
     scrollView.documentView = nil
+    playHead = nil
 		guard let totalChannels = songInfoManager.totalChannels else {
 			return
 		}
     guard songInfoManager.samples.count > 0 && songSpec != nil else {
       return
     }
+    infoExtractionMessage.hidden = true
 		for i in 0 ..< totalChannels {
 			let checkbox = NSButton(frame: NSRect(x: CGFloat(i) * 36, y: 0, width: 18, height: 18))
 			checkbox.setButtonType(.SwitchButton)
@@ -92,14 +108,18 @@ class ViewController: NSViewController, SongPlayerDelegate {
       scrollToPlayHead()
       scrollOnNextRow = false
     }
-		for i in 0 ..< songPlayer.totalChannels! {
+		for i in 0 ..< songInfoManager.totalChannels! {
 			let checkbox = channelChecksContainer.subviews[i] as! NSButton
 			checkbox.state = songPlayer.channelIsMuted(i) ? NSOffState : NSOnState
 		}
 	}
   
   func songPlayerSongEnded(songPlayer: SongPlayer) {
-    
+    guard playHead == nil else { return }
+    // If there's no playhead, then we must not have song data yet,
+    // so we should save our song data, then reload the song.
+    songInfoManager.writeData()
+    loadSongWithPath(songPlayer.songPath)
   }
   
   func scrollToPlayHead() {
@@ -115,6 +135,26 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		let mute = sender.state != NSOnState
 		songPlayer.setChannelMute(channel, mute: mute)
 	}
+  
+  func loadSongWithPath(path: String) {
+    songPlayer.delegate = self
+    songPlayer.dataDelegate = songInfoManager
+    songPlayer.openSong(path)
+    songSpec = nil
+    let specPath = path + ".spec.json"
+    if let data = NSData(contentsOfFile: specPath) {
+      let json = JSON(data: data)
+      songSpec = SongSpec(json: json)
+    }
+    if songSpec == nil && songInfoManager.samples.count > 0 {
+      let activeChannels = NotesLayer(rows: songInfoManager.totalRows, color: .init(nsColor: NSColor.redColor()))
+      let playable = NotesLayer(rows: songInfoManager.totalRows, color: .init(nsColor: NSColor.yellowColor()))
+      songSpec = SongSpec(activeChannels: activeChannels, playable: playable, patterns: songInfoManager.patterns)
+    }
+    songPlayer.songSpec = songSpec
+    
+    rebuildPlayerUI()
+  }
 	
 	@IBAction func updateSpeed(sender: NSSlider) {
 		songPlayer.speed = Int(round(sender.doubleValue))
@@ -123,27 +163,6 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	
 	@IBAction func updateVolume(sender: NSSlider) {
 		songPlayer.volume = sender.integerValue
-	}
-
-	@IBAction func loadSong(sender: NSButton) {
-    let path = NSBundle.mainBundle().pathForResource(songTextArea.stringValue, ofType: nil)
-    songPlayer.delegate = self
-    songPlayer.dataDelegate = songInfoManager
-		songPlayer.openSong(path!)
-		songSpec = nil
-		let specPath = path! + ".spec.json"
-		if let data = NSData(contentsOfFile: specPath) {
-			let json = JSON(data: data)
-			songSpec = SongSpec(json: json)
-    }
-    if songSpec == nil && songInfoManager.samples.count > 0 {
-      let activeChannels = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.redColor()))
-      let playable = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.yellowColor()))
-      songSpec = SongSpec(activeChannels: activeChannels, playable: playable, patterns: songInfoManager.patterns)
-    }
-    songPlayer.songSpec = songSpec
-    
-		rebuildPlayerUI()
 	}
 	
 	@IBAction func playSong(sender: NSButton) {
