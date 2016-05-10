@@ -56,7 +56,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		for view in channelChecksContainer.subviews {
 			view.removeFromSuperview()
 		}
-    infoExtractionMessage.hidden = false
+    self.view.addSubview(infoExtractionMessage)
     scrollView.documentView = nil
     playHead = nil
 		guard let totalChannels = songInfoManager.totalChannels else {
@@ -65,7 +65,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
     guard songInfoManager.samples.count > 0 && songSpec != nil else {
       return
     }
-    infoExtractionMessage.hidden = true
+    self.view.addSubview(infoExtractionMessage, positioned: .Below, relativeTo: scrollView)
 		for i in 0 ..< totalChannels {
 			let checkbox = NSButton(frame: NSRect(x: CGFloat(i) * 36, y: 0, width: 18, height: 18))
 			checkbox.setButtonType(.SwitchButton)

@@ -456,6 +456,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="496" height="252"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="169" translatesAutoresizingMaskIntoConstraints="NO" id="1jn-0k-tYi">
+                                <rect key="frame" x="163" y="34" width="169" height="85"/>
+                                <textFieldCell key="cell" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Please click play, and wait for the song to finish, to allow the editor to extract information about the structure of the song." id="G0c-9p-Vtp">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r9T-Ld-brW">
                                 <rect key="frame" x="14" y="204" width="52" height="32"/>
                                 <buttonCell key="cell" type="push" title="▶︎" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fp5-Jz-mU5">
@@ -495,7 +503,7 @@ IA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="F5v-Ha-R5o">
-                                    <rect key="frame" x="440" y="1" width="15" height="110"/>
+                                    <rect key="frame" x="439" y="1" width="16" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -590,14 +598,6 @@ IA
                                     <action selector="updateEditingLayer:" target="XfG-lQ-9wD" id="VMD-oJ-5F0"/>
                                 </connections>
                             </popUpButton>
-                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="169" translatesAutoresizingMaskIntoConstraints="NO" id="1jn-0k-tYi">
-                                <rect key="frame" x="163" y="34" width="169" height="85"/>
-                                <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Please click play, and wait for the song to finish, to allow the editor to extract information about the structure of the song." id="G0c-9p-Vtp">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="F7E-SI-qth" firstAttribute="height" relation="greaterThanOrEqual" secondItem="1jn-0k-tYi" secondAttribute="height" constant="20" id="2OA-go-avB"/>
