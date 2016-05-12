@@ -18,7 +18,19 @@ class SongNotesView: NSView {
 	var columns = 0
 	var layers = [NotesLayer]()
 	var patternOffsets = [Int]()
-	var editingLayer: NotesLayer?
+  var editingLayer: NotesLayer? {
+    didSet {
+      setNeedsDisplayInRect(bounds)
+    }
+  }
+  
+  var selectedRange: (x1: Int, y1: Int, x2: Int, y2: Int)? {
+    guard let start = selectionStart, let end = selectionEnd else { return nil }
+    return (x1: min(start.x, end.x), y1: min(start.y, end.y), x2: max(start.x, end.x), y2: max(start.y, end.y))
+  }
+  
+  private var selectionStart: (x: Int, y: Int)?
+  private var selectionEnd: (x: Int, y: Int)?
 	
 	override func drawRect(rect: NSRect) {
 		let start = Int((frame.size.height - ceil(rect.origin.y + rect.size.height)) / rowH)
@@ -36,9 +48,13 @@ class SongNotesView: NSView {
 		for note in layer[rowIndex] {
 			let rect = NSRect(x: CGFloat(note) * colW, y: y, width: colW, height: rowH)
 			let path = NSBezierPath(rect: rect)
+      var selected = false
+      if let sel = selectedRange where layer === editingLayer {
+        selected = note >= sel.x1 && note <= sel.x2 && rowIndex >= sel.y1 && rowIndex <= sel.y2
+      }
 			layer.color.nsColor.colorWithAlphaComponent(0.5).set()
 			path.fill()
-			NSColor.blackColor().colorWithAlphaComponent(0.3).set()
+      NSColor.blackColor().colorWithAlphaComponent(selected ? 1.0 : 0.3).set()
 			path.stroke()
 		}
 		if patternOffsets.contains(rowIndex) {
@@ -51,8 +67,7 @@ class SongNotesView: NSView {
 	func setNoteAtPosition(point: NSPoint, value: Bool) {
 		guard let layer = editingLayer else { return }
 		
-		let row = Int((frame.size.height - CGFloat(point.y + 1)) / rowH)
-		let column = Int(point.x / colW)
+    let (column, row) = positionForPoint(point)
 		if layer[row].contains(column) != value {
 			if (value) {
 				layer.addNote(row: row, column: column)
@@ -62,17 +77,48 @@ class SongNotesView: NSView {
 			setNeedsDisplayInRect(bounds)
 		}
 	}
+  
+  func positionForPoint(point: NSPoint) -> (x: Int, y: Int) {
+    let y = Int((frame.size.height - CGFloat(point.y + 1)) / rowH)
+    let x = Int(point.x / colW)
+    return (x: x, y: y)
+  }
+  
+  func deselect() {
+    selectionStart = nil
+    selectionEnd = nil
+  }
 	
 	override func mouseDown(event: NSEvent) {
 		let point = convertPoint(event.locationInWindow, fromView: nil)
-		let value = !event.modifierFlags.contains(.AlternateKeyMask)
-		setNoteAtPosition(point, value: value)
+    if event.modifierFlags.contains(.ShiftKeyMask) {
+      if selectionStart == nil {
+        selectionStart = positionForPoint(point)
+        selectionEnd = selectionStart
+      } else {
+        selectionEnd = positionForPoint(point)
+      }
+      setNeedsDisplayInRect(bounds)
+    } else {
+      if selectedRange != nil {
+        deselect()
+        setNeedsDisplayInRect(bounds)
+        return
+      }
+      let value = !event.modifierFlags.contains(.AlternateKeyMask)
+      setNoteAtPosition(point, value: value)
+    }
 	}
 	
 	override func mouseDragged(event: NSEvent) {
 		let point = convertPoint(event.locationInWindow, fromView: nil)
-		let value = !event.modifierFlags.contains(.AlternateKeyMask)
-		setNoteAtPosition(point, value: value)
+    if event.modifierFlags.contains(.ShiftKeyMask) && selectionStart != nil {
+      selectionEnd = positionForPoint(point)
+      setNeedsDisplayInRect(bounds)
+    } else {
+      let value = !event.modifierFlags.contains(.AlternateKeyMask)
+      setNoteAtPosition(point, value: value)
+    }
 	}
 	
 	override var acceptsFirstResponder: Bool {

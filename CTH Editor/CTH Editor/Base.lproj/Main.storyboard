@@ -503,7 +503,7 @@ IA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="F5v-Ha-R5o">
-                                    <rect key="frame" x="439" y="1" width="16" height="110"/>
+                                    <rect key="frame" x="440" y="1" width="15" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>

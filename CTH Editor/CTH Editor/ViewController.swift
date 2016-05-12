@@ -24,6 +24,8 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	let songPlayer = SongPlayer()
   let songInfoManager = SongInfoManager()
 	var songSpec: SongSpec?
+  
+  var copiedNotes: [[Bool]]?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -50,6 +52,22 @@ class ViewController: NSViewController, SongPlayerDelegate {
         self.loadSongWithPath(url.path!)
       }
     });
+  }
+  
+  func copy(sender: AnyObject) {
+    if let range = notesView?.selectedRange {
+      copiedNotes = notesView?.editingLayer?.notesForRange(range)
+    }
+  }
+  
+  func paste(sender: AnyObject) {
+    guard let window = self.view.window else { return }
+    guard let notes = self.copiedNotes else { return }
+    if let point = self.notesView?.convertPoint(window.mouseLocationOutsideOfEventStream, fromView: nil) {
+      guard let location = self.notesView?.positionForPoint(point) else { return }
+      notesView?.editingLayer?.setNotesAtLocation(notes, location: location)
+      notesView?.setNeedsDisplayInRect(notesView!.bounds)
+    }
   }
 	
 	func rebuildPlayerUI () {

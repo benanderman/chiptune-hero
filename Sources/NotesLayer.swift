@@ -41,7 +41,7 @@ class NotesLayer {
 	}
 #endif
   
-  // Gross so that it works on non-Darwin
+  // Gross so that it works on non-Darwin (specifically, Raspberry Pi)
   init(dict: [String:Any]) {
     notes = (dict["notes"] as! [Any]).map {
       let array = $0 as! [Any]
@@ -64,6 +64,24 @@ class NotesLayer {
 			return []
 		}
 	}
+  
+  func notesForRange(range: (x1: Int, y1: Int, x2: Int, y2: Int)) -> [[Bool]] {
+    return (range.y1 ... range.y2).map { row in
+      (range.x1 ... range.x2).map { self[row].contains($0) }
+    }
+  }
+  
+  func setNotesAtLocation(notes: [[Bool]], location: (x: Int, y: Int)) {
+    for y in 0 ..< notes.count {
+      for x in 0 ..< notes[y].count {
+        if notes[y][x] {
+          addNote(row: location.y + y, column: location.x + x)
+        } else {
+          removeNote(row: location.y + y, column: location.x + x)
+        }
+      }
+    }
+  }
 	
 	func addNote(row row: Int, column: Int) {
 		guard row >= 0 && row < notes.count else { return }
