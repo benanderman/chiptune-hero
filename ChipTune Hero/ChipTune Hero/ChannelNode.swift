@@ -44,7 +44,7 @@ class ChannelNode: SKSpriteNode {
   
   func startBlock(beats: Int, rowId: Int) {
     let height: CGFloat = size.width * CGFloat(beats)
-    let block = NoteNode(color: UIColor(white: 1.0, alpha: 0.9), size: CGSizeMake(size.width, height))
+    let block = NoteNode(size: CGSizeMake(size.width, height))
     block.rowId = rowId
     block.position = CGPointMake(0, -frame.size.height)
     block.name = "Block"
@@ -56,11 +56,7 @@ class ChannelNode: SKSpriteNode {
   
   func updateBlockPositions(position: Double, currentRow: Int) {
     for block in blocks {
-      if block.rowId == currentRow {
-        block.color = block.color.colorWithAlphaComponent(1.0)
-      } else {
-        block.color = block.color.colorWithAlphaComponent(0.75)
-      }
+      block.active = block.rowId == currentRow
       let bottom = -frame.size.height / 2 + block.frame.height / 2
       block.position.y = bottom + block.frame.height * (CGFloat(block.rowId) - CGFloat(position))
       if block.position.y > frame.size.height {

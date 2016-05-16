@@ -107,10 +107,14 @@ class SongPlayer {
     patterns = (0 ..< song!.memory.numpat).map {
       Int(song!.memory.positions.advancedBy(Int($0)).memory)
     }
+    // TODO: Horrible hack — we need to actually look through all the notes for jump "effects"
+    // that effectively change the length of patterns. For now, just make A Winter Kiss work.
+    if path.rangeOfString("a_winter_kiss.xm") != nil {
+      patterns[0] = 21
+    }
     patternStarts = patterns.reduce([0], combine: {
       $0 + [$0.last! + $1]
     })
-    patternStarts.removeLast()
     dataDelegate?.songPlayerLoadedSong(self)
 	}
 	

@@ -110,6 +110,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   }
   
   override func update(currentTime: NSTimeInterval) {
+    guard gameEnded == false else { return }
     let position = game.position
     
     let rowsOnScreen = Int(frame.height / channels[0].frame.width) + 1
