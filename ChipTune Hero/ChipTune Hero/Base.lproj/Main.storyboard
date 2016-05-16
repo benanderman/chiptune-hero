@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9oO-yK-TQJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yTT-pe-Jay">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Main Menu View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="UiK-ke-xvy">
+            <objects>
+                <navigationController id="yTT-pe-Jay" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5hF-Od-XPA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9oO-yK-TQJ" kind="relationship" relationship="rootViewController" id="rke-dT-f8q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cST-VC-whW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1116" y="300"/>
+        </scene>
+        <!--Chiptune Hero-->
         <scene sceneID="QuK-cv-wtE">
             <objects>
                 <viewController id="9oO-yK-TQJ" customClass="MainMenuViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,47 +34,116 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cD-xz-63r">
-                                <rect key="frame" x="246" y="266" width="108" height="68"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NjN-9w-L8D">
+                                <rect key="frame" x="252" y="232" width="96" height="136"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yz3-7y-VSk">
-                                        <rect key="frame" x="0.0" y="0.0" width="108" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yz3-7y-VSk">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="A Winter Kiss"/>
+                                        <state key="normal" title="Play"/>
                                         <connections>
-                                            <segue destination="BV1-FR-VrT" kind="show" identifier="a_winter_kiss" id="F5i-9l-WyR"/>
+                                            <segue destination="IJA-Wd-0dN" kind="show" id="Om7-Fz-CNf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUa-Ix-HVm">
-                                        <rect key="frame" x="21" y="38" width="67" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUa-Ix-HVm">
+                                        <rect key="frame" x="0.0" y="34" width="96" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Sunlight"/>
-                                        <connections>
-                                            <segue destination="BV1-FR-VrT" kind="show" identifier="sunlight" id="cXq-AW-2N2"/>
-                                        </connections>
+                                        <state key="normal" title="Highscores"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9K-5E-sJ0">
+                                        <rect key="frame" x="0.0" y="68" width="96" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Instructions"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1G-qe-cI7">
+                                        <rect key="frame" x="0.0" y="102" width="96" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Credits"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="hSU-sf-E4e"/>
-                                    <constraint firstAttribute="width" constant="108" id="jSh-Sb-Eoy"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1cD-xz-63r" firstAttribute="centerX" secondItem="EIq-6n-sGq" secondAttribute="centerX" id="p8z-IT-9IY"/>
-                            <constraint firstItem="1cD-xz-63r" firstAttribute="centerY" secondItem="EIq-6n-sGq" secondAttribute="centerY" id="zGn-bx-Fif"/>
+                            <constraint firstItem="NjN-9w-L8D" firstAttribute="centerY" secondItem="EIq-6n-sGq" secondAttribute="centerY" id="8o8-no-cqo"/>
+                            <constraint firstItem="NjN-9w-L8D" firstAttribute="centerX" secondItem="EIq-6n-sGq" secondAttribute="centerX" id="BKh-z8-A06"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Chiptune Hero" id="tuh-Vt-ccq">
+                        <barButtonItem key="backBarButtonItem" title="Menu" id="1kK-Zc-chv"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSV-O0-DUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-335" y="300"/>
+            <point key="canvasLocation" x="-413" y="300"/>
+        </scene>
+        <!--Choose A Song-->
+        <scene sceneID="eEa-t8-o26">
+            <objects>
+                <viewController id="IJA-Wd-0dN" customClass="ChooseSongViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lBP-Be-f7C"/>
+                        <viewControllerLayoutGuide type="bottom" id="iJO-WP-UfP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="06z-Fl-5zq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Cc-Fn-rrJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="song" id="Cdc-Oj-fi9" customClass="SongTableViewCell" customModule="Chiptune_Hero" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cdc-Oj-fi9" id="0bV-1c-vSM">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTw-tX-x36">
+                                                    <rect key="frame" x="16" y="11" width="34" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eTw-tX-x36" firstAttribute="leading" secondItem="0bV-1c-vSM" secondAttribute="leadingMargin" constant="8" id="AHV-AF-OH1"/>
+                                                <constraint firstItem="eTw-tX-x36" firstAttribute="centerY" secondItem="0bV-1c-vSM" secondAttribute="centerY" id="eIo-KS-fmG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="eTw-tX-x36" id="uai-q4-P20"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="IJA-Wd-0dN" id="j94-6d-1xP"/>
+                                    <outlet property="delegate" destination="IJA-Wd-0dN" id="NUB-Ee-XdG"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iJO-WP-UfP" firstAttribute="top" secondItem="4Cc-Fn-rrJ" secondAttribute="bottom" id="7KN-1v-iUa"/>
+                            <constraint firstItem="4Cc-Fn-rrJ" firstAttribute="leading" secondItem="06z-Fl-5zq" secondAttribute="leading" id="SyZ-kf-8y5"/>
+                            <constraint firstAttribute="trailing" secondItem="4Cc-Fn-rrJ" secondAttribute="trailing" id="gGz-FP-sxd"/>
+                            <constraint firstItem="4Cc-Fn-rrJ" firstAttribute="top" secondItem="lBP-Be-f7C" secondAttribute="bottom" constant="-64" id="xh9-h8-ZVH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Choose A Song" id="R3c-YP-Dcf"/>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="gameVC" id="oTM-c0-lGU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MCi-TE-RX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="310" y="300"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
                 <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
@@ -69,12 +155,8 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="378" y="300"/>
+            <point key="canvasLocation" x="1026" y="300"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="F5i-9l-WyR"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -110,7 +110,7 @@ class SongPlayer {
 	func startPlaying() {
 		if let module = song {
 			Player_Start(module)
-			auto_update()
+			autoUpdate()
 		}
 	}
 	
@@ -134,11 +134,11 @@ class SongPlayer {
 		return Player_Muted(UBYTE(channel))
 	}
   
-  func auto_update() {
+  func autoUpdate() {
   #if GCD_AVAILABLE
     if Player_Active() {
       let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
-      dispatch_after(delay, dispatch_get_main_queue(), auto_update)
+      dispatch_after(delay, dispatch_get_main_queue(), autoUpdate)
       update()
     } else {
       songEnded()

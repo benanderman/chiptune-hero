@@ -70,7 +70,8 @@ class Game: SongPlayerDelegate {
   
   var score = 0
   
-  init(songPath: String) {
+  init(songPath: String, speedMultiplier: Int) {
+    self.speedMultiplier = speedMultiplier
     songPlayer.delegate = self
     songPlayer.openSong(songPath)
     let specPath = songPath + ".spec.json"
@@ -88,7 +89,7 @@ class Game: SongPlayerDelegate {
   func startGame() {
     lastRowChange = NSDate().timeIntervalSince1970
     songPlayer.startPlaying()
-    songPlayer.speed = songPlayer.speed! * 2
+    songPlayer.speed = songPlayer.speed! * speedMultiplier
   }
   
   func update() {
@@ -132,7 +133,8 @@ class Game: SongPlayerDelegate {
   }
   
   // MARK: Private
-  private var songPlayer = SongPlayer()
+  private let songPlayer = SongPlayer()
+  private let speedMultiplier: Int
   private var buttonsDown = Set<Button>()
   private var lastRowChange: NSTimeInterval = 0
   private var lastRowTime: NSTimeInterval = 1

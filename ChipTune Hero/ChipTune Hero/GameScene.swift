@@ -148,12 +148,14 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   }
   
   func gameDidLose(game: Game) {
+    guard gameEnded == false else { return }
     gameEnded = true
     gameEndedNode.text = k.Text.GameLost
     self.userInteractionEnabled = true
   }
   
   func gameDidWin(game: Game) {
+    guard gameEnded == false else { return }
     gameEnded = true
     gameEndedNode.text = k.Text.GameWon
     self.userInteractionEnabled = true

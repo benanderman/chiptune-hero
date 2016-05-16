@@ -37,6 +37,12 @@
 		B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEA1CA4811D002B90EA /* SongSpec.swift */; };
 		B5D6E4521CB0C86200F7FFAA /* _sunlight_.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */; };
 		B5D6E4531CB0C86200F7FFAA /* _sunlight_.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5D6E4511CB0C86200F7FFAA /* _sunlight_.xm.spec.json */; };
+		B5DC890A1CE6F9BA005DC942 /* 81691-past.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5DC89081CE6F9BA005DC942 /* 81691-past.xm */; };
+		B5DC890B1CE6F9BA005DC942 /* 81691-past.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DC89091CE6F9BA005DC942 /* 81691-past.xm.spec.json */; };
+		B5DC890D1CE6FB07005DC942 /* song_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DC890C1CE6FB07005DC942 /* song_list.json */; };
+		B5DC890F1CE7FF32005DC942 /* SongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DC890E1CE7FF32005DC942 /* SongInfo.swift */; };
+		B5DC89111CE80A4A005DC942 /* ChooseSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DC89101CE80A4A005DC942 /* ChooseSongViewController.swift */; };
+		B5DC89131CE81064005DC942 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DC89121CE81064005DC942 /* SongTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +81,12 @@
 		B5CEF3471CADB36500FD1467 /* HealthNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthNode.swift; sourceTree = "<group>"; };
 		B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = _sunlight_.xm; path = ../songs/_sunlight_.xm; sourceTree = "<group>"; };
 		B5D6E4511CB0C86200F7FFAA /* _sunlight_.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = _sunlight_.xm.spec.json; path = ../songs/_sunlight_.xm.spec.json; sourceTree = "<group>"; };
+		B5DC89081CE6F9BA005DC942 /* 81691-past.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "81691-past.xm"; path = "../songs/81691-past.xm"; sourceTree = "<group>"; };
+		B5DC89091CE6F9BA005DC942 /* 81691-past.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "81691-past.xm.spec.json"; path = "../songs/81691-past.xm.spec.json"; sourceTree = "<group>"; };
+		B5DC890C1CE6FB07005DC942 /* song_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = song_list.json; path = ../songs/song_list.json; sourceTree = "<group>"; };
+		B5DC890E1CE7FF32005DC942 /* SongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfo.swift; sourceTree = "<group>"; };
+		B5DC89101CE80A4A005DC942 /* ChooseSongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongViewController.swift; sourceTree = "<group>"; };
+		B5DC89121CE81064005DC942 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +109,13 @@
 		B508EAE01CA2F5D6002B90EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5DC89081CE6F9BA005DC942 /* 81691-past.xm */,
+				B5DC89091CE6F9BA005DC942 /* 81691-past.xm.spec.json */,
 				B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */,
 				B5D6E4511CB0C86200F7FFAA /* _sunlight_.xm.spec.json */,
 				B5CEF33F1CAB03E500FD1467 /* a_winter_kiss.xm.spec.json */,
 				B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */,
+				B5DC890C1CE6FB07005DC942 /* song_list.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -145,6 +160,9 @@
 				5292ED401CA4624A00F7849C /* ChannelNode.swift */,
 				52135E4A1CA4BB900095E2E8 /* NoteNode.swift */,
 				5292ED441CA4628700F7849C /* GameViewController.swift */,
+				B5DC89101CE80A4A005DC942 /* ChooseSongViewController.swift */,
+				B5DC89121CE81064005DC942 /* SongTableViewCell.swift */,
+				B5DC890E1CE7FF32005DC942 /* SongInfo.swift */,
 				52135E481CA4B6410095E2E8 /* SwiftyTimer.swift */,
 				B5CEF3431CACA66400FD1467 /* ButtonsNode.swift */,
 				B5CEF3451CADAAC800FD1467 /* MainMenuViewController.swift */,
@@ -236,6 +254,9 @@
 			files = (
 				52135E471CA49D090095E2E8 /* TestScene.sks in Resources */,
 				B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */,
+				B5DC890B1CE6F9BA005DC942 /* 81691-past.xm.spec.json in Resources */,
+				B5DC890A1CE6F9BA005DC942 /* 81691-past.xm in Resources */,
+				B5DC890D1CE6FB07005DC942 /* song_list.json in Resources */,
 				5292ED471CA4629000F7849C /* StarParticle.sks in Resources */,
 				B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */,
 				B5D6E4521CB0C86200F7FFAA /* _sunlight_.xm in Resources */,
@@ -259,12 +280,15 @@
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
 				B5CEF3461CADAAC800FD1467 /* MainMenuViewController.swift in Sources */,
+				B5DC89131CE81064005DC942 /* SongTableViewCell.swift in Sources */,
 				B5CEF3441CACA66400FD1467 /* ButtonsNode.swift in Sources */,
 				5292ED431CA4627600F7849C /* GameScene.swift in Sources */,
 				B5D0598C1CA7AF2E00803648 /* SongSpec.swift in Sources */,
 				B575AC901CA198C4003F90F4 /* AppDelegate.swift in Sources */,
 				B5CEF3421CAB2DA900FD1467 /* Game.swift in Sources */,
 				B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */,
+				B5DC890F1CE7FF32005DC942 /* SongInfo.swift in Sources */,
+				B5DC89111CE80A4A005DC942 /* ChooseSongViewController.swift in Sources */,
 				B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */,
 				5292ED411CA4624A00F7849C /* ChannelNode.swift in Sources */,
 				52135E491CA4B6410095E2E8 /* SwiftyTimer.swift in Sources */,
@@ -387,6 +411,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "ChipTune Hero/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -408,6 +433,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "ChipTune Hero/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

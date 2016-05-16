@@ -11,13 +11,13 @@ import SpriteKit
 
 class GameViewController: UIViewController {
   var game: Game!
-  var songName: String?
+  var songInfo: SongInfo?
   
   override func viewWillAppear(animated: Bool) {
+    guard let song = songInfo else { fatalError() }
     guard let skview = view as? SKView else { fatalError() }
-    
-    let path = NSBundle.mainBundle().pathForResource(songName, ofType: nil)
-    game = Game(songPath: path!)
+    guard let path = NSBundle.mainBundle().pathForResource(song.filename, ofType: nil) else { fatalError() }
+    game = Game(songPath: path, speedMultiplier: song.speedMultiplier)
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameEnded), name: k.Notification.GameEnded, object: nil)
     

@@ -1,0 +1,20 @@
+{
+  "song_order": ["a_winter_kiss.xm", "81691-past.xm", "_sunlight_.xm"],
+  "songs": {
+    "a_winter_kiss.xm": {
+      "title": "A Winter Kiss",
+      "filename": "a_winter_kiss.xm",
+      "speed_multiplier": 2
+    },
+    "81691-past.xm": {
+      "title": "Past Never Came Back",
+      "filename": "81691-past.xm",
+      "speed_multiplier": 1
+    },
+    "_sunlight_.xm": {
+      "title": "Sunlight",
+      "filename": "_sunlight_.xm",
+      "speed_multiplier": 1
+    }
+  }
+}
