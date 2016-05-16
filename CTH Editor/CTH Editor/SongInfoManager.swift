@@ -35,23 +35,15 @@ class SongInfoManager: SongDataDelegate {
   // you can only record this information for one song at a time (but you can also only
   // play one song at a time).
   static var samples = [SongSample]()
-  static var patternLengths = [Int]()
   
   var samples = [SongSample]()
-  var patterns = [Int]()
-  var patternStarts = [Int]()
   var totalChannels: Int?
   
   var songPath = ""
   
-  var totalRows: Int {
-    return patternStarts.count > 0 ? patternStarts.last! + patterns.last! : 0
-  }
-  
   func songPlayerLoadedSong(songPlayer: SongPlayer) {
     songPath = songPlayer.songPath
     SongInfoManager.samples.removeAll()
-    SongInfoManager.patternLengths.removeAll()
     totalChannels = nil
     loadData()
     
@@ -72,17 +64,8 @@ class SongInfoManager: SongDataDelegate {
     
   }
   
-  func updatePatternLengths(pattern: Int, row: Int) {
-    if pattern >= SongInfoManager.patternLengths.count {
-      SongInfoManager.patternLengths.append(0)
-    }
-    SongInfoManager.patternLengths[pattern] = max(row + 1, SongInfoManager.patternLengths[pattern])
-  }
-  
   func songPlayerPositionChanged(songPlayer: SongPlayer) {
-    if samples.count == 0 {
-      updatePatternLengths(songPlayer.pattern, row: songPlayer.row)
-    }
+    
   }
   
   func printData() {
@@ -108,7 +91,7 @@ class SongInfoManager: SongDataDelegate {
         "notes": $0.notes.map { ["length": $0.length, "channel": $0.channel] }
       ]
     }
-    let json = JSON(["samples": samples, "patterns": SongInfoManager.patternLengths])
+    let json = JSON(["samples": samples])
     do {
       let data = try json.rawData()
       if let path = songInfoPathForSong(songPath) {
@@ -127,15 +110,6 @@ class SongInfoManager: SongDataDelegate {
       return
     }
     let json = JSON(data: data)
-    if let patterns = json["patterns"].array {
-      self.patterns = patterns.map { $0.intValue }
-      var total = 0
-      patternStarts = []
-      for i in 0 ..< self.patterns.count {
-        patternStarts.append(total)
-        total += self.patterns[i]
-      }
-    }
     if let samples = json["samples"].array {
       self.samples = samples.map {
         SongSample(pattern: $0["pattern"].intValue, row: $0["row"].intValue, notes: $0["notes"].arrayValue.map {

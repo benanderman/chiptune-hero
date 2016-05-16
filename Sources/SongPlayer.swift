@@ -45,11 +45,11 @@ class SongPlayer {
   }
 	
 	var globalRow: Int {
-		return songSpec?.patternStarts.count > pattern ? songSpec!.patternStarts[pattern] + row : 0
+		return patternStarts.count > pattern ? patternStarts[pattern] + row : 0
 	}
 	
 	var totalRows: Int {
-		return songSpec?.patternStarts.count > 0 ? songSpec!.patternStarts.last! + songSpec!.patterns.last! : 0
+		return patternStarts.count > 0 ? patternStarts.last! + patterns.last! : 0
 	}
 	
 	var speed: Int? {
@@ -104,6 +104,13 @@ class SongPlayer {
 			return
 		}
 		song?.memory.loop = false
+    patterns = (0 ..< song!.memory.numpat).map {
+      Int(song!.memory.positions.advancedBy(Int($0)).memory)
+    }
+    patternStarts = patterns.reduce([0], combine: {
+      $0 + [$0.last! + $1]
+    })
+    patternStarts.removeLast()
     dataDelegate?.songPlayerLoadedSong(self)
 	}
 	

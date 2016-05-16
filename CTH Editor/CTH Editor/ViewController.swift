@@ -94,11 +94,11 @@ class ViewController: NSViewController, SongPlayerDelegate {
 			channelChecksContainer.addSubview(checkbox)
 		}
 		
-		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songInfoManager.totalRows * 18)))
+		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
 		
-		let songLayer = NotesLayer(samples: songInfoManager.samples, patternOffsets: songInfoManager.patternStarts, rows: songInfoManager.totalRows)
+		let songLayer = NotesLayer(samples: songInfoManager.samples, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows)
 		let layers = [songLayer, songSpec!.activeChannels, songSpec!.playable]
-		notesView = SongNotesView(layers: layers, patternOffsets: songInfoManager.patternStarts, rows: songInfoManager.totalRows, columns: totalChannels)
+		notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: totalChannels)
 		notesView!.editingLayer = songSpec!.activeChannels
 		view.addSubview(notesView!)
 		
@@ -165,9 +165,9 @@ class ViewController: NSViewController, SongPlayerDelegate {
       songSpec = SongSpec(json: json)
     }
     if songSpec == nil && songInfoManager.samples.count > 0 {
-      let activeChannels = NotesLayer(rows: songInfoManager.totalRows, color: .init(nsColor: NSColor.redColor()))
-      let playable = NotesLayer(rows: songInfoManager.totalRows, color: .init(nsColor: NSColor.yellowColor()))
-      songSpec = SongSpec(activeChannels: activeChannels, playable: playable, patterns: songInfoManager.patterns)
+      let activeChannels = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.redColor()))
+      let playable = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.yellowColor()))
+      songSpec = SongSpec(activeChannels: activeChannels, playable: playable)
     }
     songPlayer.songSpec = songSpec
     

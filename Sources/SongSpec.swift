@@ -11,47 +11,29 @@ import Foundation
 class SongSpec {
 	var activeChannels: NotesLayer
 	var playable: NotesLayer
-  var patterns: [Int]
-  var patternStarts = [Int]()
 	
-  init(activeChannels: NotesLayer, playable: NotesLayer, patterns: [Int] = []) {
+  init(activeChannels: NotesLayer, playable: NotesLayer) {
 		self.activeChannels = activeChannels
 		self.playable = playable
-    self.patterns = patterns
-    updatePatternStarts()
 	}
   
   init(dict: [String:Any]) {
     activeChannels = NotesLayer(dict: dict["activeChannels"] as! [String:Any])
     playable = NotesLayer(dict: dict["playable"] as! [String:Any])
-    patterns = (dict["patterns"] as! [Any]).map { Int($0 as! Double) }
-    updatePatternStarts()
   }
 	
 #if USE_SWIFTYJSON
 	init(json: JSON) {
 		activeChannels = NotesLayer(json: json["activeChannels"])
 		playable = NotesLayer(json: json["playable"])
-    patterns = json["patterns"].arrayValue.map { $0.intValue }
-    updatePatternStarts()
 	}
 #endif
-  
-  func updatePatternStarts() {
-    patternStarts.removeAll()
-    var total = 0
-    for i in 0 ..< self.patterns.count {
-      patternStarts.append(total)
-      total += self.patterns[i]
-    }
-  }
 	
 #if USE_SWIFTYJSON
 	func toJSON() -> JSON {
 		return JSON([
 			"activeChannels": activeChannels.toJSON(),
-			"playable": playable.toJSON(),
-      "patterns": JSON(patterns.map { JSON(integerLiteral: $0) })])
+			"playable": playable.toJSON()])
 	}
 #endif
 }
