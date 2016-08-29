@@ -14,7 +14,8 @@ func initMikMod() {
 		
 		md_mode |= UInt16(DMODE_SOFT_MUSIC)
 		
-		let result = MikMod_Init("")
+    md_device = 2
+		let result = MikMod_Init("pipe=aplay -f cd")
 		if result != 0 {
       print("Could not initialize sound (\(result)), reason: \(String.fromCString(MikMod_strerror(MikMod_errno)))")
       fatalError()

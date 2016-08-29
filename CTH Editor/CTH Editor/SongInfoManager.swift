@@ -12,6 +12,7 @@ extension NotesLayer {
   convenience init(samples: [SongInfoManager.SongSample], patternOffsets: [Int], rows: Int) {
     self.init(rows: rows)
     for sample in samples {
+      guard sample.pattern < patternOffsets.count else { continue }
       let index = patternOffsets[sample.pattern] + sample.row
       notes[index] = sample.notes.map { $0.channel }
     }

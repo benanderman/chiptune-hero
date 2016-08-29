@@ -11,7 +11,7 @@ import Glibc
 
 class GameManager: GameDelegate {
   let game: Game
-  let buttonPins: [Int32] = [4, 17, 27, 22]
+  let buttonPins: [Int32] = [18, 23, 24, 25]
   
   init(path: String) {
     game = Game(songPath: path)
@@ -33,7 +33,11 @@ class GameManager: GameDelegate {
     while true {
       game.update()
       
-      var ts = timespec(tv_sec: 0, tv_nsec: 5_000_000)
+      if game.gameEnded {
+        break
+      }
+      
+      var ts = timespec(tv_sec: 0, tv_nsec: 10_000_000)
       var ret = timespec()
       nanosleep(&ts, &ret)
       
@@ -49,7 +53,7 @@ class GameManager: GameDelegate {
         }
       }
       
-      let position = game.position
+      let position = round(game.position * 2) / 2
       if position != oldPosition {
         let intPos = Int(round(position))
         var cols = [[Bool]]()
