@@ -122,6 +122,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	func songPlayerPositionChanged(songPlayer: SongPlayer) {
 		guard playHead != nil else { return }
 		playHead?.frame.origin.y = CGFloat(songPlayer.totalRows - songPlayer.globalRow - 1) * 18
+    print("\(songPlayer.globalRow) / \(songPlayer.totalRows) (\(playHead!.frame.origin.y) / \(notesView!.frame.size.height))")
     if scrollOnNextRow {
       scrollToPlayHead()
       scrollOnNextRow = false
