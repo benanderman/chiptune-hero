@@ -86,7 +86,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
     self.view.addSubview(infoExtractionMessage, positioned: .Below, relativeTo: scrollView)
 		for i in 0 ..< totalChannels {
 			let checkbox = NSButton(frame: NSRect(x: CGFloat(i) * 36, y: 0, width: 18, height: 18))
-			checkbox.setButtonType(.SwitchButton)
+			checkbox.setButtonType(NSSwitchButton)
 			checkbox.state = NSOnState
 			checkbox.tag = i
 			checkbox.target = self

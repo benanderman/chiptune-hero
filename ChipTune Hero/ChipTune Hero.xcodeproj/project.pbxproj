@@ -18,6 +18,7 @@
 		B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */ = {isa = PBXBuildFile; fileRef = B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */; };
 		B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */; };
 		B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */; };
+		B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5264D121D8F78CB00ACC8FB /* XMScanner.swift */; };
 		B5418E261CA1CFE400E108C9 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E251CA1CFE400E108C9 /* CoreAudio.framework */; };
 		B5418E281CA1CFEB00E108C9 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E271CA1CFEB00E108C9 /* GameController.framework */; };
 		B5418E2A1CA1CFF900E108C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */; };
@@ -58,6 +59,7 @@
 		B508EAEA1CA4811D002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
 		B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VariadicWrapper.c; path = ../Sources/VariadicWrapper.c; sourceTree = "<group>"; };
+		B5264D121D8F78CB00ACC8FB /* XMScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMScanner.swift; path = ../Sources/XMScanner.swift; sourceTree = "<group>"; };
 		B5418E211CA1C90200E108C9 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B5418E221CA1CE6900E108C9 /* mikmod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mikmod.h; path = include/mikmod.h; sourceTree = "<group>"; };
 		B5418E231CA1CF9700E108C9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -129,6 +131,7 @@
 				B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */,
 				B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */,
 				B5CEF3411CAB2DA900FD1467 /* Game.swift */,
+				B5264D121D8F78CB00ACC8FB /* XMScanner.swift */,
 			);
 			name = "Common Sources";
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */,
 				B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
+				B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
 				B5CEF3461CADAAC800FD1467 /* MainMenuViewController.swift in Sources */,
 				B5DC89131CE81064005DC942 /* SongTableViewCell.swift in Sources */,
@@ -360,6 +364,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -399,6 +404,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

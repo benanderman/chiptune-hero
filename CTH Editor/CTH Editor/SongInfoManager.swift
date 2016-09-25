@@ -132,7 +132,9 @@ class SongInfoManager: SongDataDelegate {
     }
     
     let cachesDirectories = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
-    let cacheDirectory = cachesDirectories.first!.URLByAppendingPathComponent("\(NSBundle.mainBundle().bundleIdentifier!)")
+    guard let cacheDirectory = cachesDirectories.first!.URLByAppendingPathComponent("\(NSBundle.mainBundle().bundleIdentifier!)") else {
+      return nil
+    }
     try! NSFileManager.defaultManager().createDirectoryAtURL(cacheDirectory, withIntermediateDirectories: true, attributes: nil)
     return NSURL(string: "\(data.hash).json", relativeToURL: cacheDirectory)?.path
   }

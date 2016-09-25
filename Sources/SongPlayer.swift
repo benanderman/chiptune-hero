@@ -104,7 +104,6 @@ class SongPlayer {
       print("Could not load module, reason: \(String.fromCString(MikMod_strerror(MikMod_errno)))")
       return
     }
-    song?.memory.loop = false
     patterns = (0 ..< song!.memory.numpat).map {
       Int(song!.memory.positions.advancedBy(Int($0)).memory)
     }
@@ -113,12 +112,19 @@ class SongPlayer {
     if path.rangeOfString("a_winter_kiss.xm") != nil {
       patterns[0x1E] = 21
     }
-    patternOrderTable = self.getPatternOrderTable(path)
-    patternStarts = patternOrderTable[0 ..< patternOrderTable.count - 1].reduce([0], combine: {
-      let pattern = patterns[$1]
-      return $0 + [$0.last! + pattern]
-    })
-    dataDelegate?.songPlayerLoadedSong(self)
+    do {
+      let scanner = try XMScanner(path: path)
+      patternOrderTable = scanner.patternOrderTable
+      patternStarts = patternOrderTable[0 ..< scanner.songLength - 1].reduce([0], combine: {
+        let pattern = patterns[$1]
+        return $0 + [$0.last! + pattern]
+      })
+      dataDelegate?.songPlayerLoadedSong(self)
+    } catch is XMError {
+      print("Failed to read XM file for a sort of known reason")
+    } catch {
+      print("Failed to read XM file for an unknown reason")
+    }
   }
   
   func getPatternOrderTable(path: String) -> [Int] {

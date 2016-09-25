@@ -49,8 +49,11 @@ class SongNotesView: NSView {
 			let rect = NSRect(x: CGFloat(note) * colW, y: y, width: colW, height: rowH)
 			let path = NSBezierPath(rect: rect)
       var selected = false
-      if let sel = selectedRange where layer === editingLayer {
-        selected = note >= sel.x1 && note <= sel.x2 && rowIndex >= sel.y1 && rowIndex <= sel.y2
+      
+      if layer === editingLayer {
+        if let sel = selectedRange {
+          selected = note >= sel.x1 && note <= sel.x2 && rowIndex >= sel.y1 && rowIndex <= sel.y2
+        }
       }
 			layer.color.nsColor.colorWithAlphaComponent(0.5).set()
 			path.fill()
@@ -91,7 +94,7 @@ class SongNotesView: NSView {
 	
 	override func mouseDown(event: NSEvent) {
 		let point = convertPoint(event.locationInWindow, fromView: nil)
-    if event.modifierFlags.contains(.ShiftKeyMask) {
+    if event.modifierFlags.contains(NSShiftKeyMask) {
       if selectionStart == nil {
         selectionStart = positionForPoint(point)
         selectionEnd = selectionStart
@@ -105,18 +108,18 @@ class SongNotesView: NSView {
         setNeedsDisplayInRect(bounds)
         return
       }
-      let value = !event.modifierFlags.contains(.AlternateKeyMask)
+      let value = !event.modifierFlags.contains(NSAlternateKeyMask)
       setNoteAtPosition(point, value: value)
     }
 	}
 	
 	override func mouseDragged(event: NSEvent) {
 		let point = convertPoint(event.locationInWindow, fromView: nil)
-    if event.modifierFlags.contains(.ShiftKeyMask) && selectionStart != nil {
+    if event.modifierFlags.contains(NSShiftKeyMask) && selectionStart != nil {
       selectionEnd = positionForPoint(point)
       setNeedsDisplayInRect(bounds)
     } else {
-      let value = !event.modifierFlags.contains(.AlternateKeyMask)
+      let value = !event.modifierFlags.contains(NSAlternateKeyMask)
       setNoteAtPosition(point, value: value)
     }
 	}
