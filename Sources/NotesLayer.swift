@@ -23,7 +23,7 @@ class NotesLayer {
   }
   
   init(rows: Int, color: Color = Color(red: 0, green: 0, blue: 0, alpha: 1)) {
-    self.notes = [[Int]?](count: rows, repeatedValue: nil)
+    self.notes = [[Int]?](repeating: nil, count: rows)
     self.color = color
   }
   
@@ -83,7 +83,7 @@ class NotesLayer {
     }
   }
   
-  func addNote(row row: Int, column: Int) {
+  func addNote(row: Int, column: Int) {
     guard row >= 0 && row < notes.count else { return }
     if notes[row] == nil {
       notes[row] = [column]
@@ -91,11 +91,11 @@ class NotesLayer {
       var cols = notes[row]!
       guard !cols.contains(column) else { return }
       cols.append(column)
-      notes[row] = cols.sort()
+      notes[row] = cols.sorted()
     }
   }
   
-  func removeNote(row row: Int, column: Int) {
+  func removeNote(row: Int, column: Int) {
     guard row >= 0 && row < notes.count else {
       return
     }
@@ -106,7 +106,7 @@ class NotesLayer {
   func toJSON() -> JSON {
     let rgba = ["red": color.red, "green": color.green, "blue": color.blue, "alpha": color.alpha]
     let nonOptionalNotes = (0 ..< rows).map { self[$0] }
-    let dict: [String:AnyObject] = ["color": rgba, "notes": nonOptionalNotes]
+    let dict: [String:Any] = ["color": rgba, "notes": nonOptionalNotes]
     return JSON(dict)
   }
 #endif

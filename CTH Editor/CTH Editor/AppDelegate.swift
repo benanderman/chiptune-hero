@@ -10,12 +10,12 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+  
+  func applicationDidFinishLaunching(_: Notification) {
+    initMikMod()
+  }
 
-	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		initMikMod()
-	}
-
-	func applicationWillTerminate(aNotification: NSNotification) {
+	func applicationWillTerminate(_: Notification) {
 		MikMod_Exit()
 	}
 
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		md_mode |= UInt16(DMODE_SOFT_MUSIC)
 		
 		if (MikMod_Init("") != 0) {
-			print("Could not initialize sound, reason: \(String.fromCString(MikMod_strerror(MikMod_errno)))")
+      print("Could not initialize sound, reason: \(String(cString: MikMod_strerror(MikMod_errno)))")
 			fatalError()
 		}
 	}

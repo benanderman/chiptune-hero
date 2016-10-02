@@ -35,38 +35,38 @@ class ViewController: NSViewController, SongPlayerDelegate {
 		
 	}
 
-	override var representedObject: AnyObject? {
+	override var representedObject: Any? {
 		didSet {
 			
 		}
   }
   
-  func openDocument(sender: AnyObject) {
+  func openDocument(_: AnyObject) {
     let openPanel = NSOpenPanel.init()
     openPanel.canChooseDirectories = false
     openPanel.canChooseFiles = true
     openPanel.allowsMultipleSelection = false
-    openPanel.beginSheetModalForWindow(NSApp.mainWindow!, completionHandler: { (result: Int) in
+    openPanel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: { (result: Int) in
       if result == NSFileHandlingPanelOKButton {
-        let url = openPanel.URLs.first!
-        self.loadSongWithPath(url.path!)
+        let url = openPanel.urls.first!
+        self.loadSongWithPath(url.path)
       }
     });
   }
   
-  func copy(sender: AnyObject) {
+  func copy(_: AnyObject) {
     if let range = notesView?.selectedRange {
-      copiedNotes = notesView?.editingLayer?.notesForRange(range)
+      copiedNotes = notesView?.editingLayer?.notesForRange(range: range)
     }
   }
   
-  func paste(sender: AnyObject) {
+  func paste(_: AnyObject) {
     guard let window = self.view.window else { return }
     guard let notes = self.copiedNotes else { return }
-    if let point = self.notesView?.convertPoint(window.mouseLocationOutsideOfEventStream, fromView: nil) {
-      guard let location = self.notesView?.positionForPoint(point) else { return }
-      notesView?.editingLayer?.setNotesAtLocation(notes, location: location)
-      notesView?.setNeedsDisplayInRect(notesView!.bounds)
+    if let point = self.notesView?.convert(window.mouseLocationOutsideOfEventStream, from: nil) {
+      guard let location = self.notesView?.positionForPoint(point: point) else { return }
+      notesView?.editingLayer?.setNotesAtLocation(notes: notes, location: location)
+      notesView?.setNeedsDisplay(notesView!.bounds)
     }
   }
 	
@@ -83,32 +83,33 @@ class ViewController: NSViewController, SongPlayerDelegate {
     guard songInfoManager.samples.count > 0 && songSpec != nil else {
       return
     }
-    self.view.addSubview(infoExtractionMessage, positioned: .Below, relativeTo: scrollView)
+    self.view.addSubview(infoExtractionMessage, positioned: .below, relativeTo: scrollView)
 		for i in 0 ..< totalChannels {
 			let checkbox = NSButton(frame: NSRect(x: CGFloat(i) * 36, y: 0, width: 18, height: 18))
 			checkbox.setButtonType(NSSwitchButton)
 			checkbox.state = NSOnState
 			checkbox.tag = i
 			checkbox.target = self
-			checkbox.action = #selector(ViewController.toggleMute(_:))
+      checkbox.action = #selector(ViewController.toggleMute(_:))
 			channelChecksContainer.addSubview(checkbox)
 		}
 		
 		let view = NSView(frame: NSRect(x: 0, y: 0, width: CGFloat(totalChannels) * 36, height: CGFloat(songPlayer.totalRows * 18)))
 		
-		let songLayer = NotesLayer(samples: songInfoManager.samples, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows)
+    let offsets = songPlayer.scanner.songStructure.map { $0.offset }
+		let songLayer = NotesLayer(samples: songInfoManager.samples, patternOffsets: offsets, rows: songPlayer.totalRows)
 		let layers = [songLayer, songSpec!.activeChannels, songSpec!.playable]
-		notesView = SongNotesView(layers: layers, patternOffsets: songPlayer.patternStarts, rows: songPlayer.totalRows, columns: totalChannels)
+		notesView = SongNotesView(layers: layers, patternOffsets: offsets, rows: songPlayer.totalRows, columns: totalChannels)
 		notesView!.editingLayer = songSpec!.activeChannels
 		view.addSubview(notesView!)
 		
 		playHead = NSBox(frame: NSRect(x: 0, y: view.frame.size.height - 18, width: CGFloat(totalChannels) * 36, height: 18))
-		playHead?.fillColor = NSColor.greenColor().colorWithAlphaComponent(0.4)
-		playHead?.boxType = .Custom
+		playHead?.fillColor = NSColor.green.withAlphaComponent(0.4)
+		playHead?.boxType = .custom
 		view.addSubview(playHead!)
 		
 		scrollView.documentView = view
-		scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: view.frame.size.height - scrollView.frame.size.height))
+		scrollView.contentView.scroll(to: NSPoint(x: 0, y: view.frame.size.height - scrollView.frame.size.height))
 		scrollView.reflectScrolledClipView(scrollView.contentView)
 		
 		speedSlider.maxValue = Double((songPlayer.speed ?? 1) * 4)
@@ -129,7 +130,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
     }
 		for i in 0 ..< songInfoManager.totalChannels! {
 			let checkbox = channelChecksContainer.subviews[i] as! NSButton
-			checkbox.state = songPlayer.channelIsMuted(i) ? NSOffState : NSOnState
+			checkbox.state = songPlayer.channelIsMuted(channel: i) ? NSOffState : NSOnState
 		}
 	}
   
@@ -144,30 +145,30 @@ class ViewController: NSViewController, SongPlayerDelegate {
   func scrollToPlayHead() {
     guard playHead != nil else { return }
     if !scrollView.contentView.documentVisibleRect.contains(playHead!.frame) {
-      scrollView.contentView.scrollToPoint(NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
+      scrollView.contentView.scroll(to: NSPoint(x: 0, y: playHead!.frame.maxY - scrollView.frame.size.height))
       scrollView.reflectScrolledClipView(scrollView.contentView)
     }
   }
 	
-	func toggleMute(sender: NSButton) {
+	func toggleMute(_ sender: NSButton) {
 		let channel = sender.tag
 		let mute = sender.state != NSOnState
-		songPlayer.setChannelMute(channel, mute: mute)
+		songPlayer.setChannelMute(channel: channel, mute: mute)
 	}
   
-  func loadSongWithPath(path: String) {
+  func loadSongWithPath(_ path: String) {
     songPlayer.delegate = self
     songPlayer.dataDelegate = songInfoManager
-    songPlayer.openSong(path)
+    songPlayer.openSong(path: path)
     songSpec = nil
     let specPath = path + ".spec.json"
     if let data = NSData(contentsOfFile: specPath) {
-      let json = JSON(data: data)
+      let json = JSON(data: data as Data)
       songSpec = SongSpec(json: json)
     }
     if songSpec == nil && songInfoManager.samples.count > 0 {
-      let activeChannels = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.redColor()))
-      let playable = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.yellowColor()))
+      let activeChannels = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.red))
+      let playable = NotesLayer(rows: songPlayer.totalRows, color: .init(nsColor: NSColor.yellow))
       songSpec = SongSpec(activeChannels: activeChannels, playable: playable)
     }
     songPlayer.songSpec = songSpec
@@ -175,53 +176,60 @@ class ViewController: NSViewController, SongPlayerDelegate {
     rebuildPlayerUI()
   }
 	
-	@IBAction func updateSpeed(sender: NSSlider) {
+	@IBAction func updateSpeed(_ sender: NSSlider) {
 		songPlayer.speed = Int(round(sender.doubleValue))
 		sender.integerValue = songPlayer.speed ?? 1
 	}
 	
-	@IBAction func updateVolume(sender: NSSlider) {
+	@IBAction func updateVolume(_ sender: NSSlider) {
 		songPlayer.volume = sender.integerValue
 	}
 	
-	@IBAction func playSong(sender: NSButton) {
+	@IBAction func playSong(_ sender: NSButton) {
     songPlayer.startPlaying()
     scrollOnNextRow = true
 	}
 	
-	@IBAction func pauseSong(sender: NSButton) {
+	@IBAction func pauseSong(_ sender: NSButton) {
 		songPlayer.pause()
 	}
 	
-	@IBAction func nextPosition(sender: AnyObject) {
+	@IBAction func nextPosition(_ sender: AnyObject) {
     songPlayer.nextPosition()
     scrollOnNextRow = true
 	}
 	
-	@IBAction func prevPosition(sender: AnyObject) {
+	@IBAction func prevPosition(_ sender: AnyObject) {
 		songPlayer.prevPosition()
     scrollOnNextRow = true
 	}
 	
-	@IBAction func printData(sender: NSButton) {
+	@IBAction func printData(_ sender: NSButton) {
 		songInfoManager.printData()
 	}
 	
-	@IBAction func writeData(sender: NSButton) {
+	@IBAction func writeData(_ sender: NSButton) {
 		songInfoManager.writeData()
 	}
 	
-	@IBAction func writeSongSpec(sender: AnyObject) {
+	@IBAction func writeSongSpec(_ sender: AnyObject) {
 		if let data = try? songSpec?.toJSON().rawData() {
-			data?.writeToFile(songPlayer.songPath + ".spec.json", atomically: false)
+      do {
+        guard let url = URL(string: songPlayer.songPath + ".spec.json") else {
+          return
+        }
+        try data?.write(to: url)
+      } catch {
+        
+      }
 		}
 	}
 	
-	@IBAction func updateSelectedChannels(sender: NSPopUpButton) {
+	@IBAction func updateSelectedChannels(_ sender: NSPopUpButton) {
 		songPlayer.playChannels = ChannelSet(rawValue: sender.selectedTag()) ?? .Custom
 	}
 	
-	@IBAction func updateEditingLayer(sender: NSPopUpButton) {
+	@IBAction func updateEditingLayer(_ sender: NSPopUpButton) {
 		let layer = sender.selectedTag() == 0 ? songSpec?.activeChannels : songSpec?.playable
 		notesView?.editingLayer = layer
 	}

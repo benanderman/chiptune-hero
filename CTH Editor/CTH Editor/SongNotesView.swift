@@ -20,7 +20,7 @@ class SongNotesView: NSView {
 	var patternOffsets = [Int]()
   var editingLayer: NotesLayer? {
     didSet {
-      setNeedsDisplayInRect(bounds)
+      setNeedsDisplay(bounds)
     }
   }
   
@@ -32,13 +32,13 @@ class SongNotesView: NSView {
   private var selectionStart: (x: Int, y: Int)?
   private var selectionEnd: (x: Int, y: Int)?
 	
-	override func drawRect(rect: NSRect) {
+	override func draw(_ rect: NSRect) {
 		let start = Int((frame.size.height - ceil(rect.origin.y + rect.size.height)) / rowH)
 		let end = Int(ceil((frame.size.height - rect.origin.y) / rowH))
 		guard start >= 0 && end < rows else { return }
 		for i in start ... end {
 			for layer in layers {
-				drawRow(i, layer: layer)
+				drawRow(rowIndex: i, layer: layer)
 			}
 		}
 	}
@@ -55,14 +55,14 @@ class SongNotesView: NSView {
           selected = note >= sel.x1 && note <= sel.x2 && rowIndex >= sel.y1 && rowIndex <= sel.y2
         }
       }
-			layer.color.nsColor.colorWithAlphaComponent(0.5).set()
+			layer.color.nsColor.withAlphaComponent(0.5).set()
 			path.fill()
-      NSColor.blackColor().colorWithAlphaComponent(selected ? 1.0 : 0.3).set()
+      NSColor.black.withAlphaComponent(selected ? 1.0 : 0.3).set()
 			path.stroke()
 		}
 		if patternOffsets.contains(rowIndex) {
 			let path = NSBezierPath(rect: NSRect(x: 0, y: y, width: frame.size.width, height: rowH))
-			NSColor.blueColor().colorWithAlphaComponent(0.3).set()
+			NSColor.blue.withAlphaComponent(0.3).set()
 			path.fill()
 		}
 	}
@@ -70,14 +70,14 @@ class SongNotesView: NSView {
 	func setNoteAtPosition(point: NSPoint, value: Bool) {
 		guard let layer = editingLayer else { return }
 		
-    let (column, row) = positionForPoint(point)
+    let (column, row) = positionForPoint(point: point)
 		if layer[row].contains(column) != value {
 			if (value) {
 				layer.addNote(row: row, column: column)
 			} else {
 				layer.removeNote(row: row, column: column)
 			}
-			setNeedsDisplayInRect(bounds)
+			setNeedsDisplay(bounds)
 		}
 	}
   
@@ -92,35 +92,35 @@ class SongNotesView: NSView {
     selectionEnd = nil
   }
 	
-	override func mouseDown(event: NSEvent) {
-		let point = convertPoint(event.locationInWindow, fromView: nil)
+	override func mouseDown(with event: NSEvent) {
+		let point = convert(event.locationInWindow, from: nil)
     if event.modifierFlags.contains(NSShiftKeyMask) {
       if selectionStart == nil {
-        selectionStart = positionForPoint(point)
+        selectionStart = positionForPoint(point: point)
         selectionEnd = selectionStart
       } else {
-        selectionEnd = positionForPoint(point)
+        selectionEnd = positionForPoint(point: point)
       }
-      setNeedsDisplayInRect(bounds)
+      setNeedsDisplay(bounds)
     } else {
       if selectedRange != nil {
         deselect()
-        setNeedsDisplayInRect(bounds)
+        setNeedsDisplay(bounds)
         return
       }
       let value = !event.modifierFlags.contains(NSAlternateKeyMask)
-      setNoteAtPosition(point, value: value)
+      setNoteAtPosition(point: point, value: value)
     }
 	}
 	
-	override func mouseDragged(event: NSEvent) {
-		let point = convertPoint(event.locationInWindow, fromView: nil)
+	override func mouseDragged(with event: NSEvent) {
+		let point = convert(event.locationInWindow, from: nil)
     if event.modifierFlags.contains(NSShiftKeyMask) && selectionStart != nil {
-      selectionEnd = positionForPoint(point)
-      setNeedsDisplayInRect(bounds)
+      selectionEnd = positionForPoint(point: point)
+      setNeedsDisplay(bounds)
     } else {
       let value = !event.modifierFlags.contains(NSAlternateKeyMask)
-      setNoteAtPosition(point, value: value)
+      setNoteAtPosition(point: point, value: value)
     }
 	}
 	

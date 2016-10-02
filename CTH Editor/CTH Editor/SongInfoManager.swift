@@ -52,7 +52,7 @@ class SongInfoManager: SongDataDelegate {
       MikMod_KickCallback = { sngpos, patpos, channels, lengths, len in
         var notes = [Note]()
         for i in 0 ..< Int(len) {
-          let note = Note(length: Int(lengths.advancedBy(i).memory), channel: Int(channels.advancedBy(i).memory))
+          let note = Note(length: Int(lengths!.advanced(by: i).pointee), channel: Int(channels!.advanced(by: i).pointee))
           notes.append(note)
         }
         let sample = SongSample(pattern: Int(sngpos), row: Int(patpos), notes: notes)
@@ -95,8 +95,8 @@ class SongInfoManager: SongDataDelegate {
     let json = JSON(["samples": samples])
     do {
       let data = try json.rawData()
-      if let path = songInfoPathForSong(songPath) {
-        data.writeToFile(path, atomically: false)
+      if let path = songInfoPathForSong(path: songPath) {
+        try data.write(to: URL(string: path)!)
       }
     } catch {
       return
@@ -104,10 +104,10 @@ class SongInfoManager: SongDataDelegate {
   }
   
   func loadData() {
-    guard let path = songInfoPathForSong(songPath) else {
+    guard let path = songInfoPathForSong(path: songPath) else {
       return
     }
-    guard let data = NSData(contentsOfFile: path) else {
+    guard let data = FileManager.default.contents(atPath: path) else {
       return
     }
     let json = JSON(data: data)
@@ -131,11 +131,9 @@ class SongInfoManager: SongDataDelegate {
       return nil
     }
     
-    let cachesDirectories = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
-    guard let cacheDirectory = cachesDirectories.first!.URLByAppendingPathComponent("\(NSBundle.mainBundle().bundleIdentifier!)") else {
-      return nil
-    }
-    try! NSFileManager.defaultManager().createDirectoryAtURL(cacheDirectory, withIntermediateDirectories: true, attributes: nil)
-    return NSURL(string: "\(data.hash).json", relativeToURL: cacheDirectory)?.path
+    let cachesDirectories = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+    let cacheDirectory = cachesDirectories.first!.appendingPathComponent("\(Bundle.main.bundleIdentifier!)")
+    try! FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true, attributes: nil)
+    return NSURL(string: "\(data.hash).json", relativeTo: cacheDirectory)?.path
   }
 }

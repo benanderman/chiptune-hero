@@ -10,6 +10,8 @@
 		B508EAE51CA31572002B90EA /* NotesLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE41CA31572002B90EA /* NotesLayer.swift */; };
 		B508EAE71CA356D4002B90EA /* SongSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAE61CA356D4002B90EA /* SongSpec.swift */; };
 		B5264D151D90BEF500ACC8FB /* XMScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5264D141D90BEF500ACC8FB /* XMScanner.swift */; };
+		B5264D251DA06EC100ACC8FB /* libmikmod.3.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2EF681C974D5900619754 /* libmikmod.3.3.0.dylib */; };
+		B5264D261DA06F1E00ACC8FB /* libmikmod.3.3.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B5F2EF681C974D5900619754 /* libmikmod.3.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */; };
 		B5CEF33C1CA9E63B00FD1467 /* SongInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEF33B1CA9E63B00FD1467 /* SongInfoManager.swift */; };
 		B5D0598A1CA7AADE00803648 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D059891CA7AADE00803648 /* Extensions.swift */; };
@@ -17,8 +19,6 @@
 		B5F2EF5B1C9748DA00619754 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF5A1C9748DA00619754 /* ViewController.swift */; };
 		B5F2EF5D1C9748DA00619754 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF5C1C9748DA00619754 /* Assets.xcassets */; };
 		B5F2EF601C9748DA00619754 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF5E1C9748DA00619754 /* Main.storyboard */; };
-		B5F2EF691C974D5900619754 /* libmikmod.3.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F2EF681C974D5900619754 /* libmikmod.3.3.0.dylib */; };
-		B5F2EF6B1C974D8C00619754 /* libmikmod.3.3.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B5F2EF681C974D5900619754 /* libmikmod.3.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF721C975D1200619754 /* SongPlayer.swift */; };
 		B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */; };
 		B5F8D0371C9CA67F00086F85 /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */; };
@@ -31,7 +31,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B5F2EF6B1C974D8C00619754 /* libmikmod.3.3.0.dylib in CopyFiles */,
+				B5264D261DA06F1E00ACC8FB /* libmikmod.3.3.0.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +41,7 @@
 		B508EAE41CA31572002B90EA /* NotesLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesLayer.swift; path = ../Sources/NotesLayer.swift; sourceTree = "<group>"; };
 		B508EAE61CA356D4002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B5264D141D90BEF500ACC8FB /* XMScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMScanner.swift; sourceTree = "<group>"; };
+		B5264D161D984F3800ACC8FB /* a_winter_kiss.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = a_winter_kiss.xm; path = ../../songs/a_winter_kiss.xm; sourceTree = "<group>"; };
 		B5C7C4C81C9DE06D003C9B16 /* SongNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongNotesView.swift; sourceTree = "<group>"; };
 		B5CEF33B1CA9E63B00FD1467 /* SongInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfoManager.swift; sourceTree = "<group>"; };
 		B5D059891CA7AADE00803648 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -62,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F2EF691C974D5900619754 /* libmikmod.3.3.0.dylib in Frameworks */,
+				B5264D251DA06EC100ACC8FB /* libmikmod.3.3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +131,7 @@
 		B5F2EF6D1C9752EA00619754 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5264D161D984F3800ACC8FB /* a_winter_kiss.xm */,
 			);
 			name = Resources;
 			path = "CTH Editor";
@@ -163,11 +165,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ben Anderman";
 				TargetAttributes = {
 					B5F2EF541C9748DA00619754 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -247,15 +250,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/lib";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -277,7 +283,7 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CTH Editor/bridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -294,15 +300,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/lib";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -316,7 +325,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "CTH Editor/bridge.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -336,6 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -354,6 +365,7 @@
 				OTHER_SWIFT_FLAGS = "-DUSE_SWIFTYJSON -DGCD_AVAILABLE";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.happyspork.CTH-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

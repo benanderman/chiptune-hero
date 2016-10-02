@@ -38,40 +38,40 @@ class SongPlayer {
   
   var playChannels = ChannelSet.Custom
   var songSpec: SongSpec?
-  var patterns = [Int]()
-  var patternOrderTable = [Int]()
-  var patternStarts = [Int]()
+  var scanner: XMScanner!
   var totalChannels: Int? {
-    return song != nil ? Int(song!.memory.numchn) : 0
+    return song != nil ? Int(song!.pointee.numchn) : 0
   }
   
   var globalRow: Int {
-    return patternStarts.count > pattern ? patternStarts[pattern] + row : 0
+    guard scanner.songStructure.count > pattern else { return 0 }
+    return scanner.songStructure[pattern].offset + row
   }
   
   var totalRows: Int {
-    return patternStarts.count > 0 ? patternStarts.last! + patterns[patternOrderTable.last!] : 0
+    guard let flatPattern = scanner.songStructure.last else { return 0 }
+    return flatPattern.offset + flatPattern.rows
   }
   
   var speed: Int? {
     get {
       guard song != nil else { return nil }
-      return Int(song!.memory.sngspd)
+      return Int(song!.pointee.sngspd)
     }
     set {
       guard song != nil else { return }
-      Player_SetSpeed(newValue == nil ? UWORD(song!.memory.initspeed) : UWORD(newValue!))
+      Player_SetSpeed(newValue == nil ? UWORD(song!.pointee.initspeed) : UWORD(newValue!))
     }
   }
   
   var volume: Int? {
     get {
       guard song != nil else { return nil }
-      return Int(song!.memory.volume)
+      return Int(song!.pointee.volume)
     }
     set {
       guard song != nil else { return }
-      Player_SetVolume(newValue == nil ? SWORD(song!.memory.initvolume) : SWORD(newValue!))
+      Player_SetVolume(newValue == nil ? SWORD(song!.pointee.initvolume) : SWORD(newValue!))
     }
   }
   
@@ -101,42 +101,17 @@ class SongPlayer {
     
     song = Player_Load(path, 128, false)
     guard song != nil else {
-      print("Could not load module, reason: \(String.fromCString(MikMod_strerror(MikMod_errno)))")
+      print("Could not load module, reason: \(String(cString: MikMod_strerror(MikMod_errno)))")
       return
     }
-    patterns = (0 ..< song!.memory.numpat).map {
-      Int(song!.memory.positions.advancedBy(Int($0)).memory)
-    }
-    // TODO: Horrible hack — we need to actually look through all the notes for jump "effects"
-    // that effectively change the length of patterns. For now, just make A Winter Kiss work.
-    if path.rangeOfString("a_winter_kiss.xm") != nil {
-      patterns[0x1E] = 21
-    }
     do {
-      let scanner = try XMScanner(path: path)
-      patternOrderTable = scanner.patternOrderTable
-      patternStarts = patternOrderTable[0 ..< scanner.songLength - 1].reduce([0], combine: {
-        let pattern = patterns[$1]
-        return $0 + [$0.last! + pattern]
-      })
-      dataDelegate?.songPlayerLoadedSong(self)
+      scanner = try XMScanner(path: path)
+      dataDelegate?.songPlayerLoadedSong(songPlayer: self)
     } catch is XMError {
       print("Failed to read XM file for a sort of known reason")
     } catch {
       print("Failed to read XM file for an unknown reason")
     }
-  }
-  
-  func getPatternOrderTable(path: String) -> [Int] {
-    guard let data = NSFileManager.defaultManager().contentsAtPath(path) else {
-      return []
-    }
-    var length: UInt8 = 0
-    data.getBytes(&length, range: NSRange(location: 0x40, length: 1))
-    
-    var table = [UInt8](count: Int(length), repeatedValue: 0)
-    data.getBytes(&table, range: NSRange(location: 0x50, length: Int(length)))
-    return table.map { Int($0) }
   }
   
   func startPlaying() {
@@ -169,8 +144,12 @@ class SongPlayer {
   func autoUpdate() {
     #if GCD_AVAILABLE
       if Player_Active() {
-        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
-        dispatch_after(delay, dispatch_get_main_queue(), autoUpdate)
+//        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
+//        dispatch_after(delay, dispatch_get_main_queue(), autoUpdate)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+          self.autoUpdate()
+        }
         update()
       } else {
         songEnded()
@@ -185,15 +164,15 @@ class SongPlayer {
     let newPattern = Int(Player_GetOrder())
     let newRow = Int(Player_GetRow())
     guard newPattern != pattern || newRow != row else { return }
-    let navigating = NSDate().timeIntervalSinceDate(lastNavigation) < 1
+    let navigating = NSDate().timeIntervalSince(lastNavigation as Date) < 1
     if !navigating && (newPattern < pattern || (newPattern != pattern + 1 && newRow < row)) {
       songEnded()
       return
     }
     pattern = newPattern
     row = newRow
-    delegate?.songPlayerPositionChanged(self)
-    dataDelegate?.songPlayerPositionChanged(self)
+    delegate?.songPlayerPositionChanged(songPlayer: self)
+    dataDelegate?.songPlayerPositionChanged(songPlayer: self)
     updateMutedChannels()
   }
   
@@ -201,21 +180,21 @@ class SongPlayer {
     Player_Stop()
     pattern = 0
     row = 0
-    delegate?.songPlayerSongEnded(self)
+    delegate?.songPlayerSongEnded(songPlayer: self)
   }
   
   func updateMutedChannels() {
     guard playChannels != .Custom && songSpec != nil else {
       return
     }
-    var states = [Bool](count: totalChannels ?? 0, repeatedValue: false)
+    var states = [Bool](repeating: false, count: totalChannels ?? 0)
     for col in songSpec!.activeChannels[globalRow] {
       guard col < states.count else { return }
       states[col] = true
     }
     let active = playChannels == .Active
     for i in 0 ..< states.count {
-      setChannelMute(i, mute: active ? !states[i] : states[i])
+      setChannelMute(channel: i, mute: active ? !states[i] : states[i])
     }
   }
   
@@ -224,7 +203,7 @@ class SongPlayer {
   }
   
   init(song: String) {
-    openSong(song)
+    openSong(path: song)
     songPath = song
   }
   
