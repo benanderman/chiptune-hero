@@ -15,10 +15,10 @@ class HealthNode: SKSpriteNode {
     let size = CGSize(width: 15, height: 100)
     shade = SKSpriteNode(color: UIColor(white: 0, alpha: 0.8), size: CGSize(width: size.width, height: 0))
     
-    super.init(texture: nil, color: UIColor.clearColor(), size: size)
+    super.init(texture: nil, color: UIColor.clear, size: size)
     
-    let border = SKShapeNode(rectOfSize: CGSize(width: size.width + 2, height: size.height + 2))
-    border.strokeColor = UIColor.blackColor()
+    let border = SKShapeNode(rectOf: CGSize(width: size.width + 2, height: size.height + 2))
+    border.strokeColor = UIColor.black
     border.fillColor = UIColor(white: 0, alpha: 0.3)
     border.zPosition = 1
     self.addChild(border)

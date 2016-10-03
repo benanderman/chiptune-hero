@@ -16,14 +16,14 @@ class NoteNode: SKSpriteNode {
   
   var active = false {
     didSet {
-      block.color = block.color.colorWithAlphaComponent(active ? 1.0 : 0.75)
+      block.color = block.color.withAlphaComponent(active ? 1.0 : 0.75)
     }
   }
   
   init(size: CGSize) {
     border = SKSpriteNode(color: UIColor(white: 1.0, alpha: 0.4), size: CGSize(width: size.width - 10, height: size.height - 10))
     block = SKSpriteNode(color: UIColor(white: 1.0, alpha: 0.75), size: CGSize(width: size.width - 20, height: size.height - 20))
-    super.init(texture: nil, color: UIColor.clearColor(), size: size)
+    super.init(texture: nil, color: UIColor.clear, size: size)
     addChild(border)
     addChild(block)
   }

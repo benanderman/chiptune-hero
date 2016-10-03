@@ -51,7 +51,7 @@ class Game: SongPlayerDelegate {
   }
   
   var streak: Int {
-    return notesPlayedOrMissed.reverse().reduce((sum: 0, foundMissed: false)) {
+    return notesPlayedOrMissed.reversed().reduce((sum: 0, foundMissed: false)) {
       if $1 && !$0.foundMissed {
         return (sum: $0.sum + 1, foundMissed: false)
       } else {
@@ -73,14 +73,14 @@ class Game: SongPlayerDelegate {
   init(songPath: String, speedMultiplier: Int) {
     self.speedMultiplier = speedMultiplier
     songPlayer.delegate = self
-    songPlayer.openSong(songPath)
+    songPlayer.openSong(path: songPath)
     let specPath = songPath + ".spec.json"
-    if let data = NSData(contentsOfFile: specPath) {
+    if let data = FileManager.default.contents(atPath: specPath) {
       #if USE_SWIFTYJSON
         let json = JSON(data: data)
         songPlayer.songSpec = SongSpec(json: json)
       #else
-        let dict = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as! [String:Any]
+        let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as! [String:Any]
         songPlayer.songSpec = SongSpec(dict: dict)
       #endif
     }
@@ -99,12 +99,12 @@ class Game: SongPlayerDelegate {
   func loseGame() {
     gameEnded = true
     songPlayer.stop()
-    delegate?.gameDidLose(self)
+    delegate?.gameDidLose(game: self)
   }
   
   func winGame() {
     gameEnded = true
-    delegate?.gameDidWin(self)
+    delegate?.gameDidWin(game: self)
   }
   
   func buttonDown(button: Button) {
@@ -124,7 +124,7 @@ class Game: SongPlayerDelegate {
     lastRowChange = now
     let lastRow = Int(position - 1)
     if notes[lastRow].count > 0 && lastRowPlayed != lastRow {
-      handleFailedToPlayRow(lastRow)
+      handleFailedToPlayRow(row: lastRow)
     }
   }
   
@@ -136,8 +136,8 @@ class Game: SongPlayerDelegate {
   private let songPlayer = SongPlayer()
   private let speedMultiplier: Int
   private var buttonsDown = Set<Button>()
-  private var lastRowChange: NSTimeInterval = 0
-  private var lastRowTime: NSTimeInterval = 1
+  private var lastRowChange: TimeInterval = 0
+  private var lastRowTime: TimeInterval = 1
   private var lastRowPlayed = 0
   private var notesPlayedOrMissed = [Bool]()
   private var rowsMissed = [Int:Int]()
@@ -149,14 +149,14 @@ class Game: SongPlayerDelegate {
     let row = Set(notes[rowId])
     let buttons = Set(buttonsDown.map { $0.rawValue })
     if lastRowPlayed == rowId {
-      handleFailedToPlayRow(rowId)
+      handleFailedToPlayRow(row: rowId)
       return
     }
     if buttons == row {
-      handlePlayedRow(rowId)
-    } else if buttons.subtract(row).count != 0 {
+      handlePlayedRow(row: rowId)
+    } else if buttons.subtracting(row).count != 0 {
       // The player pressed a wrong button
-      handleFailedToPlayRow(rowId)
+      handleFailedToPlayRow(row: rowId)
     }
   }
   
@@ -176,19 +176,19 @@ class Game: SongPlayerDelegate {
     healthInternal = max(0, healthInternal - healthLoss)
     
     checkLoseCondition()
-    delegate?.gameDidFailRow(self, row: row)
+    delegate?.gameDidFailRow(game: self, row: row)
   }
   
   private func handlePlayedRow(row: Int) {
     lastRowPlayed = row
     songPlayer.playChannels = .Custom
     for i in 0 ..< (songPlayer.totalChannels ?? 0) {
-      songPlayer.setChannelMute(i, mute: false)
+      songPlayer.setChannelMute(channel: i, mute: false)
     }
     notesPlayedOrMissed.append(true)
     healthInternal = min(Game.maxHealth, healthInternal + 2 * multiplier)
     score += multiplier
-    delegate?.gameDidPlayRow(self, row: row)
+    delegate?.gameDidPlayRow(game: self, row: row)
   }
   
   private func checkLoseCondition() {

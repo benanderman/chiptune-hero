@@ -27,7 +27,7 @@ class ButtonsNode : SKSpriteNode {
     self.buttonColor = color
     self.activeColor = activeColor
     
-    super.init(texture: nil, color: UIColor.clearColor(), size: size)
+    super.init(texture: nil, color: UIColor.clear, size: size)
     
     let buttonSize = size.width / CGFloat(buttonCount)
     for i in 0 ..< 4 {
@@ -44,51 +44,51 @@ class ButtonsNode : SKSpriteNode {
   }
   
   func buttonDown(buttonId: Int) {
-    delegate?.buttonsNodeButtonDown(buttonId)
+    delegate?.buttonsNodeButtonDown(buttonId: buttonId)
     buttons[buttonId].color = activeColor
   }
   
   func buttonUp(buttonId: Int) {
-    delegate?.buttonsNodeButtonUp(buttonId)
+    delegate?.buttonsNodeButtonUp(buttonId: buttonId)
     buttons[buttonId].color = buttonColor
   }
   
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    super.touchesBegan(touches, withEvent: event)
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
     for touch in touches {
-      let buttonId = buttonIdForTouch(touch)
+      let buttonId = buttonIdForTouch(touch: touch)
       touchesToButtons[touch] = buttonId
-      buttonDown(buttonId)
+      buttonDown(buttonId: buttonId)
     }
   }
   
-  override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    super.touchesMoved(touches, withEvent: event)
+  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesMoved(touches, with: event)
     for touch in touches {
-      let buttonId = buttonIdForTouch(touch)
+      let buttonId = buttonIdForTouch(touch: touch)
       if buttonId != touchesToButtons[touch] {
-        buttonUp(touchesToButtons[touch]!)
-        buttonDown(buttonId)
+        buttonUp(buttonId: touchesToButtons[touch]!)
+        buttonDown(buttonId: buttonId)
         touchesToButtons[touch] = buttonId
       }
     }
   }
   
-  override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    super.touchesCancelled(touches, withEvent: event)
+  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesCancelled(touches, with: event)
     for buttonId in touchesToButtons.values {
-      buttonUp(buttonId)
+      buttonUp(buttonId: buttonId)
     }
   }
   
-  override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    super.touchesEnded(touches, withEvent: event)
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
     for touch in touches {
-      buttonUp(touchesToButtons[touch]!)
+      buttonUp(buttonId: touchesToButtons[touch]!)
     }
   }
   
   func buttonIdForTouch(touch: UITouch) -> Int {
-    return Int((touch.locationInNode(self).x + size.width / 2) / (size.width / CGFloat(buttonCount)))
+    return Int((touch.location(in: self).x + size.width / 2) / (size.width / CGFloat(buttonCount)))
   }
 }

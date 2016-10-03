@@ -14,10 +14,10 @@ struct k {
   }
   
   struct Color {
-    static let Channels        = [UIColor.redColor(),
-                                  UIColor.blueColor(),
-                                  UIColor.purpleColor(),
-                                  UIColor.greenColor()]
+    static let Channels        = [UIColor.red,
+                                  UIColor.blue,
+                                  UIColor.purple,
+                                  UIColor.green]
     static let Buttons         =  UIColor(white: 0.0, alpha: 0.3)
     static let ButtonsActive   =  UIColor(white: 1.0, alpha: 0.3)
   }
@@ -48,7 +48,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   init(size: CGSize, game: Game) {
     
     let channelWidth = size.width / CGFloat(channelCount)
-    let channelSize = CGSizeMake(channelWidth - 2, size.height)
+    let channelSize = CGSize(width: channelWidth - 2, height: size.height)
     
     self.game = game
     
@@ -70,34 +70,34 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     
     self.game.delegate = self
     
-    self.userInteractionEnabled = false
+    self.isUserInteractionEnabled = false
     
     for i in 0 ..< channelCount {
-      self.channels[i].position = CGPointMake(channelWidth * (0.5 + CGFloat(i)), frame.midY)
+      self.channels[i].position = CGPoint(x: channelWidth * (0.5 + CGFloat(i)), y: frame.midY)
       self.channels[i].name = "\(k.Name.ChannelName)\(i)"
       addChild(self.channels[i])
     }
     
     buttonsNode.position = CGPoint(x: frame.midX, y: buttonsNode.size.height / 2)
     buttonsNode.zPosition = 6
-    buttonsNode.userInteractionEnabled = true
+    buttonsNode.isUserInteractionEnabled = true
     buttonsNode.delegate = self
     self.addChild(buttonsNode)
     
-    healthNode.setHealth(game.health)
+    healthNode.setHealth(health: game.health)
     healthNode.zPosition = 7
     healthNode.position = CGPoint(x: size.width - healthNode.size.width, y: size.height - healthNode.size.height / 2 - healthNode.size.width / 2)
     self.addChild(healthNode)
     
-    scoreNode.horizontalAlignmentMode = .Left
-    scoreNode.verticalAlignmentMode = .Top
+    scoreNode.horizontalAlignmentMode = .left
+    scoreNode.verticalAlignmentMode = .top
     scoreNode.fontSize = 16
     scoreNode.position = CGPoint(x: 10, y: size.height - 10)
     scoreNode.zPosition = 8
     self.addChild(scoreNode)
     
-    multiplierNode.horizontalAlignmentMode = .Left
-    multiplierNode.verticalAlignmentMode = .Top
+    multiplierNode.horizontalAlignmentMode = .left
+    multiplierNode.verticalAlignmentMode = .top
     multiplierNode.fontSize = 16
     multiplierNode.position = CGPoint(x: 10, y: scoreNode.frame.minY - 10)
     multiplierNode.zPosition = 9
@@ -109,7 +109,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     self.addChild(gameEndedNode)
   }
   
-  override func update(currentTime: NSTimeInterval) {
+  override func update(_ currentTime: TimeInterval) {
     guard gameEnded == false else { return }
     let position = game.position
     
@@ -119,7 +119,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
         let row = game.notes[i]
         for channelIndex in row {
           guard channelIndex < channels.count else { continue }
-          channels[channelIndex].startBlock(1, rowId: i)
+          channels[channelIndex].startBlock(beats: 1, rowId: i)
         }
       }
     }
@@ -127,53 +127,53 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     
     let currentRow = game.currentRow
     for i in 0 ..< 4 {
-      channels[i].updateBlockPositions(position, currentRow: currentRow)
+      channels[i].updateBlockPositions(position: position, currentRow: currentRow)
     }
   }
   
   func gameDidPlayRow(game: Game, row: Int) {
     for channel in channels {
-      channel.rowWasPlayed(row)
+      channel.rowWasPlayed(row: row)
     }
-    healthNode.setHealth(game.health)
+    healthNode.setHealth(health: game.health)
     scoreNode.text = "\(game.score)"
     multiplierNode.text = "x\(game.multiplier)"
   }
   
   func gameDidFailRow(game: Game, row: Int) {
     for channel in channels {
-      channel.failedToPlayRow(row)
+      channel.failedToPlayRow(row: row)
     }
     multiplierNode.text = "x\(game.multiplier)"
-    healthNode.setHealth(game.health)
+    healthNode.setHealth(health: game.health)
   }
   
   func gameDidLose(game: Game) {
     guard gameEnded == false else { return }
     gameEnded = true
     gameEndedNode.text = k.Text.GameLost
-    self.userInteractionEnabled = true
+    self.isUserInteractionEnabled = true
   }
   
   func gameDidWin(game: Game) {
     guard gameEnded == false else { return }
     gameEnded = true
     gameEndedNode.text = k.Text.GameWon
-    self.userInteractionEnabled = true
+    self.isUserInteractionEnabled = true
   }
   
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if gameEnded {
-      NSNotificationCenter.defaultCenter().postNotificationName(k.Notification.GameEnded, object: self)
+      NotificationCenter.default.post(name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: self)
     }
   }
   
   func buttonsNodeButtonDown(buttonId: Int) {
-    game.buttonDown(Game.Button(rawValue: buttonId)!)
+    game.buttonDown(button: Game.Button(rawValue: buttonId)!)
   }
   
   func buttonsNodeButtonUp(buttonId: Int) {
-    game.buttonUp(Game.Button(rawValue: buttonId)!)
+    game.buttonUp(button: Game.Button(rawValue: buttonId)!)
   }
   
   required init?(coder aDecoder: NSCoder) {

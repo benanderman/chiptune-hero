@@ -122,7 +122,7 @@ class XMScanner {
       }
       self.patterns = patterns
       
-      songStructure = XMScanner.calculateSongStructure(patterns: patterns, order: patternOrderTable)
+      songStructure = XMScanner.calculateSongStructure(patterns: patterns, order: patternOrderTable, songLength: Int(songLength))
     }
   }
   
@@ -231,7 +231,7 @@ class XMScanner {
     return (XMNote(note: values[0], instrument: values[1], volume: values[2], effect: values[3], effectParam: values[4]), size)
   }
   
-  private static func calculateSongStructure(patterns: [XMPattern], order: [UInt8]) -> [XMFlatPattern] {
+  private static func calculateSongStructure(patterns: [XMPattern], order: [UInt8], songLength: Int) -> [XMFlatPattern] {
     var patternBreaks = [Int?](repeating: nil, count: patterns.count)
     var patternJumps = [(Int, Int)?](repeating: nil, count: patterns.count)
     for (patternIndex, pattern) in patterns.enumerated() {
@@ -266,7 +266,7 @@ class XMScanner {
       structure.append(XMFlatPattern(offset: rowSum, rows: length, patternId: Int(patternIndex)))
       
       // If there's a pattern jump, it's probably the end of the song
-      if patternJump != nil {
+      if patternJump != nil || structure.count >= songLength {
         break
       }
       
