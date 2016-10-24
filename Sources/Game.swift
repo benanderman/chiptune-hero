@@ -92,10 +92,6 @@ class Game: SongPlayerDelegate {
     songPlayer.speed = songPlayer.speed! * speedMultiplier
   }
   
-  func update() {
-    songPlayer.update()
-  }
-  
   func loseGame() {
     gameEnded = true
     songPlayer.stop()
@@ -119,6 +115,11 @@ class Game: SongPlayerDelegate {
   }
   
   func songPlayerPositionChanged(songPlayer: SongPlayer) {
+    // HACK: This resets the speed to the initial speed, then multiplies it;
+    // it works, but could be done more cleanly.
+    songPlayer.speed = nil
+    songPlayer.speed = songPlayer.speed! * speedMultiplier
+    
     let now = NSDate().timeIntervalSince1970
     lastRowTime = now - lastRowChange
     lastRowChange = now

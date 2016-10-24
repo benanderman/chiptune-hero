@@ -1,5 +1,5 @@
 {
-  "song_order": ["a_winter_kiss.xm", "81691-past.xm", "_sunlight_.xm"],
+  "song_order": ["a_winter_kiss.xm", "girl_from_mars.xm", "81691-past.xm", "_sunlight_.xm"],
   "songs": {
     "a_winter_kiss.xm": {
       "title": "A Winter Kiss",
@@ -15,6 +15,11 @@
       "title": "Sunlight",
       "filename": "_sunlight_.xm",
       "speed_multiplier": 1
+    },
+    "girl_from_mars.xm": {
+      "title": "Girl From Mars",
+      "filename": "girl_from_mars.xm",
+      "speed_multiplier": 2
     }
   }
 }
