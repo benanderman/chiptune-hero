@@ -221,6 +221,7 @@ class XMScanner {
       // The note is packed / compressed
       size = 1
       let packSpec = values[0]
+      values[0] = 0
       for i in UInt8(0) ..< UInt8(5) {
         if (packSpec >> i) & 1 == 1 {
           values[Int(i)] = UInt8(try XMScanner.getChar(data: data, range: Offset.note, offset: offset + size))

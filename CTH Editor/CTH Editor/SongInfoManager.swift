@@ -96,7 +96,7 @@ class SongInfoManager: SongDataDelegate {
     do {
       let data = try json.rawData()
       if let path = songInfoPathForSong(path: songPath) {
-        try data.write(to: URL(string: path)!)
+        try data.write(to: URL(fileURLWithPath: path))
       }
     } catch {
       return

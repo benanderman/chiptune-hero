@@ -215,9 +215,7 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	@IBAction func writeSongSpec(_ sender: AnyObject) {
 		if let data = try? songSpec?.toJSON().rawData() {
       do {
-        guard let url = URL(string: songPlayer.songPath + ".spec.json") else {
-          return
-        }
+        let url = URL(fileURLWithPath: songPlayer.songPath + ".spec.json")
         try data?.write(to: url)
       } catch {
         
