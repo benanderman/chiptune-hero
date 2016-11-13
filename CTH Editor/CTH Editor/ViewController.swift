@@ -191,6 +191,10 @@ class ViewController: NSViewController, SongPlayerDelegate {
 	}
 	
 	@IBAction func pauseSong(_ sender: NSButton) {
+    if !songPlayer.isPlaying {
+      songPlayer.startPlaying()
+      return
+    }
 		songPlayer.pause()
 	}
 	

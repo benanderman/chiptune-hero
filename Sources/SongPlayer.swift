@@ -75,6 +75,10 @@ class SongPlayer {
     }
   }
   
+  var isPlaying: Bool {
+    return Player_Active()
+  }
+  
   func nextPosition() {
     lastNavigation = NSDate()
     Player_NextPosition()
@@ -117,6 +121,7 @@ class SongPlayer {
   func startPlaying() {
     if let module = song {
       Player_Start(module)
+      Player_SetPosition(0)
       autoUpdate()
     }
   }
@@ -144,8 +149,6 @@ class SongPlayer {
   func autoUpdate() {
     #if GCD_AVAILABLE
       if Player_Active() {
-//        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(10_000_000))
-//        dispatch_after(delay, dispatch_get_main_queue(), autoUpdate)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
           self.autoUpdate()
