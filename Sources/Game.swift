@@ -37,9 +37,23 @@ class Game: SongPlayerDelegate {
   var gameEnded = false
   
   var currentRow: Int {
-    var rowId = Int(position)
-    rowId += position - Double(rowId) > 0.5 ? 1 : 0
-    return rowId
+    var midRow = Int(position)
+    midRow += position - Double(midRow) > 0.5 ? 1 : 0
+    
+    let candidates = [midRow - 1, midRow, midRow + 1]
+    var result = midRow
+    for row in candidates {
+      let distance = abs(Double(row) - position)
+      
+      guard distance < Game.distanceThreshold else { continue }
+      guard row >= 0 && row < songPlayer.totalRows else { continue }
+      guard row > lastRowPlayed else { continue }
+      guard notes[row].count > 0 else { continue }
+      
+      result = row
+      break
+    }
+    return result
   }
   
   // MARK: Stats
@@ -115,9 +129,6 @@ class Game: SongPlayerDelegate {
   }
   
   func songPlayerPositionChanged(songPlayer: SongPlayer) {
-    // HACK: This resets the speed to the initial speed, then multiplies it;
-    // it works, but could be done more cleanly.
-    songPlayer.speed = nil
     songPlayer.speed = self.speed
     
     let now = NSDate().timeIntervalSince1970
@@ -142,6 +153,7 @@ class Game: SongPlayerDelegate {
   private var lastRowPlayed = 0
   private var notesPlayedOrMissed = [Bool]()
   private var rowsMissed = [Int:Int]()
+  private static let distanceThreshold = 0.9
   private static let maxHealth = 200
   private var healthInternal = Int(Float(maxHealth) * 0.75)
   
