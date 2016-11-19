@@ -1,25 +1,35 @@
 {
-  "song_order": ["a_winter_kiss.xm", "girl_from_mars.xm", "81691-past.xm", "_sunlight_.xm"],
+  "song_order": ["a_winter_kiss.xm", "a_winter_kiss.xm2", "girl_from_mars.xm", "girl_from_mars.xm2", "81691-past.xm", "_sunlight_.xm"],
   "songs": {
     "a_winter_kiss.xm": {
       "title": "A Winter Kiss",
       "filename": "a_winter_kiss.xm",
-      "speed_multiplier": 2
+      "speed": 7
+    },
+    "a_winter_kiss.xm2": {
+      "title": "A Winter Kiss (Fast)",
+      "filename": "a_winter_kiss.xm",
+      "speed": 5
     },
     "81691-past.xm": {
       "title": "Past Never Came Back",
       "filename": "81691-past.xm",
-      "speed_multiplier": 1
+      "speed": 1
     },
     "_sunlight_.xm": {
       "title": "Sunlight",
       "filename": "_sunlight_.xm",
-      "speed_multiplier": 1
+      "speed": 6
     },
     "girl_from_mars.xm": {
       "title": "Girl From Mars",
       "filename": "girl_from_mars.xm",
-      "speed_multiplier": 2
+      "speed": 7
+    },
+    "girl_from_mars.xm2": {
+      "title": "Girl From Mars (Fast)",
+      "filename": "girl_from_mars.xm",
+      "speed": 5
     }
   }
 }

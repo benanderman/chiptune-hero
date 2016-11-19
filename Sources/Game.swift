@@ -70,8 +70,8 @@ class Game: SongPlayerDelegate {
   
   var score = 0
   
-  init(songPath: String, speedMultiplier: Int) {
-    self.speedMultiplier = speedMultiplier
+  init(songPath: String, speed: Int) {
+    self.speed = speed
     songPlayer.delegate = self
     songPlayer.openSong(path: songPath)
     let specPath = songPath + ".spec.json"
@@ -89,7 +89,7 @@ class Game: SongPlayerDelegate {
   func startGame() {
     lastRowChange = NSDate().timeIntervalSince1970
     songPlayer.startPlaying()
-    songPlayer.speed = songPlayer.speed! * speedMultiplier
+    songPlayer.speed = self.speed
   }
   
   func loseGame() {
@@ -118,7 +118,7 @@ class Game: SongPlayerDelegate {
     // HACK: This resets the speed to the initial speed, then multiplies it;
     // it works, but could be done more cleanly.
     songPlayer.speed = nil
-    songPlayer.speed = songPlayer.speed! * speedMultiplier
+    songPlayer.speed = self.speed
     
     let now = NSDate().timeIntervalSince1970
     lastRowTime = now - lastRowChange
@@ -135,7 +135,7 @@ class Game: SongPlayerDelegate {
   
   // MARK: Private
   private let songPlayer = SongPlayer()
-  private let speedMultiplier: Int
+  private let speed: Int
   private var buttonsDown = Set<Button>()
   private var lastRowChange: TimeInterval = 0
   private var lastRowTime: TimeInterval = 1

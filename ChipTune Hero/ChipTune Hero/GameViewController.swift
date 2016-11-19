@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
     guard let song = songInfo else { fatalError() }
     guard let skview = view as? SKView else { fatalError() }
     guard let path = Bundle.main.path(forResource: song.filename, ofType: nil) else { fatalError() }
-    game = Game(songPath: path, speedMultiplier: song.speedMultiplier)
+    game = Game(songPath: path, speed: song.speed)
     gameScene = GameScene(size: view.bounds.size, game: game)
     
     NotificationCenter.default.addObserver(self, selector: #selector(GameEnded), name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: nil)
