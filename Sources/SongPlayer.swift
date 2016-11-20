@@ -21,6 +21,8 @@ enum ChannelSet: Int {
   case Custom = 0
   case Active = 1
   case Inactive = 2
+  case None = 3
+  case All = 4
 }
 
 class SongPlayer {
@@ -31,6 +33,7 @@ class SongPlayer {
   var song: UnsafeMutablePointer<MODULE>?
   var songPath = ""
   private var lastNavigation = NSDate()
+  private var runOnUpdate = [() -> Void]()
   
   // Play position
   var pattern = 0
@@ -77,6 +80,11 @@ class SongPlayer {
   
   var isPlaying: Bool {
     return Player_Active()
+  }
+  
+  func setPattern(pattern: Int) {
+    lastNavigation = NSDate()
+    Player_SetPosition(UWORD(pattern))
   }
   
   func nextPosition() {
@@ -146,6 +154,10 @@ class SongPlayer {
     return Player_Muted(UBYTE(channel))
   }
   
+  func runOnNextUpdate(handler: @escaping () -> Void) {
+    runOnUpdate.append(handler)
+  }
+  
   func autoUpdate() {
     #if GCD_AVAILABLE
       if Player_Active() {
@@ -164,6 +176,12 @@ class SongPlayer {
   func update() {
     guard Player_Active() else { return }
     MikMod_Update()
+    
+    for handler in runOnUpdate {
+      handler()
+    }
+    runOnUpdate.removeAll()
+    
     let newPattern = Int(Player_GetOrder())
     let newRow = Int(Player_GetRow())
     guard newPattern != pattern || newRow != row else { return }
@@ -190,6 +208,13 @@ class SongPlayer {
     guard playChannels != .Custom && songSpec != nil else {
       return
     }
+    
+    if playChannels == .All || playChannels == .None {
+      for i in 0 ..< (totalChannels ?? 0) {
+        setChannelMute(channel: i, mute: playChannels == .None)
+      }
+    }
+    
     var states = [Bool](repeating: false, count: totalChannels ?? 0)
     for col in songSpec!.activeChannels[globalRow] {
       guard col < states.count else { return }

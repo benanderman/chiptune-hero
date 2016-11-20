@@ -34,7 +34,7 @@ struct k {
 
 class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   let channelCount = 4
-  var lastAddedRow = 0
+  var lastAddedRow = -1
   var game: Game!
   var gameEnded = false
   

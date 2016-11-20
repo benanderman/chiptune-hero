@@ -31,11 +31,17 @@ class Game: SongPlayerDelegate {
   
   var position: Double {
     let elapsed = NSDate().timeIntervalSince1970 - lastRowChange
-    return Double(songPlayer.globalRow) + min(1, elapsed / lastRowTime)
+    var row = songPlayer.globalRow
+    if !introFinished {
+      row = -introRowCount + row
+    }
+
+    return Double(row) + min(1, elapsed / lastRowTime)
   }
   
   var gameEnded = false
   
+  // The current row which should be played
   var currentRow: Int {
     var midRow = Int(position)
     midRow += position - Double(midRow) > 0.5 ? 1 : 0
@@ -45,7 +51,7 @@ class Game: SongPlayerDelegate {
     for row in candidates {
       let distance = abs(Double(row) - position)
       
-      guard distance < Game.distanceThreshold else { continue }
+      guard distance < Game.noteHitThreshold else { continue }
       guard row >= 0 && row < songPlayer.totalRows else { continue }
       guard row > lastRowPlayed else { continue }
       guard notes[row].count > 0 else { continue }
@@ -101,7 +107,25 @@ class Game: SongPlayerDelegate {
   }
   
   func startGame() {
+    introRowCount = 15
+    for row in 0 ..< introRowCount {
+      if notes[row].count > 0 {
+        break
+      }
+      introRowCount -= 1
+    }
+    
+    if introRowCount > 0 {
+      // Set volume to 0 until the intro is over
+      songPlayer.runOnNextUpdate {
+        self.songPlayer.volume = 0
+      }
+    } else {
+      introFinished = true
+    }
+    
     lastRowChange = NSDate().timeIntervalSince1970
+    lastRowId = 0
     songPlayer.startPlaying()
     songPlayer.speed = self.speed
   }
@@ -130,6 +154,9 @@ class Game: SongPlayerDelegate {
   
   func songPlayerPositionChanged(songPlayer: SongPlayer) {
     songPlayer.speed = self.speed
+    let newPosition = songPlayer.globalRow - (introFinished ? 0 : introRowCount)
+    guard lastRowId != newPosition else { return }
+    lastRowId = newPosition
     
     let now = NSDate().timeIntervalSince1970
     lastRowTime = now - lastRowChange
@@ -137,6 +164,14 @@ class Game: SongPlayerDelegate {
     let lastRow = Int(position - 1)
     if notes[lastRow].count > 0 && lastRowPlayed != lastRow {
       handleFailedToPlayRow(row: lastRow)
+    }
+    
+    if !introFinished && songPlayer.globalRow >= introRowCount {
+      songPlayer.volume = 128
+      songPlayer.setPattern(pattern: 0)
+      songPlayer.runOnNextUpdate {
+        self.introFinished = true
+      }
     }
   }
   
@@ -150,12 +185,16 @@ class Game: SongPlayerDelegate {
   private var buttonsDown = Set<Button>()
   private var lastRowChange: TimeInterval = 0
   private var lastRowTime: TimeInterval = 1
-  private var lastRowPlayed = 0
+  private var lastRowPlayed = -1
   private var notesPlayedOrMissed = [Bool]()
   private var rowsMissed = [Int:Int]()
-  private static let distanceThreshold = 0.9
-  private static let maxHealth = 200
   private var healthInternal = Int(Float(maxHealth) * 0.75)
+  private var introFinished = false
+  private var lastRowId = 0
+  private var introRowCount = 0
+  
+  private static let noteHitThreshold = 0.9
+  private static let maxHealth = 200
   
   private func checkIfRowPlayed() {
     let rowId = currentRow
