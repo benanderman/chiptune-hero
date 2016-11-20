@@ -42,7 +42,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   var buttonsNode: ButtonsNode
   var healthNode: HealthNode
   var scoreNode: SKLabelNode
-  var multiplierNode: SKLabelNode
+  var multiplierNode: SKSpriteNode
   var gameEndedNode: SKLabelNode
   
   init(size: CGSize, game: Game) {
@@ -63,7 +63,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
                               size: CGSize(width: size.width, height: channelWidth * 1.5))
     healthNode = HealthNode()
     scoreNode = SKLabelNode(text: "\(game.score)")
-    multiplierNode = SKLabelNode(text: "x\(game.multiplier)")
+    multiplierNode = SKSpriteNode(texture: GameScene.textureForMultiplier(multiplier: game.multiplier))
     gameEndedNode = SKLabelNode(text: "")
     
     super.init(size: size)
@@ -85,23 +85,20 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     self.addChild(buttonsNode)
     
     healthNode.setHealth(health: game.health)
-    healthNode.zPosition = 7
     healthNode.position = CGPoint(x: size.width - healthNode.size.width, y: size.height - healthNode.size.height / 2 - healthNode.size.width / 2)
+    healthNode.zPosition = 7
     self.addChild(healthNode)
+    
+    multiplierNode.position = CGPoint(x: 10 + multiplierNode.size.width / 2, y: size.height - 10 - multiplierNode.size.height / 2)
+    multiplierNode.zPosition = 8
+    self.addChild(multiplierNode)
     
     scoreNode.horizontalAlignmentMode = .left
     scoreNode.verticalAlignmentMode = .top
     scoreNode.fontSize = 16
-    scoreNode.position = CGPoint(x: 10, y: size.height - 10)
-    scoreNode.zPosition = 8
+    scoreNode.position = CGPoint(x: 10, y: multiplierNode.frame.minY - 10)
+    scoreNode.zPosition = 9
     self.addChild(scoreNode)
-    
-    multiplierNode.horizontalAlignmentMode = .left
-    multiplierNode.verticalAlignmentMode = .top
-    multiplierNode.fontSize = 16
-    multiplierNode.position = CGPoint(x: 10, y: scoreNode.frame.minY - 10)
-    multiplierNode.zPosition = 9
-    self.addChild(multiplierNode)
     
     gameEndedNode.fontSize = 24
     gameEndedNode.zPosition = 10
@@ -131,20 +128,24 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     }
   }
   
+  static func textureForMultiplier(multiplier: Int) -> SKTexture {
+    return SKTexture(imageNamed: "multiplier_\(multiplier)")
+  }
+  
   func gameDidPlayRow(game: Game, row: Int) {
     for channel in channels {
       channel.rowWasPlayed(row: row)
     }
     healthNode.setHealth(health: game.health)
     scoreNode.text = "\(game.score)"
-    multiplierNode.text = "x\(game.multiplier)"
+    multiplierNode.texture = GameScene.textureForMultiplier(multiplier: game.multiplier)
   }
   
   func gameDidFailRow(game: Game, row: Int) {
     for channel in channels {
       channel.failedToPlayRow(row: row)
     }
-    multiplierNode.text = "x\(game.multiplier)"
+    multiplierNode.texture = GameScene.textureForMultiplier(multiplier: game.multiplier)
     healthNode.setHealth(health: game.health)
   }
   
