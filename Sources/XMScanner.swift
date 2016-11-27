@@ -191,14 +191,16 @@ class XMScanner {
       
       var notes = [[XMNote]]()
       var noteOffset: UInt16 = 0
-      for _ in 0 ..< rowsInPattern {
-        var row = [XMNote]()
-        for _ in 0 ..< columnCount {
-          let (note, noteSize) = try XMScanner.getNote(data: data, offset: Int(offset) + Int(headerLength) + Int(noteOffset))
-          row.append(note)
-          noteOffset += UInt16(noteSize)
+      if patternDataSize > 0 {
+        for _ in 0 ..< rowsInPattern {
+          var row = [XMNote]()
+          for _ in 0 ..< columnCount {
+            let (note, noteSize) = try XMScanner.getNote(data: data, offset: Int(offset) + Int(headerLength) + Int(noteOffset))
+            row.append(note)
+            noteOffset += UInt16(noteSize)
+          }
+          notes.append(row)
         }
-        notes.append(row)
       }
       
       guard patternDataSize == noteOffset else { throw XMError.inconsistentFile }

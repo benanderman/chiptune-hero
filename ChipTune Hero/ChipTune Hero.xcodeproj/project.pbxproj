@@ -18,6 +18,8 @@
 		B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */ = {isa = PBXBuildFile; fileRef = B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */; };
 		B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */; };
 		B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */; };
+		B50B2B211DEB6A1E00AB4446 /* 0-insnej.xm in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */; };
+		B50B2B221DEB6A1E00AB4446 /* 0-insnej.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */; };
 		B5192FDD1DBDAC2800A22D0D /* girl_from_mars.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */; };
 		B5192FDE1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */; };
 		B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5264D121D8F78CB00ACC8FB /* XMScanner.swift */; };
@@ -61,6 +63,8 @@
 		B508EAEA1CA4811D002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
 		B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
 		B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VariadicWrapper.c; path = ../Sources/VariadicWrapper.c; sourceTree = "<group>"; };
+		B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "0-insnej.xm"; path = "../songs/0-insnej.xm"; sourceTree = "<group>"; };
+		B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "0-insnej.xm.spec.json"; path = "../songs/0-insnej.xm.spec.json"; sourceTree = "<group>"; };
 		B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = girl_from_mars.xm; path = ../songs/girl_from_mars.xm; sourceTree = "<group>"; };
 		B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = girl_from_mars.xm.spec.json; path = ../songs/girl_from_mars.xm.spec.json; sourceTree = "<group>"; };
 		B5264D121D8F78CB00ACC8FB /* XMScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMScanner.swift; path = ../Sources/XMScanner.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 		B508EAE01CA2F5D6002B90EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */,
+				B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */,
 				B5DC89081CE6F9BA005DC942 /* 81691-past.xm */,
 				B5DC89091CE6F9BA005DC942 /* 81691-past.xm.spec.json */,
 				B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */,
@@ -274,6 +280,8 @@
 				B5D6E4531CB0C86200F7FFAA /* _sunlight_.xm.spec.json in Resources */,
 				B5192FDE1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json in Resources */,
 				B5CEF3401CAB03E500FD1467 /* a_winter_kiss.xm.spec.json in Resources */,
+				B50B2B211DEB6A1E00AB4446 /* 0-insnej.xm in Resources */,
+				B50B2B221DEB6A1E00AB4446 /* 0-insnej.xm.spec.json in Resources */,
 				B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */,
 				B575AC991CA198C4003F90F4 /* Main.storyboard in Resources */,
 			);

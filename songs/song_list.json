@@ -1,5 +1,11 @@
 {
-  "song_order": ["a_winter_kiss.xm", "a_winter_kiss.xm2", "girl_from_mars.xm", "girl_from_mars.xm2", "81691-past.xm", "_sunlight_.xm"],
+  "song_order": ["a_winter_kiss.xm",
+                 "a_winter_kiss.xm2",
+                 "girl_from_mars.xm",
+                 "girl_from_mars.xm2",
+                 "81691-past.xm",
+                 "_sunlight_.xm",
+                 "0-insnej.xm"],
   "songs": {
     "a_winter_kiss.xm": {
       "title": "A Winter Kiss",
@@ -29,6 +35,11 @@
     "girl_from_mars.xm2": {
       "title": "Girl From Mars (Fast)",
       "filename": "girl_from_mars.xm",
+      "speed": 5
+    },
+    "0-insnej.xm": {
+      "title": "VPDSP",
+      "filename": "0-insnej.xm",
       "speed": 5
     }
   }
