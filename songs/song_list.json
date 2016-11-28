@@ -1,45 +1,43 @@
 {
-  "song_order": ["a_winter_kiss.xm",
-                 "a_winter_kiss.xm2",
-                 "girl_from_mars.xm",
-                 "girl_from_mars.xm2",
-                 "81691-past.xm",
-                 "_sunlight_.xm",
-                 "0-insnej.xm"],
+  "song_order": ["a_winter_kiss",
+                 "girl_from_mars",
+                 "past_never_came_back",
+                 "vpdsp"],
   "songs": {
-    "a_winter_kiss.xm": {
+    "a_winter_kiss": {
       "title": "A Winter Kiss",
-      "filename": "a_winter_kiss.xm",
-      "speed": 7
-    },
-    "a_winter_kiss.xm2": {
-      "title": "A Winter Kiss (Fast)",
+      "artist": "Drozerix",
       "filename": "a_winter_kiss.xm",
       "speed": 5
     },
-    "81691-past.xm": {
+    "past_never_came_back": {
       "title": "Past Never Came Back",
+      "artist": "JAM",
       "filename": "81691-past.xm",
       "speed": 6
     },
-    "_sunlight_.xm": {
+    "sunlight": {
       "title": "Sunlight",
+      "artist": "fender",
       "filename": "_sunlight_.xm",
       "speed": 6
     },
-    "girl_from_mars.xm": {
+    "girl_from_mars": {
       "title": "Girl From Mars",
-      "filename": "girl_from_mars.xm",
-      "speed": 7
-    },
-    "girl_from_mars.xm2": {
-      "title": "Girl From Mars (Fast)",
+      "artist": "Drozerix",
       "filename": "girl_from_mars.xm",
       "speed": 5
     },
-    "0-insnej.xm": {
+    "vpdsp": {
       "title": "VPDSP",
+      "artist": "Anders Dator Felix Dator",
       "filename": "0-insnej.xm",
+      "speed": 5
+    },
+    "felix8": {
+      "title": "2 x the SQUAREbeam",
+      "artist": "Anders Dator Felix Dator",
+      "filename": "felix8.xm",
       "speed": 5
     }
   }

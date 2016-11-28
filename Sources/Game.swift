@@ -40,6 +40,7 @@ class Game: SongPlayerDelegate {
   }
   
   var gameEnded = false
+  var gameWon = false
   
   // The current row which should be played
   var currentRow: Int {
@@ -68,6 +69,10 @@ class Game: SongPlayerDelegate {
   }
   var notesMissed: Int {
     return notesPlayedOrMissed.reduce(0) { $0 + ($1 == false ? 1 : 0) }
+  }
+  
+  var totalNotes: Int {
+    return notes.notes.reduce(0) { $0 + ($1 == nil ? 0 : 1) }
   }
   
   var streak: Int {
@@ -137,8 +142,11 @@ class Game: SongPlayerDelegate {
   }
   
   func winGame() {
-    gameEnded = true
-    delegate?.gameDidWin(game: self)
+    if !gameEnded {
+      gameEnded = true
+      gameWon = true
+      delegate?.gameDidWin(game: self)
+    }
   }
   
   func buttonDown(button: Button) {

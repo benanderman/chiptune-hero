@@ -21,24 +21,28 @@ class GameViewController: UIViewController {
     game = Game(songPath: path, speed: song.speed)
     gameScene = GameScene(size: view.bounds.size, game: game)
     
-    NotificationCenter.default.addObserver(self, selector: #selector(GameEnded), name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(gameEnded), name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: nil)
     
     gameScene?.isPaused = false
     skview.presentScene(gameScene)
     game.startGame()
   }
   
-  func GameEnded() {
+  func gameEnded() {
     gameScene?.isPaused = true
+    if game.gameWon {
+      let highScore = HighScoreInfo(score: game.score, notesHit: game.notesPlayed, totalNotes: game.totalNotes)
+      _ = HighScoreManager.updateHighestScoreForSong(id: songInfo!.filename, highScore: highScore)
+    }
     self.dismiss(animated: true, completion: nil)
   }
   
   override open var shouldAutorotate: Bool {
-    return true
+    return false
   }
   
   override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-    return .allButUpsideDown
+    return .portrait
   }
 
   override func didReceiveMemoryWarning() {

@@ -13,6 +13,8 @@ class ChooseSongViewController: UIViewController {
   var songs = [SongInfo]()
   var selectedSong: SongInfo?
   
+  @IBOutlet var tableView: UITableView!
+  
   override func viewDidLoad() {
     guard let path = Bundle.main.path(forResource: "song_list", ofType: "json") else { fatalError() }
     if let data = FileManager.default.contents(atPath: path) {
@@ -21,6 +23,10 @@ class ChooseSongViewController: UIViewController {
       let songInfos = json["songs"].dictionaryValue
       self.songs = songOrder.map { SongInfo(json: songInfos[$0]!) }
     }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    tableView.reloadData()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,6 +57,9 @@ extension ChooseSongViewController: UITableViewDataSource {
     guard let songCell = cell as? SongTableViewCell else { fatalError() }
     let songInfo = songs[indexPath.row]
     songCell.titleLabel.text = songInfo.title
+    songCell.artistLabel.text = songInfo.artist
+    let highScore = HighScoreManager.highestScoreForSong(id: songInfo.filename)
+    songCell.scoreLabel.text = highScore != nil ? String(highScore!.score) : ""
     return cell
   }
 }

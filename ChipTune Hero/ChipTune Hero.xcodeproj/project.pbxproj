@@ -20,6 +20,9 @@
 		B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */; };
 		B50B2B211DEB6A1E00AB4446 /* 0-insnej.xm in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */; };
 		B50B2B221DEB6A1E00AB4446 /* 0-insnej.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */; };
+		B50B2B251DEBACBB00AB4446 /* felix8.xm in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B231DEBACBB00AB4446 /* felix8.xm */; };
+		B50B2B261DEBACBB00AB4446 /* felix8.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B241DEBACBB00AB4446 /* felix8.xm.spec.json */; };
+		B50B2B281DEBBB0700AB4446 /* HighScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B2B271DEBBB0700AB4446 /* HighScoreManager.swift */; };
 		B5192FDD1DBDAC2800A22D0D /* girl_from_mars.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */; };
 		B5192FDE1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */; };
 		B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5264D121D8F78CB00ACC8FB /* XMScanner.swift */; };
@@ -65,6 +68,9 @@
 		B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VariadicWrapper.c; path = ../Sources/VariadicWrapper.c; sourceTree = "<group>"; };
 		B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "0-insnej.xm"; path = "../songs/0-insnej.xm"; sourceTree = "<group>"; };
 		B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "0-insnej.xm.spec.json"; path = "../songs/0-insnej.xm.spec.json"; sourceTree = "<group>"; };
+		B50B2B231DEBACBB00AB4446 /* felix8.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = felix8.xm; path = ../songs/felix8.xm; sourceTree = "<group>"; };
+		B50B2B241DEBACBB00AB4446 /* felix8.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = felix8.xm.spec.json; path = ../songs/felix8.xm.spec.json; sourceTree = "<group>"; };
+		B50B2B271DEBBB0700AB4446 /* HighScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoreManager.swift; sourceTree = "<group>"; };
 		B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = girl_from_mars.xm; path = ../songs/girl_from_mars.xm; sourceTree = "<group>"; };
 		B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = girl_from_mars.xm.spec.json; path = ../songs/girl_from_mars.xm.spec.json; sourceTree = "<group>"; };
 		B5264D121D8F78CB00ACC8FB /* XMScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMScanner.swift; path = ../Sources/XMScanner.swift; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 			children = (
 				B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */,
 				B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */,
+				B50B2B231DEBACBB00AB4446 /* felix8.xm */,
+				B50B2B241DEBACBB00AB4446 /* felix8.xm.spec.json */,
 				B5DC89081CE6F9BA005DC942 /* 81691-past.xm */,
 				B5DC89091CE6F9BA005DC942 /* 81691-past.xm.spec.json */,
 				B5D6E4501CB0C86200F7FFAA /* _sunlight_.xm */,
@@ -176,6 +184,7 @@
 				52135E4A1CA4BB900095E2E8 /* NoteNode.swift */,
 				5292ED441CA4628700F7849C /* GameViewController.swift */,
 				B5DC89101CE80A4A005DC942 /* ChooseSongViewController.swift */,
+				B50B2B271DEBBB0700AB4446 /* HighScoreManager.swift */,
 				B5DC89121CE81064005DC942 /* SongTableViewCell.swift */,
 				B5DC890E1CE7FF32005DC942 /* SongInfo.swift */,
 				52135E481CA4B6410095E2E8 /* SwiftyTimer.swift */,
@@ -274,6 +283,8 @@
 				B5DC890B1CE6F9BA005DC942 /* 81691-past.xm.spec.json in Resources */,
 				B5DC890A1CE6F9BA005DC942 /* 81691-past.xm in Resources */,
 				B5DC890D1CE6FB07005DC942 /* song_list.json in Resources */,
+				B50B2B251DEBACBB00AB4446 /* felix8.xm in Resources */,
+				B50B2B261DEBACBB00AB4446 /* felix8.xm.spec.json in Resources */,
 				5292ED471CA4629000F7849C /* StarParticle.sks in Resources */,
 				B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */,
 				B5D6E4521CB0C86200F7FFAA /* _sunlight_.xm in Resources */,
@@ -310,6 +321,7 @@
 				B5D0598B1CA7AF2B00803648 /* NotesLayer.swift in Sources */,
 				B5DC890F1CE7FF32005DC942 /* SongInfo.swift in Sources */,
 				B5DC89111CE80A4A005DC942 /* ChooseSongViewController.swift in Sources */,
+				B50B2B281DEBBB0700AB4446 /* HighScoreManager.swift in Sources */,
 				B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */,
 				5292ED411CA4624A00F7849C /* ChannelNode.swift in Sources */,
 				52135E491CA4B6410095E2E8 /* SwiftyTimer.swift in Sources */,
