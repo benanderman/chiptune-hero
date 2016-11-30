@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameDelegate: class {
-  func gameDidPlayRow(game: Game, row: Int)
+  func gameDidPlayRow(game: Game, row: Int, accuracy: Double)
   func gameDidFailRow(game: Game, row: Int)
   func gameDidLose(game: Game)
   func gameDidWin(game: Game)
@@ -248,7 +248,8 @@ class Game: SongPlayerDelegate {
     notesPlayedOrMissed.append(true)
     healthInternal = min(Game.maxHealth, healthInternal + 2 * multiplier)
     score += multiplier
-    delegate?.gameDidPlayRow(game: self, row: row)
+    let accuracy = (Double(row) - position) / Game.noteHitThreshold
+    delegate?.gameDidPlayRow(game: self, row: row, accuracy: accuracy)
   }
   
   private func checkLoseCondition() {

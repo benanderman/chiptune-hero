@@ -132,9 +132,9 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     return SKTexture(imageNamed: "multiplier_\(multiplier)")
   }
   
-  func gameDidPlayRow(game: Game, row: Int) {
+  func gameDidPlayRow(game: Game, row: Int, accuracy: Double) {
     for channel in channels {
-      channel.rowWasPlayed(row: row)
+      channel.rowWasPlayed(row: row, accuracy: accuracy)
     }
     healthNode.setHealth(health: game.health)
     scoreNode.text = "\(game.score)"

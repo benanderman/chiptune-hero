@@ -69,7 +69,7 @@ class ChannelNode: SKSpriteNode {
     lines2.position = pos
   }
   
-  func rowWasPlayed(row: Int) {
+  func rowWasPlayed(row: Int, accuracy: Double) {
     for block in blocks {
       if (block.rowId == row) {
         let starSprite = SKSpriteNode(imageNamed: "Square")
