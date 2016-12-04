@@ -35,8 +35,8 @@ class SongNotesView: NSView {
 	override func draw(_ rect: NSRect) {
 		let start = Int((frame.size.height - ceil(rect.origin.y + rect.size.height)) / rowH)
 		let end = Int(ceil((frame.size.height - rect.origin.y) / rowH))
-		guard start >= 0 && end < rows else { return }
-		for i in start ... end {
+		guard start >= 0 else { return }
+		for i in start ... min(end, rows - 1) {
 			for layer in layers {
 				drawRow(rowIndex: i, layer: layer)
 			}
