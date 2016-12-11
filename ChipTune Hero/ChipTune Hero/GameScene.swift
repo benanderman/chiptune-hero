@@ -42,6 +42,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   var buttonsNode: ButtonsNode
   var healthNode: HealthNode
   var scoreNode: SKLabelNode
+  var streakNode: SKLabelNode
   var multiplierNode: SKSpriteNode
   var gameEndedNode: SKLabelNode
   
@@ -63,6 +64,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
                               size: CGSize(width: size.width, height: channelWidth * 1.5))
     healthNode = HealthNode()
     scoreNode = SKLabelNode(text: "\(game.score)")
+    streakNode = SKLabelNode(text: "\(game.streak)")
     multiplierNode = SKSpriteNode(texture: GameScene.textureForMultiplier(multiplier: game.multiplier))
     gameEndedNode = SKLabelNode(text: "")
     
@@ -93,15 +95,24 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     multiplierNode.zPosition = 8
     self.addChild(multiplierNode)
     
+    streakNode.horizontalAlignmentMode = .left
+    streakNode.verticalAlignmentMode = .top
+    streakNode.fontSize = 18
+    streakNode.fontName = "Menlo-Regular"
+    streakNode.position = CGPoint(x: 10, y: multiplierNode.frame.minY - 10)
+    streakNode.zPosition = 9
+    self.addChild(streakNode)
+    
     scoreNode.horizontalAlignmentMode = .left
     scoreNode.verticalAlignmentMode = .top
-    scoreNode.fontSize = 16
-    scoreNode.position = CGPoint(x: 10, y: multiplierNode.frame.minY - 10)
-    scoreNode.zPosition = 9
+    scoreNode.fontSize = 18
+    scoreNode.fontName = "Menlo-Regular"
+    scoreNode.position = CGPoint(x: 10, y: streakNode.frame.minY - 10)
+    scoreNode.zPosition = 10
     self.addChild(scoreNode)
     
     gameEndedNode.fontSize = 24
-    gameEndedNode.zPosition = 10
+    gameEndedNode.zPosition = 11
     gameEndedNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
     self.addChild(gameEndedNode)
   }
@@ -138,6 +149,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     }
     healthNode.setHealth(health: game.health)
     scoreNode.text = "\(game.score)"
+    streakNode.text = "\(game.streak)"
     multiplierNode.texture = GameScene.textureForMultiplier(multiplier: game.multiplier)
   }
   
@@ -145,6 +157,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     for channel in channels {
       channel.failedToPlayRow(row: row)
     }
+    streakNode.text = "\(game.streak)"
     multiplierNode.texture = GameScene.textureForMultiplier(multiplier: game.multiplier)
     healthNode.setHealth(health: game.health)
   }
@@ -159,7 +172,9 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   func gameDidWin(game: Game) {
     guard gameEnded == false else { return }
     gameEnded = true
-    gameEndedNode.text = k.Text.GameWon
+    let songCompleteNode = SongCompleteNode(score: game.score, longestStreak: game.longestStreak, stars: 0, totalNotes: game.totalNotes, notesPlayed: game.notesPlayed)
+    songCompleteNode.position = CGPoint(x: frame.midX, y: frame.midY)
+    self.addChild(songCompleteNode)
     self.isUserInteractionEnabled = true
   }
   

@@ -85,6 +85,16 @@ class Game: SongPlayerDelegate {
     }.sum
   }
   
+  var longestStreak: Int {
+    return notesPlayedOrMissed.reduce((sum: 0, biggestSum: 0)) {
+      if $1 {
+        return (sum: $0.sum + 1, biggestSum: max($0.biggestSum, $0.sum + 1))
+      } else {
+        return (sum: 0, biggestSum: $0.biggestSum)
+      }
+    }.biggestSum
+  }
+  
   var multiplier: Int {
     return min(streak / 10 + 1, 4)
   }

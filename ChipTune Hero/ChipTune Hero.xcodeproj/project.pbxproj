@@ -30,6 +30,7 @@
 		B5418E281CA1CFEB00E108C9 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E271CA1CFEB00E108C9 /* GameController.framework */; };
 		B5418E2A1CA1CFF900E108C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */; };
 		B5418E2C1CA1D00B00E108C9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E2B1CA1D00B00E108C9 /* CoreMotion.framework */; };
+		B54CF4821DF91CDC002D6BFE /* SongCompleteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CF4811DF91CDC002D6BFE /* SongCompleteNode.swift */; };
 		B575AC901CA198C4003F90F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575AC8F1CA198C4003F90F4 /* AppDelegate.swift */; };
 		B575AC991CA198C4003F90F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B575AC971CA198C4003F90F4 /* Main.storyboard */; };
 		B575AC9B1CA198C4003F90F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B575AC9A1CA198C4003F90F4 /* Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		B5418E271CA1CFEB00E108C9 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B5418E2B1CA1D00B00E108C9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		B54CF4811DF91CDC002D6BFE /* SongCompleteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCompleteNode.swift; sourceTree = "<group>"; };
 		B575AC8C1CA198C4003F90F4 /* Chiptune Hero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chiptune Hero.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B575AC8F1CA198C4003F90F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B575AC981CA198C4003F90F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				5292ED421CA4627600F7849C /* GameScene.swift */,
 				5292ED401CA4624A00F7849C /* ChannelNode.swift */,
 				52135E4A1CA4BB900095E2E8 /* NoteNode.swift */,
+				B54CF4811DF91CDC002D6BFE /* SongCompleteNode.swift */,
 				5292ED441CA4628700F7849C /* GameViewController.swift */,
 				B5DC89101CE80A4A005DC942 /* ChooseSongViewController.swift */,
 				B50B2B271DEBBB0700AB4446 /* HighScoreManager.swift */,
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5CEF3481CADB36500FD1467 /* HealthNode.swift in Sources */,
+				B54CF4821DF91CDC002D6BFE /* SongCompleteNode.swift in Sources */,
 				B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */,
 				B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
