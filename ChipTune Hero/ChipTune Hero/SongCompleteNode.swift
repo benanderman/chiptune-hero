@@ -9,12 +9,12 @@
 import SpriteKit
 
 class SongCompleteNode: SKSpriteNode {
-  init(score: Int, longestStreak: Int, stars: Int, totalNotes: Int, notesPlayed: Int) {
+  init(game: Game, won: Bool) {
     super.init(texture: nil, color: UIColor(white: 1.0, alpha: 0.85), size: CGSize(width: 250, height: 250))
     
     let padding = CGFloat(15.0)
     
-    let titleNode = SKLabelNode(text: "Song Complete!")
+    let titleNode = SKLabelNode(text: won ? "Song Complete!" : "Song Failed!")
     titleNode.fontColor = .black
     titleNode.fontName = "Menlo-Bold"
     titleNode.horizontalAlignmentMode = .center
@@ -23,11 +23,19 @@ class SongCompleteNode: SKSpriteNode {
     titleNode.position = CGPoint(x: 0, y: frame.maxY - padding)
     self.addChild(titleNode)
     
-    let notesPercent = Int(Float(notesPlayed) / Float(totalNotes) * 100)
-    let stats = [
-      "Longest streak: \(longestStreak)",
-      "Score: \(score)",
-      "Notes played: \(notesPercent)%"]
+    var stats: [String]
+    if won {
+      let notesPercent = Int(Float(game.notesPlayed) / Float(game.totalNotes) * 100)
+      stats = [
+        "Longest streak: \(game.longestStreak)",
+        "Score: \(game.score)",
+        "Notes played: \(notesPercent)%"]
+    } else {
+      let progressPercent = Int(Float(game.position) / Float(game.totalNotes) * 100)
+      stats = [
+        "Score: \(game.score)",
+        "Progress: \(progressPercent)%"]
+    }
     
     var lastNode = titleNode
     for stat in stats {

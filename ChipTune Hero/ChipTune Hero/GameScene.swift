@@ -44,7 +44,6 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   var scoreNode: SKLabelNode
   var streakNode: SKLabelNode
   var multiplierNode: SKSpriteNode
-  var gameEndedNode: SKLabelNode
   
   init(size: CGSize, game: Game) {
     
@@ -66,7 +65,6 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     scoreNode = SKLabelNode(text: "\(game.score)")
     streakNode = SKLabelNode(text: "\(game.streak)")
     multiplierNode = SKSpriteNode(texture: GameScene.textureForMultiplier(multiplier: game.multiplier))
-    gameEndedNode = SKLabelNode(text: "")
     
     super.init(size: size)
     
@@ -110,11 +108,6 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     scoreNode.position = CGPoint(x: 10, y: streakNode.frame.minY - 10)
     scoreNode.zPosition = 10
     self.addChild(scoreNode)
-    
-    gameEndedNode.fontSize = 24
-    gameEndedNode.zPosition = 11
-    gameEndedNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
-    self.addChild(gameEndedNode)
   }
   
   override func update(_ currentTime: TimeInterval) {
@@ -163,17 +156,19 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   }
   
   func gameDidLose(game: Game) {
-    guard gameEnded == false else { return }
-    gameEnded = true
-    gameEndedNode.text = k.Text.GameLost
-    self.isUserInteractionEnabled = true
+    endGame(won: false)
   }
   
   func gameDidWin(game: Game) {
+    endGame(won: true)
+  }
+  
+  func endGame(won: Bool) {
     guard gameEnded == false else { return }
     gameEnded = true
-    let songCompleteNode = SongCompleteNode(score: game.score, longestStreak: game.longestStreak, stars: 0, totalNotes: game.totalNotes, notesPlayed: game.notesPlayed)
+    let songCompleteNode = SongCompleteNode(game: game, won: won)
     songCompleteNode.position = CGPoint(x: frame.midX, y: frame.midY)
+    songCompleteNode.zPosition = 99
     self.addChild(songCompleteNode)
     self.isUserInteractionEnabled = true
   }
