@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="9oO-yK-TQJ" kind="relationship" relationship="rootViewController" id="rke-dT-f8q"/>
+                        <segue destination="IJA-Wd-0dN" kind="relationship" relationship="rootViewController" id="20K-Xp-VMd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cST-VC-whW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,9 +45,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123" height="32"/>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                         <state key="normal" title="Play"/>
-                                        <connections>
-                                            <segue destination="IJA-Wd-0dN" kind="show" id="Om7-Fz-CNf"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUa-Ix-HVm">
                                         <rect key="frame" x="0.0" y="32" width="123" height="32"/>
@@ -79,9 +76,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSV-O0-DUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-413" y="300"/>
+            <point key="canvasLocation" x="-1130" y="-618"/>
         </scene>
-        <!--Choose A Song-->
+        <!--Chiptune Hero-->
         <scene sceneID="eEa-t8-o26">
             <objects>
                 <viewController id="IJA-Wd-0dN" customClass="ChooseSongViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
@@ -153,7 +150,7 @@
                             <constraint firstItem="4Cc-Fn-rrJ" firstAttribute="top" secondItem="lBP-Be-f7C" secondAttribute="bottom" constant="-64" id="xh9-h8-ZVH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose A Song" id="R3c-YP-Dcf"/>
+                    <navigationItem key="navigationItem" title="Chiptune Hero" id="R3c-YP-Dcf"/>
                     <connections>
                         <outlet property="tableView" destination="4Cc-Fn-rrJ" id="zdN-4Q-Egu"/>
                         <segue destination="BV1-FR-VrT" kind="presentation" identifier="gameVC" id="oTM-c0-lGU"/>
@@ -161,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MCi-TE-RX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="309.60000000000002" y="300"/>
+            <point key="canvasLocation" x="-353" y="300"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -179,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1026" y="300"/>
+            <point key="canvasLocation" x="380" y="300"/>
         </scene>
     </scenes>
 </document>

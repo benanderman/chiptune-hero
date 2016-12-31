@@ -8,20 +8,8 @@
 
 import SpriteKit
 
-class SongCompleteNode: SKSpriteNode {
+class SongCompleteNode: AlertNode {
   init(game: Game, won: Bool) {
-    super.init(texture: nil, color: UIColor(white: 1.0, alpha: 0.85), size: CGSize(width: 250, height: 250))
-    
-    let padding = CGFloat(15.0)
-    
-    let titleNode = SKLabelNode(text: won ? "Song Complete!" : "Song Failed!")
-    titleNode.fontColor = .black
-    titleNode.fontName = "Menlo-Bold"
-    titleNode.horizontalAlignmentMode = .center
-    titleNode.verticalAlignmentMode = .top
-    titleNode.fontSize = 24
-    titleNode.position = CGPoint(x: 0, y: frame.maxY - padding)
-    self.addChild(titleNode)
     
     var stats: [String]
     if won {
@@ -31,24 +19,13 @@ class SongCompleteNode: SKSpriteNode {
         "Score: \(game.score)",
         "Notes played: \(notesPercent)%"]
     } else {
-      let progressPercent = Int(Float(game.position) / Float(game.totalNotes) * 100)
+      let progressPercent = max(Int(Float(game.position) / Float(game.songLength) * 100), 0)
       stats = [
         "Score: \(game.score)",
         "Progress: \(progressPercent)%"]
     }
     
-    var lastNode = titleNode
-    for stat in stats {
-      let labelNode = SKLabelNode(text: stat)
-      labelNode.fontColor = .black
-      labelNode.fontName = "Menlo-Regular"
-      labelNode.horizontalAlignmentMode = .left
-      labelNode.verticalAlignmentMode = .top
-      labelNode.fontSize = 18
-      labelNode.position = CGPoint(x: frame.minX + padding, y: lastNode.frame.minY - padding)
-      self.addChild(labelNode)
-      lastNode = labelNode
-    }
+    super.init(title: won ? "Song Complete!" : "Song Failed!", stats: stats)
     
     let continueNode = SKLabelNode(text: "Tap to continue")
     continueNode.fontColor = .black

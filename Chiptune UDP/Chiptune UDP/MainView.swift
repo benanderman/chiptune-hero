@@ -26,14 +26,12 @@ class MainView: NSView {
     if event.characters != nil && keysToButtons[event.characters!] != nil {
       delegate?.buttonDown(button: keysToButtons[event.characters!]!)
     }
-    super.keyDown(with: event)
   }
   
   override func keyUp(with event: NSEvent) {
     if event.characters != nil && keysToButtons[event.characters!] != nil {
       delegate?.buttonUp(button: keysToButtons[event.characters!]!)
     }
-    super.keyUp(with: event)
   }
   
   override var acceptsFirstResponder: Bool {

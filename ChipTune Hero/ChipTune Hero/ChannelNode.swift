@@ -15,7 +15,7 @@ class ChannelNode: SKSpriteNode {
   var lines2 = SKShapeNode()
   
   override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-    super.init(texture: texture, color: color.withAlphaComponent(0.5), size: size)
+    super.init(texture: texture, color: color, size: size)
     setupLines()
   }
   
@@ -72,7 +72,15 @@ class ChannelNode: SKSpriteNode {
   func rowWasPlayed(row: Int, accuracy: Double) {
     for block in blocks {
       if (block.rowId == row) {
-        let starSprite = SKSpriteNode(imageNamed: "Square")
+//        let starSprite = SKSpriteNode(imageNamed: "Square")
+        var color = UIColor.white
+        let fade = 1.0 - CGFloat(abs(accuracy) / 2)
+        if accuracy > 0 {
+          color = UIColor(red: fade, green: fade, blue: 1.0, alpha: 1.0)
+        } else {
+          color = UIColor(red: 1.0, green: fade, blue: fade, alpha: 1.0)
+        }
+        let starSprite = SKSpriteNode(color: color, size: CGSize(width: self.size.width, height: self.size.width))
 
         starSprite.setScale(0.5)
         starSprite.position = block.position

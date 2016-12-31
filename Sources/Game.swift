@@ -75,6 +75,10 @@ class Game: SongPlayerDelegate {
     return notes.notes.reduce(0) { $0 + ($1 == nil ? 0 : 1) }
   }
   
+  var songLength: Int {
+    return songPlayer.totalRows
+  }
+  
   var streak: Int {
     return notesPlayedOrMissed.reversed().reduce((sum: 0, foundMissed: false)) {
       if $1 && !$0.foundMissed {
@@ -145,18 +149,15 @@ class Game: SongPlayerDelegate {
     songPlayer.speed = self.speed
   }
   
-  func loseGame() {
-    gameEnded = true
+  func endGame() {
+    guard gameEnded == false else { return }
     songPlayer.stop()
-    delegate?.gameDidLose(game: self)
+    gameEnded = true
+    gameWon = false
   }
   
-  func winGame() {
-    if !gameEnded {
-      gameEnded = true
-      gameWon = true
-      delegate?.gameDidWin(game: self)
-    }
+  func togglePaused() {
+    songPlayer.pause()
   }
   
   func buttonDown(button: Button) {
@@ -213,6 +214,20 @@ class Game: SongPlayerDelegate {
   
   private static let noteHitThreshold = 0.9
   private static let maxHealth = 200
+  
+  private func loseGame() {
+    gameEnded = true
+    songPlayer.stop()
+    delegate?.gameDidLose(game: self)
+  }
+  
+  private func winGame() {
+    if !gameEnded {
+      gameEnded = true
+      gameWon = true
+      delegate?.gameDidWin(game: self)
+    }
+  }
   
   private func checkIfRowPlayed() {
     let rowId = currentRow

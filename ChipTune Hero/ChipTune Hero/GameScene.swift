@@ -14,17 +14,12 @@ struct k {
   }
   
   struct Color {
-    static let Channels        = [UIColor.red,
-                                  UIColor.blue,
-                                  UIColor.purple,
-                                  UIColor.green]
+    static let Channels        = [UIColor(red: 0.8, green: 0.3, blue: 0.3, alpha: 0.8),
+                                  UIColor(red: 0.3, green: 0.3, blue: 0.8, alpha: 0.8),
+                                  UIColor(red: 0.8, green: 0.3, blue: 0.8, alpha: 0.8),
+                                  UIColor(red: 0.3, green: 0.8, blue: 0.3, alpha: 0.8),]
     static let Buttons         =  UIColor(white: 0.0, alpha: 0.3)
     static let ButtonsActive   =  UIColor(white: 1.0, alpha: 0.3)
-  }
-  
-  struct Text {
-    static let GameWon = "Song Complete"
-    static let GameLost = "Game Over"
   }
   
   struct Notification {
@@ -69,8 +64,6 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     super.init(size: size)
     
     self.game.delegate = self
-    
-    self.isUserInteractionEnabled = false
     
     for i in 0 ..< channelCount {
       self.channels[i].position = CGPoint(x: channelWidth * (0.5 + CGFloat(i)), y: frame.midY)
@@ -170,13 +163,26 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
     songCompleteNode.position = CGPoint(x: frame.midX, y: frame.midY)
     songCompleteNode.zPosition = 99
     self.addChild(songCompleteNode)
-    self.isUserInteractionEnabled = true
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if gameEnded {
       NotificationCenter.default.post(name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: self)
+    } else {
+      guard touches.count == 1 else { return }
+      let touch = touches.first!
+      let location = touch.location(in: self)
+      if location.y > 180 {
+        let pauseNode = PauseNode(game: game)
+        pauseNode.delegate = self
+        pauseNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        pauseNode.zPosition = 99
+        pauseNode.isUserInteractionEnabled = true
+        addChild(pauseNode)
+        game.togglePaused()
+      }
     }
+    super.touchesBegan(touches, with: event)
   }
   
   func buttonsNodeButtonDown(buttonId: Int) {
@@ -189,5 +195,17 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+extension GameScene: PauseNodeDelegate {
+  func pauseNodeQuitButtonTapped(pauseNode: PauseNode) {
+    game.endGame()
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: self)
+  }
+  
+  func pauseNodeResumeButtonTapped(pauseNode: PauseNode) {
+    pauseNode.removeFromParent()
+    game.togglePaused()
   }
 }

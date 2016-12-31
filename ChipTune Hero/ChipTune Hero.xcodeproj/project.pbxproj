@@ -26,6 +26,8 @@
 		B5192FDD1DBDAC2800A22D0D /* girl_from_mars.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */; };
 		B5192FDE1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */; };
 		B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5264D121D8F78CB00ACC8FB /* XMScanner.swift */; };
+		B532F2541E16FB0C0032F761 /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532F2531E16FB0C0032F761 /* AlertNode.swift */; };
+		B532F2561E175B380032F761 /* PauseNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532F2551E175B380032F761 /* PauseNode.swift */; };
 		B5418E261CA1CFE400E108C9 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E251CA1CFE400E108C9 /* CoreAudio.framework */; };
 		B5418E281CA1CFEB00E108C9 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E271CA1CFEB00E108C9 /* GameController.framework */; };
 		B5418E2A1CA1CFF900E108C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5418E291CA1CFF900E108C9 /* AudioToolbox.framework */; };
@@ -75,6 +77,8 @@
 		B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = girl_from_mars.xm; path = ../songs/girl_from_mars.xm; sourceTree = "<group>"; };
 		B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = girl_from_mars.xm.spec.json; path = ../songs/girl_from_mars.xm.spec.json; sourceTree = "<group>"; };
 		B5264D121D8F78CB00ACC8FB /* XMScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMScanner.swift; path = ../Sources/XMScanner.swift; sourceTree = "<group>"; };
+		B532F2531E16FB0C0032F761 /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
+		B532F2551E175B380032F761 /* PauseNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseNode.swift; sourceTree = "<group>"; };
 		B5418E211CA1C90200E108C9 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B5418E221CA1CE6900E108C9 /* mikmod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mikmod.h; path = include/mikmod.h; sourceTree = "<group>"; };
 		B5418E231CA1CF9700E108C9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -184,6 +188,8 @@
 				5292ED421CA4627600F7849C /* GameScene.swift */,
 				5292ED401CA4624A00F7849C /* ChannelNode.swift */,
 				52135E4A1CA4BB900095E2E8 /* NoteNode.swift */,
+				B532F2531E16FB0C0032F761 /* AlertNode.swift */,
+				B532F2551E175B380032F761 /* PauseNode.swift */,
 				B54CF4811DF91CDC002D6BFE /* SongCompleteNode.swift */,
 				5292ED441CA4628700F7849C /* GameViewController.swift */,
 				B5DC89101CE80A4A005DC942 /* ChooseSongViewController.swift */,
@@ -310,12 +316,14 @@
 			files = (
 				B5CEF3481CADB36500FD1467 /* HealthNode.swift in Sources */,
 				B54CF4821DF91CDC002D6BFE /* SongCompleteNode.swift in Sources */,
+				B532F2541E16FB0C0032F761 /* AlertNode.swift in Sources */,
 				B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */,
 				B5CEF33E1CAAFBE100FD1467 /* SongPlayer.swift in Sources */,
 				5292ED451CA4628700F7849C /* GameViewController.swift in Sources */,
 				B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */,
 				52135E4B1CA4BB900095E2E8 /* NoteNode.swift in Sources */,
 				B5CEF3461CADAAC800FD1467 /* MainMenuViewController.swift in Sources */,
+				B532F2561E175B380032F761 /* PauseNode.swift in Sources */,
 				B5DC89131CE81064005DC942 /* SongTableViewCell.swift in Sources */,
 				B5CEF3441CACA66400FD1467 /* ButtonsNode.swift in Sources */,
 				5292ED431CA4627600F7849C /* GameScene.swift in Sources */,
