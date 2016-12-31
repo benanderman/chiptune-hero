@@ -46,7 +46,12 @@ class SongInfoManager: SongDataDelegate {
     songPath = songPlayer.songPath
     SongInfoManager.samples.removeAll()
     totalChannels = nil
+    
     loadData()
+//    printData()
+//    print("------------------------")
+//    loadDataWithScanner()
+//    printData()
     
     if samples.count == 0 {
       MikMod_KickCallback = { sngpos, patpos, channels, lengths, len in
@@ -70,7 +75,7 @@ class SongInfoManager: SongDataDelegate {
   }
   
   func printData() {
-    for sample in SongInfoManager.samples {
+    for sample in samples {
       var output = "\(sample.pattern)-\(sample.row): "
       var last = 0
       for note in sample.notes {
@@ -100,6 +105,34 @@ class SongInfoManager: SongDataDelegate {
       }
     } catch {
       return
+    }
+  }
+  
+  func loadDataWithScanner() {
+    guard let scanner = try? XMScanner(path: songPath) else { return }
+    
+    samples.removeAll()
+    for patternIndex in 0 ..< scanner.numberOfPatterns {
+      let pattern = scanner.patterns[Int(patternIndex)]
+      for (rowIndex, row) in pattern.notes.enumerated() {
+        var notes = [Note]()
+        for (channelIndex, note) in row.enumerated() {
+          if note.note != 0 {
+            notes.append(Note(length: 1, channel: channelIndex))
+          }
+        }
+        if notes.count > 0 {
+          let sample = SongSample(pattern: Int(patternIndex), row: rowIndex, notes: notes)
+          samples.append(sample)
+        }
+      }
+    }
+    
+    totalChannels = 0
+    for sample in self.samples {
+      for note in sample.notes {
+        totalChannels = max(note.channel + 1, totalChannels!)
+      }
     }
   }
   

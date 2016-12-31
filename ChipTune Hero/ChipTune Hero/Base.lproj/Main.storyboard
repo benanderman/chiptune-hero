@@ -102,21 +102,27 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTw-tX-x36">
-                                                    <rect key="frame" x="16" y="8" width="51.5" height="20"/>
+                                                    <rect key="frame" x="16" y="8" width="52" height="20"/>
                                                     <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPD-G4-OyB">
-                                                    <rect key="frame" x="318" y="8" width="41" height="20"/>
-                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★★★★★" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPD-G4-OyB">
+                                                    <rect key="frame" x="298" y="8" width="61" height="23"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nly-O5-x6c">
-                                                    <rect key="frame" x="16" y="28" width="47" height="15.5"/>
+                                                    <rect key="frame" x="16" y="28" width="47" height="16"/>
                                                     <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGR-6u-jO4">
+                                                    <rect key="frame" x="327" y="28" width="32" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -125,13 +131,16 @@
                                                 <constraint firstItem="eTw-tX-x36" firstAttribute="leading" secondItem="0bV-1c-vSM" secondAttribute="leadingMargin" constant="8" id="AHV-AF-OH1"/>
                                                 <constraint firstItem="KPD-G4-OyB" firstAttribute="top" secondItem="eTw-tX-x36" secondAttribute="top" id="LbR-M0-gXW"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="KPD-G4-OyB" secondAttribute="trailing" constant="8" id="Q3z-aH-SVg"/>
+                                                <constraint firstItem="dGR-6u-jO4" firstAttribute="baseline" secondItem="Nly-O5-x6c" secondAttribute="baseline" id="XwC-8r-ccU"/>
                                                 <constraint firstItem="eTw-tX-x36" firstAttribute="top" secondItem="0bV-1c-vSM" secondAttribute="top" constant="8" id="eIo-KS-fmG"/>
                                                 <constraint firstItem="Nly-O5-x6c" firstAttribute="top" secondItem="eTw-tX-x36" secondAttribute="bottom" id="ezg-VC-N3r"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dGR-6u-jO4" secondAttribute="trailing" constant="8" id="zPw-dS-4xt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="artistLabel" destination="Nly-O5-x6c" id="ozp-4X-22W"/>
-                                            <outlet property="scoreLabel" destination="KPD-G4-OyB" id="P56-Y7-tfo"/>
+                                            <outlet property="scoreLabel" destination="dGR-6u-jO4" id="Tjm-jn-Qkq"/>
+                                            <outlet property="starsLabel" destination="KPD-G4-OyB" id="YoC-gg-BEP"/>
                                             <outlet property="titleLabel" destination="eTw-tX-x36" id="uai-q4-P20"/>
                                         </connections>
                                     </tableViewCell>
@@ -158,7 +167,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MCi-TE-RX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-353" y="300"/>
+            <point key="canvasLocation" x="-354.39999999999998" y="300"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">

@@ -58,8 +58,14 @@ extension ChooseSongViewController: UITableViewDataSource {
     let songInfo = songs[indexPath.row]
     songCell.titleLabel.text = songInfo.title
     songCell.artistLabel.text = songInfo.artist
-    let highScore = HighScoreManager.highestScoreForSong(id: songInfo.filename)
-    songCell.scoreLabel.text = highScore != nil ? String(highScore!.score) : ""
+    if let highScore = HighScoreManager.highestScoreForSong(id: songInfo.filename) {
+      songCell.scoreLabel.text = String(highScore.score)
+      let stars = Int(round(Float(highScore.notesHit) / Float(highScore.totalNotes)) * 5)
+      songCell.starsLabel.text = [String](repeating: "★", count: stars).joined()
+    } else {
+      songCell.scoreLabel.text = ""
+      songCell.starsLabel.text = ""
+    }
     return cell
   }
 }

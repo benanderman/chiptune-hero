@@ -13,4 +13,5 @@ class SongTableViewCell: UITableViewCell {
   @IBOutlet var titleLabel: UILabel!
   @IBOutlet var artistLabel: UILabel!
   @IBOutlet var scoreLabel: UILabel!
+  @IBOutlet var starsLabel: UILabel!
 }
