@@ -13,7 +13,14 @@ class ChooseSongViewController: UIViewController {
   var songs = [SongInfo]()
   var selectedSong: SongInfo?
   
+  let difficulties = ["easy", "hard"]
+  
   @IBOutlet var tableView: UITableView!
+  @IBOutlet var difficultySelector: UISegmentedControl!
+
+  var difficulty: String {
+    return difficulties[difficultySelector.selectedSegmentIndex]
+  }
   
   override func viewDidLoad() {
     guard let path = Bundle.main.path(forResource: "song_list", ofType: "json") else { fatalError() }
@@ -32,6 +39,11 @@ class ChooseSongViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let gameVC = segue.destination as? GameViewController else { fatalError() }
     gameVC.songInfo = selectedSong
+    gameVC.songDifficulty = difficulty
+  }
+  
+  @IBAction func reloadData() {
+    tableView.reloadData()
   }
 }
 
@@ -58,10 +70,12 @@ extension ChooseSongViewController: UITableViewDataSource {
     let songInfo = songs[indexPath.row]
     songCell.titleLabel.text = songInfo.title
     songCell.artistLabel.text = songInfo.artist
-    if let highScore = HighScoreManager.highestScoreForSong(id: songInfo.filename) {
+    
+    if let highScore = HighScoreManager.highestScoreForSong(id: songInfo.filename, difficulty: difficulty) {
       songCell.scoreLabel.text = String(highScore.score)
       let stars = Int(round(Float(highScore.notesHit) / Float(highScore.totalNotes)) * 5)
       songCell.starsLabel.text = [String](repeating: "★", count: stars).joined()
+      songCell.starsLabel.textColor = ["easy": .orange, "hard": .purple][difficulty]
     } else {
       songCell.scoreLabel.text = ""
       songCell.starsLabel.text = ""

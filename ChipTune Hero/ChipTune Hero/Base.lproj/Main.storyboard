@@ -29,7 +29,7 @@
         <!--Chiptune Hero-->
         <scene sceneID="QuK-cv-wtE">
             <objects>
-                <viewController id="9oO-yK-TQJ" customClass="MainMenuViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="introScene" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9oO-yK-TQJ" customClass="MainMenuViewController" customModule="Chiptune_Hero" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mWh-jr-Arh"/>
                         <viewControllerLayoutGuide type="bottom" id="Jct-Kq-bPs"/>
@@ -90,8 +90,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDD-PZ-e0B">
+                                <rect key="frame" x="16" y="82.5" width="113" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bbm-A4-0nW">
+                                <rect key="frame" x="137" y="79" width="89" height="29"/>
+                                <segments>
+                                    <segment title="Easy"/>
+                                    <segment title="Hard"/>
+                                </segments>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="reloadData" destination="IJA-Wd-0dN" eventType="valueChanged" id="J5x-Ca-b4H"/>
+                                </connections>
+                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Cc-Fn-rrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="549"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="song" rowHeight="45" id="Cdc-Oj-fi9" customClass="SongTableViewCell" customModule="Chiptune_Hero" customModuleProvider="target">
@@ -153,14 +170,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bbm-A4-0nW" firstAttribute="leading" secondItem="cDD-PZ-e0B" secondAttribute="trailing" constant="8" id="0Sg-xI-ZAo"/>
+                            <constraint firstItem="bbm-A4-0nW" firstAttribute="centerY" secondItem="cDD-PZ-e0B" secondAttribute="centerY" id="1XW-mG-IXd"/>
                             <constraint firstItem="iJO-WP-UfP" firstAttribute="top" secondItem="4Cc-Fn-rrJ" secondAttribute="bottom" id="7KN-1v-iUa"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="cDD-PZ-e0B" secondAttribute="leading" id="D5A-LW-e9I"/>
                             <constraint firstItem="4Cc-Fn-rrJ" firstAttribute="leading" secondItem="06z-Fl-5zq" secondAttribute="leading" id="SyZ-kf-8y5"/>
                             <constraint firstAttribute="trailing" secondItem="4Cc-Fn-rrJ" secondAttribute="trailing" id="gGz-FP-sxd"/>
-                            <constraint firstItem="4Cc-Fn-rrJ" firstAttribute="top" secondItem="lBP-Be-f7C" secondAttribute="bottom" constant="-64" id="xh9-h8-ZVH"/>
+                            <constraint firstItem="bbm-A4-0nW" firstAttribute="top" secondItem="lBP-Be-f7C" secondAttribute="bottom" constant="15" id="gaI-yR-NDj"/>
+                            <constraint firstItem="4Cc-Fn-rrJ" firstAttribute="top" secondItem="bbm-A4-0nW" secondAttribute="bottom" constant="11" id="hI8-8O-yUt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chiptune Hero" id="R3c-YP-Dcf"/>
                     <connections>
+                        <outlet property="difficultySelector" destination="bbm-A4-0nW" id="gGX-e3-HWN"/>
                         <outlet property="tableView" destination="4Cc-Fn-rrJ" id="zdN-4Q-Egu"/>
                         <segue destination="BV1-FR-VrT" kind="presentation" identifier="gameVC" id="oTM-c0-lGU"/>
                     </connections>

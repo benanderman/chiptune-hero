@@ -12,14 +12,16 @@ struct SongInfo {
   let filename: String
   let title: String
   let artist: String
-  let speed: Int
+  let hardSpeed: Int
+  let easySpeed: Int
   
   init(json: JSON) {
     guard let filename = json["filename"].string else { fatalError() }
     guard let title = json["title"].string else { fatalError() }
     let artist = json["artist"].string ?? ""
-    guard let speed = json["speed"].int else { fatalError() }
+    guard let hardSpeed = json["speeds"]["hard"].int else { fatalError() }
+    guard let easySpeed = json["speeds"]["easy"].int else { fatalError() }
     
-    (self.filename, self.title, self.artist, self.speed) = (filename, title, artist, speed)
+    (self.filename, self.title, self.artist, self.hardSpeed, self.easySpeed) = (filename, title, artist, hardSpeed, easySpeed)
   }
 }

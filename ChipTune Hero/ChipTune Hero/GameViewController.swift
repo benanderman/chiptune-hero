@@ -13,12 +13,15 @@ class GameViewController: UIViewController {
   var game: Game!
   var gameScene: GameScene?
   var songInfo: SongInfo?
+  var songDifficulty: String?
   
   override func viewWillAppear(_ animated: Bool) {
     guard let song = songInfo else { fatalError() }
+    guard let difficulty = songDifficulty else { fatalError() }
     guard let skview = view as? SKView else { fatalError() }
     guard let path = Bundle.main.path(forResource: song.filename, ofType: nil) else { fatalError() }
-    game = Game(songPath: path, speed: song.speed)
+    let speed = ["easy": song.easySpeed, "hard": song.hardSpeed][difficulty]
+    game = Game(songPath: path, speed: speed!)
     gameScene = GameScene(size: view.bounds.size, game: game)
     
     NotificationCenter.default.addObserver(self, selector: #selector(gameEnded), name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: nil)
@@ -31,8 +34,9 @@ class GameViewController: UIViewController {
   func gameEnded() {
     gameScene?.isPaused = true
     if game.gameWon {
+      guard let difficulty = songDifficulty else { fatalError() }
       let highScore = HighScoreInfo(score: game.score, notesHit: game.notesPlayed, totalNotes: game.totalNotes)
-      _ = HighScoreManager.updateHighestScoreForSong(id: songInfo!.filename, highScore: highScore)
+      _ = HighScoreManager.updateHighestScoreForSong(id: songInfo!.filename, difficulty: difficulty, highScore: highScore)
     }
     self.dismiss(animated: true, completion: nil)
   }

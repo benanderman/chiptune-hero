@@ -9,37 +9,55 @@
       "title": "A Winter Kiss",
       "artist": "Drozerix",
       "filename": "a_winter_kiss.xm",
-      "speed": 5
+      "speeds": {
+        "easy": 7,
+        "hard": 5,
+      }
     },
     "past_never_came_back": {
       "title": "Past Never Came Back",
       "artist": "JAM",
       "filename": "81691-past.xm",
-      "speed": 6
+      "speeds": {
+        "easy": 8,
+        "hard": 6,
+      }
     },
     "sunlight": {
       "title": "Sunlight",
       "artist": "fender",
       "filename": "_sunlight_.xm",
-      "speed": 6
+      "speeds": {
+        "easy": 8,
+        "hard": 6,
+      }
     },
     "girl_from_mars": {
       "title": "Girl From Mars",
       "artist": "Drozerix",
       "filename": "girl_from_mars.xm",
-      "speed": 5
+      "speeds": {
+        "easy": 7,
+        "hard": 5,
+      }
     },
     "vpdsp": {
       "title": "VPDSP",
       "artist": "Anders Dator Felix Dator",
       "filename": "0-insnej.xm",
-      "speed": 5
+      "speeds": {
+        "easy": 7,
+        "hard": 5,
+      }
     },
     "felix8": {
       "title": "2 x the SQUAREbeam",
       "artist": "Anders Dator Felix Dator",
       "filename": "felix8.xm",
-      "speed": 5
+      "speeds": {
+        "easy": 7,
+        "hard": 5,
+      }
     }
   }
 }

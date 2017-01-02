@@ -15,9 +15,9 @@ struct HighScoreInfo {
 }
 
 class HighScoreManager {
-  static func highestScoreForSong(id: String) -> HighScoreInfo? {
+  static func highestScoreForSong(id: String, difficulty: String) -> HighScoreInfo? {
     let json = getJSON()
-    if let highScoreJSON = json[id].dictionary {
+    if let highScoreJSON = json[difficulty][id].dictionary {
       let highScore = HighScoreInfo(score: highScoreJSON["score"]?.intValue ?? 0,
                                     notesHit: highScoreJSON["notesHit"]?.intValue ?? 0,
                                     totalNotes: highScoreJSON["totalNotes"]?.intValue ?? 0)
@@ -26,11 +26,14 @@ class HighScoreManager {
     return nil
   }
   
-  static func updateHighestScoreForSong(id: String, highScore: HighScoreInfo) -> Bool {
-    let oldHighScore = highestScoreForSong(id: id)
+  static func updateHighestScoreForSong(id: String, difficulty: String, highScore: HighScoreInfo) -> Bool {
+    let oldHighScore = highestScoreForSong(id: id, difficulty: difficulty)
     if oldHighScore == nil || highScore.score > oldHighScore!.score {
       var json = getJSON()
-      json[id] = JSON(["score": highScore.score,
+      if json[difficulty].dictionary == nil {
+        json[difficulty] = JSON([:])
+      }
+      json[difficulty][id] = JSON(["score": highScore.score,
                        "notesHit": highScore.notesHit,
                        "totalNotes": highScore.totalNotes])
       writeJSON(json: json)
