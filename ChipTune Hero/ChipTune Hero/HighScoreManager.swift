@@ -9,18 +9,20 @@
 import Foundation
 
 struct HighScoreInfo {
-  var score: Int
-  var notesHit: Int
-  var totalNotes: Int
+  let score: Int
+  let maxScore: Int
+  let notesHit: Int
+  let totalNotes: Int
 }
 
 class HighScoreManager {
   static func highestScoreForSong(id: String, difficulty: String) -> HighScoreInfo? {
     let json = getJSON()
     if let highScoreJSON = json[difficulty][id].dictionary {
-      let highScore = HighScoreInfo(score: highScoreJSON["score"]?.intValue ?? 0,
-                                    notesHit: highScoreJSON["notesHit"]?.intValue ?? 0,
-                                    totalNotes: highScoreJSON["totalNotes"]?.intValue ?? 0)
+      let highScore = HighScoreInfo(score: highScoreJSON["score"]?.int ?? 0,
+                                    maxScore: highScoreJSON["maxScore"]?.int ?? 1,
+                                    notesHit: highScoreJSON["notesHit"]?.int ?? 0,
+                                    totalNotes: highScoreJSON["totalNotes"]?.int ?? 1)
       return highScore
     }
     return nil
@@ -34,8 +36,9 @@ class HighScoreManager {
         json[difficulty] = JSON([:])
       }
       json[difficulty][id] = JSON(["score": highScore.score,
-                       "notesHit": highScore.notesHit,
-                       "totalNotes": highScore.totalNotes])
+                                   "maxScore": highScore.maxScore,
+                                   "notesHit": highScore.notesHit,
+                                   "totalNotes": highScore.totalNotes])
       writeJSON(json: json)
       return true
     }

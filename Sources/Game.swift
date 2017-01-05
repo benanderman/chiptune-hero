@@ -75,6 +75,20 @@ class Game: SongPlayerDelegate {
     return notes.notes.reduce(0) { $0 + ($1 == nil ? 0 : 1) }
   }
   
+  var maxScore: Int {
+    var result = 0
+    var noteCount = totalNotes
+    for multiplier in 1 ..< Game.maxMultiplier {
+      result += min(noteCount, 10) * multiplier
+      noteCount -= 10
+      if noteCount <= 0 {
+        return result
+      }
+    }
+    result += noteCount * Game.maxMultiplier
+    return result
+  }
+  
   var songLength: Int {
     return songPlayer.totalRows
   }
@@ -100,7 +114,7 @@ class Game: SongPlayerDelegate {
   }
   
   var multiplier: Int {
-    return min(streak / 10 + 1, 4)
+    return min(streak / 10 + 1, Game.maxMultiplier)
   }
   
   var health: Double {
@@ -214,6 +228,7 @@ class Game: SongPlayerDelegate {
   
   private static let noteHitThreshold = 0.9
   private static let maxHealth = 200
+  private static let maxMultiplier = 4
   
   private func loseGame() {
     gameEnded = true

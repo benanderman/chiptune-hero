@@ -73,7 +73,7 @@ extension ChooseSongViewController: UITableViewDataSource {
     
     if let highScore = HighScoreManager.highestScoreForSong(id: songInfo.filename, difficulty: difficulty) {
       songCell.scoreLabel.text = String(highScore.score)
-      let stars = Int(round(Float(highScore.notesHit) / Float(highScore.totalNotes)) * 5)
+      let stars = min(Int(round(Float(highScore.score) / Float(highScore.maxScore) * 5)), 5)
       songCell.starsLabel.text = [String](repeating: "★", count: stars).joined()
       songCell.starsLabel.textColor = ["easy": .orange, "hard": .purple][difficulty]
     } else {

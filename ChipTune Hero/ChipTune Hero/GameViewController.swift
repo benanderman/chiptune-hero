@@ -35,7 +35,10 @@ class GameViewController: UIViewController {
     gameScene?.isPaused = true
     if game.gameWon {
       guard let difficulty = songDifficulty else { fatalError() }
-      let highScore = HighScoreInfo(score: game.score, notesHit: game.notesPlayed, totalNotes: game.totalNotes)
+      let highScore = HighScoreInfo(score: game.score,
+                                    maxScore: game.maxScore,
+                                    notesHit: game.notesPlayed,
+                                    totalNotes: game.totalNotes)
       _ = HighScoreManager.updateHighestScoreForSong(id: songInfo!.filename, difficulty: difficulty, highScore: highScore)
     }
     self.dismiss(animated: true, completion: nil)

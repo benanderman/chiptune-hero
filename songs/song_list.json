@@ -3,7 +3,8 @@
                  "girl_from_mars",
                  "past_never_came_back",
                  "vpdsp",
-                 "felix8"],
+                 "felix8",
+                 "outer_space"],
   "songs": {
     "a_winter_kiss": {
       "title": "A Winter Kiss",
@@ -54,6 +55,15 @@
       "title": "2 x the SQUAREbeam",
       "artist": "Anders Dator Felix Dator",
       "filename": "felix8.xm",
+      "speeds": {
+        "easy": 7,
+        "hard": 5,
+      }
+    },
+    "outer_space": {
+      "title": "Outer Space",
+      "artist": "Magnusti",
+      "filename": "magnusti_-_outer_space.xm",
       "speeds": {
         "easy": 7,
         "hard": 5,
