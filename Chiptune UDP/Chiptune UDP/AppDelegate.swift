@@ -17,11 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var game: Game?
   
   var oldPosition = 0.0
+  var frame = 0
+  
+  var lastWrongNoteTime = TimeInterval()
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     initMikMod()
     
-    let path = Bundle.main.path(forResource: "girl_from_mars", ofType: "xm")
+    let path = Bundle.main.path(forResource: "a_winter_kiss", ofType: "xm")
     game = Game(songPath: path!, speed: 5)
     game?.delegate = self
     game?.startGame()
@@ -32,27 +35,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   func update() {
     guard game?.gameEnded == false else { return }
+    frame += 1
+    
+    let failRowsOn = (NSDate().timeIntervalSince1970 - lastWrongNoteTime) < 0.2
+    let flickerValues = [4, 4, 1, 8]
     
     let position = round(game!.position * 2) / 2
-    if position != oldPosition {
-      let intPos = Int(round(position))
-      var cols = [[Bool]]()
-      for i in intPos ..< intPos + 9 {
-        let row = game!.notes[i].reduce([false, false, false, false]) {
-          var result = $0
-          result[$1] = true
-          return result
-        }
-        cols.append(row)
-        cols.append(row)
+    let intPos = Int(round(position))
+    var cols = [[Bool]]()
+    for i in intPos ..< intPos + 9 {
+      let row = game!.notes[i].reduce([false, false, false, false]) {
+        var result = $0
+        result[$1] = (frame % flickerValues[$1]) == 0
+        return result
       }
-      let offset = 1 - (intPos - Int(position))
-      cols = [[Bool]](cols[0 + offset ..< cols.count - (2 - offset)])
-      setDisplay(cols)
-      oldPosition = position
+      cols.append(row)
+      cols.append(row)
     }
+    let offset = 1 - (intPos - Int(position))
+    cols = [[Bool]](cols[0 + offset ..< cols.count - (2 - offset)])
+    if failRowsOn {
+      cols[14] = (0 ..< 4).map { (frame % flickerValues[$0]) == 0}
+      cols[15] = cols[14]
+    }
+    setDisplay(cols)
+    oldPosition = position
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+    DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 0.001) {
       self.update()
     }
   }
@@ -66,7 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     var addr = in_addr(s_addr: 0)
-    inet_pton(AF_INET, "192.168.2.5", &addr)
+    inet_pton(AF_INET, "192.168.0.11", &addr)
     udpSend(bytesToSend: bytes, address: addr, port: 1337)
   }
   
@@ -128,6 +137,7 @@ extension AppDelegate: GameDelegate {
   }
   
   func gameDidFailRow(game: Game, row: Int) {
+    lastWrongNoteTime = NSDate().timeIntervalSince1970
     print("Failed row")
   }
   

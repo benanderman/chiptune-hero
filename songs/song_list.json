@@ -4,7 +4,8 @@
                  "past_never_came_back",
                  "vpdsp",
                  "felix8",
-                 "outer_space"],
+                 "outer_space",
+                 "korobeiniki",],
   "songs": {
     "a_winter_kiss": {
       "title": "A Winter Kiss",
@@ -68,6 +69,15 @@
         "easy": 7,
         "hard": 5,
       }
-    }
+    },
+    "korobeiniki": {
+      "title": "Korobeiniki",
+      "artist": "Dalezy",
+      "filename": "dalezy-tetris.xm",
+      "speeds": {
+        "easy": 7,
+        "hard": 5,
+      }
+    },
   }
 }

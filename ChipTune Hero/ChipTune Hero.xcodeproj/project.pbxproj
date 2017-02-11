@@ -26,6 +26,8 @@
 		B5192FDD1DBDAC2800A22D0D /* girl_from_mars.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */; };
 		B5192FDE1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */; };
 		B5264D131D8F78CB00ACC8FB /* XMScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5264D121D8F78CB00ACC8FB /* XMScanner.swift */; };
+		B52E4E2A1E4FBF57006AE5D1 /* dalezy-tetris.xm in Resources */ = {isa = PBXBuildFile; fileRef = B52E4E281E4FBF57006AE5D1 /* dalezy-tetris.xm */; };
+		B52E4E2B1E4FBF57006AE5D1 /* dalezy-tetris.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B52E4E291E4FBF57006AE5D1 /* dalezy-tetris.xm.spec.json */; };
 		B532F2541E16FB0C0032F761 /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532F2531E16FB0C0032F761 /* AlertNode.swift */; };
 		B532F2561E175B380032F761 /* PauseNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532F2551E175B380032F761 /* PauseNode.swift */; };
 		B5410FED1E1E089800CBCA7B /* magnusti_-_outer_space.xm in Resources */ = {isa = PBXBuildFile; fileRef = B5410FEB1E1E089800CBCA7B /* magnusti_-_outer_space.xm */; };
@@ -79,6 +81,8 @@
 		B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = girl_from_mars.xm; path = ../songs/girl_from_mars.xm; sourceTree = "<group>"; };
 		B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = girl_from_mars.xm.spec.json; path = ../songs/girl_from_mars.xm.spec.json; sourceTree = "<group>"; };
 		B5264D121D8F78CB00ACC8FB /* XMScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMScanner.swift; path = ../Sources/XMScanner.swift; sourceTree = "<group>"; };
+		B52E4E281E4FBF57006AE5D1 /* dalezy-tetris.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "dalezy-tetris.xm"; path = "../songs/dalezy-tetris.xm"; sourceTree = "<group>"; };
+		B52E4E291E4FBF57006AE5D1 /* dalezy-tetris.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "dalezy-tetris.xm.spec.json"; path = "../songs/dalezy-tetris.xm.spec.json"; sourceTree = "<group>"; };
 		B532F2531E16FB0C0032F761 /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
 		B532F2551E175B380032F761 /* PauseNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseNode.swift; sourceTree = "<group>"; };
 		B5410FEB1E1E089800CBCA7B /* magnusti_-_outer_space.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "magnusti_-_outer_space.xm"; path = "../songs/magnusti_-_outer_space.xm"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */,
 				B5192FDB1DBDAC2800A22D0D /* girl_from_mars.xm */,
 				B5192FDC1DBDAC2800A22D0D /* girl_from_mars.xm.spec.json */,
+				B52E4E281E4FBF57006AE5D1 /* dalezy-tetris.xm */,
+				B52E4E291E4FBF57006AE5D1 /* dalezy-tetris.xm.spec.json */,
 				B5DC890C1CE6FB07005DC942 /* song_list.json */,
 			);
 			name = Resources;
@@ -297,6 +303,7 @@
 				B575AC9E1CA198C4003F90F4 /* LaunchScreen.storyboard in Resources */,
 				B5192FDD1DBDAC2800A22D0D /* girl_from_mars.xm in Resources */,
 				B5DC890B1CE6F9BA005DC942 /* 81691-past.xm.spec.json in Resources */,
+				B52E4E2B1E4FBF57006AE5D1 /* dalezy-tetris.xm.spec.json in Resources */,
 				B5DC890A1CE6F9BA005DC942 /* 81691-past.xm in Resources */,
 				B5DC890D1CE6FB07005DC942 /* song_list.json in Resources */,
 				B5410FED1E1E089800CBCA7B /* magnusti_-_outer_space.xm in Resources */,
@@ -312,6 +319,7 @@
 				B50B2B221DEB6A1E00AB4446 /* 0-insnej.xm.spec.json in Resources */,
 				B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */,
 				B575AC991CA198C4003F90F4 /* Main.storyboard in Resources */,
+				B52E4E2A1E4FBF57006AE5D1 /* dalezy-tetris.xm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
