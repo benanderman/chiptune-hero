@@ -75,7 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     var addr = in_addr(s_addr: 0)
-    inet_pton(AF_INET, "192.168.0.11", &addr)
+    inet_pton(AF_INET, "192.168.2.5", &addr)
     udpSend(bytesToSend: bytes, address: addr, port: 1337)
   }
   

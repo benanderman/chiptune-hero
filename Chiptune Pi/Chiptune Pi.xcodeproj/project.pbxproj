@@ -20,6 +20,7 @@
 		B57C0A711CB5E548004D36DE /* RPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RPI.h; path = Sources/RPI.h; sourceTree = "<group>"; };
 		B57C0A721CB5E59A004D36DE /* RPI.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = RPI.c; path = Sources/RPI.c; sourceTree = "<group>"; };
 		B57C0A731CB5EBAB004D36DE /* gpio_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = gpio_test.c; path = Sources/gpio_test.c; sourceTree = "<group>"; };
+		B5A848FE1FF0A1540016F636 /* grid_web.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = grid_web.py; sourceTree = "<group>"; };
 		B5EE000D1CB6E87D00365559 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameManager.swift; path = Sources/GameManager.swift; sourceTree = "<group>"; };
 		B5EE000E1CB6F19100365559 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		B5EE000F1CB7362400365559 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Display.swift; path = Sources/Display.swift; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 				B57C0A721CB5E59A004D36DE /* RPI.c */,
 				B57C0A731CB5EBAB004D36DE /* gpio_test.c */,
 				B532F1ED1E105C8D0032F761 /* grid_controller.c */,
+				B5A848FE1FF0A1540016F636 /* grid_web.py */,
 			);
 			name = Sources;
 			sourceTree = "<group>";

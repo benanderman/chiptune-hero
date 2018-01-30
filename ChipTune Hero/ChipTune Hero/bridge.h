@@ -9,6 +9,8 @@
 #ifndef bridge_h
 #define bridge_h
 
+typedef _Bool bool;
+
 #include "SDL.h"
 #include "mikmod.h"
 
