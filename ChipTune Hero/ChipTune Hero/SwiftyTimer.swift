@@ -31,7 +31,7 @@ private class NSTimerActor {
         self.block = block
     }
     
-    dynamic func fire() {
+    @objc dynamic func fire() {
         block()
     }
 }
@@ -63,7 +63,7 @@ extension Timer {
     
     public class func after(interval: TimeInterval, _ block: @escaping () -> ()) -> Timer {
         let timer = Timer.new(after: interval, block)
-        RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.current.add(timer, forMode: .default)
         return timer
     }
     
@@ -71,7 +71,7 @@ extension Timer {
     
     public class func every(interval: TimeInterval, _ block: @escaping () -> ()) -> Timer {
         let timer = Timer.new(every: interval, block)
-        RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.current.add(timer, forMode: .default)
         return timer
     }
 }

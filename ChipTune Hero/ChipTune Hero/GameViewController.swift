@@ -31,7 +31,7 @@ class GameViewController: UIViewController {
     game.startGame()
   }
   
-  func gameEnded() {
+  @objc func gameEnded() {
     gameScene?.isPaused = true
     if game.gameWon {
       guard let difficulty = songDifficulty else { fatalError() }
