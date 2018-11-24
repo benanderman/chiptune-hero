@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SongSpec {
+class SongSpec: Codable {
 	var activeChannels: NotesLayer
 	var playable: NotesLayer
 	
@@ -21,19 +21,4 @@ class SongSpec {
     activeChannels = NotesLayer(dict: dict["activeChannels"] as! [String:Any])
     playable = NotesLayer(dict: dict["playable"] as! [String:Any])
   }
-	
-#if USE_SWIFTYJSON
-	init(json: JSON) {
-		activeChannels = NotesLayer(json: json["activeChannels"])
-		playable = NotesLayer(json: json["playable"])
-	}
-#endif
-	
-#if USE_SWIFTYJSON
-	func toJSON() -> JSON {
-		return JSON([
-			"activeChannels": activeChannels.toJSON(),
-			"playable": playable.toJSON()])
-	}
-#endif
 }

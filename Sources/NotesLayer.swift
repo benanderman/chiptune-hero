@@ -8,8 +8,8 @@
 
 import Foundation
 
-class NotesLayer {
-  struct Color {
+class NotesLayer: Codable {
+    struct Color: Codable {
     let red: Double
     let green: Double
     let blue: Double
@@ -26,20 +26,6 @@ class NotesLayer {
     self.notes = [[Int]?](repeating: nil, count: rows)
     self.color = color
   }
-  
-  #if USE_SWIFTYJSON
-  init(json: JSON) {
-		notes = json["notes"].arrayValue.map {
-      $0.arrayValue.count != 0 ? $0.arrayValue.map { $0.intValue } : nil
-		}
-		
-		let red = json["color"]["red"].doubleValue
-		let green = json["color"]["green"].doubleValue
-		let blue = json["color"]["blue"].doubleValue
-		let alpha = json["color"]["alpha"].doubleValue
-    color = Color(red: red, green: green, blue: blue, alpha: alpha)
-  }
-  #endif
   
   // Gross so that it works on non-Darwin (specifically, Raspberry Pi)
   init(dict: [String:Any]) {
@@ -101,13 +87,4 @@ class NotesLayer {
     }
     notes[row] = notes[row]?.filter { $0 != column }
   }
-  
-#if USE_SWIFTYJSON
-  func toJSON() -> JSON {
-    let rgba = ["red": color.red, "green": color.green, "blue": color.blue, "alpha": color.alpha]
-    let nonOptionalNotes = (0 ..< rows).map { self[$0] }
-    let dict: [String:Any] = ["color": rgba, "notes": nonOptionalNotes]
-    return JSON(dict)
-  }
-#endif
 }

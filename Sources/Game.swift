@@ -130,8 +130,12 @@ class Game: SongPlayerDelegate {
     let specPath = songPath + ".spec.json"
     if let data = FileManager.default.contents(atPath: specPath) {
       #if USE_SWIFTYJSON
-        let json = JSON(data: data)
-        songPlayer.songSpec = SongSpec(json: json)
+        let decoder = JSONDecoder()
+        do {
+            songPlayer.songSpec = try decoder.decode(SongSpec.self, from: data)
+        } catch let error {
+            debugPrint(error)
+        }
       #else
         let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as! [String:Any]
         songPlayer.songSpec = SongSpec(dict: dict)

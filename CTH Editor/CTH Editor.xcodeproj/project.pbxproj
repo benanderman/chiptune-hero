@@ -20,7 +20,6 @@
 		B5F2EF5D1C9748DA00619754 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF5C1C9748DA00619754 /* Assets.xcassets */; };
 		B5F2EF601C9748DA00619754 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F2EF5E1C9748DA00619754 /* Main.storyboard */; };
 		B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F2EF721C975D1200619754 /* SongPlayer.swift */; };
-		B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */; };
 		B5F8D0371C9CA67F00086F85 /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 		B5F2EF681C974D5900619754 /* libmikmod.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmikmod.3.3.0.dylib; sourceTree = "<group>"; };
 		B5F2EF6C1C974EE000619754 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B5F2EF721C975D1200619754 /* SongPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongPlayer.swift; sourceTree = "<group>"; };
-		B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VariadicWrapper.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +73,6 @@
 			children = (
 				B508EAE41CA31572002B90EA /* NotesLayer.swift */,
 				B508EAE61CA356D4002B90EA /* SongSpec.swift */,
-				B5F8D0331C9B07E100086F85 /* SwiftyJSON.swift */,
 				B5F2EF721C975D1200619754 /* SongPlayer.swift */,
 				B5264D141D90BEF500ACC8FB /* XMScanner.swift */,
 				B5F8D0361C9CA67F00086F85 /* VariadicWrapper.c */,
@@ -217,7 +214,6 @@
 				B5F2EF731C975D1200619754 /* SongPlayer.swift in Sources */,
 				B508EAE51CA31572002B90EA /* NotesLayer.swift in Sources */,
 				B5264D151D90BEF500ACC8FB /* XMScanner.swift in Sources */,
-				B5F8D0341C9B07E100086F85 /* SwiftyJSON.swift in Sources */,
 				B5CEF33C1CA9E63B00FD1467 /* SongInfoManager.swift in Sources */,
 				B5C7C4C91C9DE06D003C9B16 /* SongNotesView.swift in Sources */,
 			);

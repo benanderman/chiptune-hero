@@ -16,7 +16,6 @@
 		5292ED471CA4629000F7849C /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5292ED461CA4629000F7849C /* StarParticle.sks */; };
 		B508EADD1CA2351B002B90EA /* libmikmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B575ACA51CA19D52003F90F4 /* libmikmod.a */; };
 		B508EAE21CA2F5F3002B90EA /* a_winter_kiss.xm in Resources */ = {isa = PBXBuildFile; fileRef = B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */; };
-		B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */; };
 		B508EAF01CA4811D002B90EA /* VariadicWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */; };
 		B50B2B211DEB6A1E00AB4446 /* 0-insnej.xm in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */; };
 		B50B2B221DEB6A1E00AB4446 /* 0-insnej.xm.spec.json in Resources */ = {isa = PBXBuildFile; fileRef = B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */; };
@@ -71,7 +70,6 @@
 		B508EAE11CA2F5F3002B90EA /* a_winter_kiss.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = a_winter_kiss.xm; path = ../songs/a_winter_kiss.xm; sourceTree = "<group>"; };
 		B508EAE91CA4811D002B90EA /* NotesLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesLayer.swift; path = ../Sources/NotesLayer.swift; sourceTree = "<group>"; };
 		B508EAEA1CA4811D002B90EA /* SongSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSpec.swift; path = ../Sources/SongSpec.swift; sourceTree = "<group>"; };
-		B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Sources/SwiftyJSON.swift; sourceTree = "<group>"; };
 		B508EAEC1CA4811D002B90EA /* VariadicWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VariadicWrapper.c; path = ../Sources/VariadicWrapper.c; sourceTree = "<group>"; };
 		B50B2B1F1DEB6A1E00AB4446 /* 0-insnej.xm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "0-insnej.xm"; path = "../songs/0-insnej.xm"; sourceTree = "<group>"; };
 		B50B2B201DEB6A1E00AB4446 /* 0-insnej.xm.spec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "0-insnej.xm.spec.json"; path = "../songs/0-insnej.xm.spec.json"; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				B508EAE91CA4811D002B90EA /* NotesLayer.swift */,
 				B508EAEA1CA4811D002B90EA /* SongSpec.swift */,
 				B5CEF33D1CAAFBE100FD1467 /* SongPlayer.swift */,
-				B508EAEB1CA4811D002B90EA /* SwiftyJSON.swift */,
 				B5CEF3411CAB2DA900FD1467 /* Game.swift */,
 				B5264D121D8F78CB00ACC8FB /* XMScanner.swift */,
 			);
@@ -350,7 +347,6 @@
 				B5DC890F1CE7FF32005DC942 /* SongInfo.swift in Sources */,
 				B5DC89111CE80A4A005DC942 /* ChooseSongViewController.swift in Sources */,
 				B50B2B281DEBBB0700AB4446 /* HighScoreManager.swift in Sources */,
-				B508EAEF1CA4811D002B90EA /* SwiftyJSON.swift in Sources */,
 				5292ED411CA4624A00F7849C /* ChannelNode.swift in Sources */,
 				52135E491CA4B6410095E2E8 /* SwiftyTimer.swift in Sources */,
 			);
