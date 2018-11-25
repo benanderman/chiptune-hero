@@ -39,6 +39,7 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
   var scoreNode: SKLabelNode
   var streakNode: SKLabelNode
   var multiplierNode: SKSpriteNode
+  var pauseNode: PauseNode?
   
   init(size: CGSize, game: Game) {
     
@@ -173,12 +174,18 @@ class GameScene: SKScene, GameDelegate, ButtonsNodeDelegate {
       let touch = touches.first!
       let location = touch.location(in: self)
       if location.y > 180 {
-        let pauseNode = PauseNode(game: game)
-        pauseNode.delegate = self
-        pauseNode.position = CGPoint(x: frame.midX, y: frame.midY)
-        pauseNode.zPosition = 99
-        pauseNode.isUserInteractionEnabled = true
-        addChild(pauseNode)
+        if let pauseNode = pauseNode {
+          pauseNode.removeFromParent()
+          self.pauseNode = nil
+        } else {
+          let pauseNode = PauseNode(game: game)
+          pauseNode.delegate = self
+          pauseNode.position = CGPoint(x: frame.midX, y: frame.midY)
+          pauseNode.zPosition = 99
+          pauseNode.isUserInteractionEnabled = true
+          addChild(pauseNode)
+          self.pauseNode = pauseNode
+        }
         game.togglePaused()
       }
     }
@@ -206,6 +213,7 @@ extension GameScene: PauseNodeDelegate {
   
   func pauseNodeResumeButtonTapped(pauseNode: PauseNode) {
     pauseNode.removeFromParent()
+    self.pauseNode = nil
     game.togglePaused()
   }
 }
