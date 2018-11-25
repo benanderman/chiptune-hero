@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import AVKit
 
 class GameViewController: UIViewController {
   var game: Game!
@@ -23,6 +24,13 @@ class GameViewController: UIViewController {
     let speed: Int? = song.speedValue(for: difficulty)
     game = Game(songPath: path, speed: speed!)
     gameScene = GameScene(size: view.bounds.size, game: game)
+    
+    do {
+      try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+      try AVAudioSession.sharedInstance().setActive(true)
+    } catch let error {
+      debugPrint(error)
+    }
     
     NotificationCenter.default.addObserver(self, selector: #selector(gameEnded), name: NSNotification.Name(rawValue: k.Notification.GameEnded), object: nil)
     
