@@ -36,7 +36,11 @@ class Game: SongPlayerDelegate {
       row = -introRowCount + row
     }
 
-    return Double(row) + min(1, elapsed / lastRowTime)
+    return Double(row) + min(1, elapsed / rowDuration)
+  }
+  
+  var rowDuration: Double {
+    return Double(speed) * 0.02
   }
   
   var gameEnded = false
@@ -72,7 +76,7 @@ class Game: SongPlayerDelegate {
   }
   
   var totalNotes: Int {
-    return notes.notes.reduce(0) { $0 + ($1 == nil ? 0 : 1) }
+    return notes.notes.reduce(0) { $0 + (($1 ?? []).count > 0 ? 1 : 0) }
   }
   
   var maxScore: Int {
@@ -196,7 +200,6 @@ class Game: SongPlayerDelegate {
     lastRowId = newPosition
     
     let now = NSDate().timeIntervalSince1970
-    lastRowTime = now - lastRowChange
     lastRowChange = now
     let lastRow = Int(position - 1)
     if notes[lastRow].count > 0 && lastRowPlayed != lastRow {
@@ -221,7 +224,6 @@ class Game: SongPlayerDelegate {
   private let speed: Int
   private var buttonsDown = Set<Button>()
   private var lastRowChange: TimeInterval = 0
-  private var lastRowTime: TimeInterval = 1
   private var lastRowPlayed = -1
   private var notesPlayedOrMissed = [Bool]()
   private var rowsMissed = [Int:Int]()
