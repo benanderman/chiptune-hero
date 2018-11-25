@@ -8,37 +8,29 @@
 
 import Foundation
 
-struct HighScoreInfo {
+struct HighScoreInfo: Codable {
   let score: Int
   let maxScore: Int
   let notesHit: Int
   let totalNotes: Int
 }
 
+typealias HighScoreCollection = [String: [String: HighScoreInfo]]
+
 class HighScoreManager {
-  static func highestScoreForSong(id: String, difficulty: String) -> HighScoreInfo? {
+  static func highestScoreForSong(id: String, difficulty: SongSpeed) -> HighScoreInfo? {
     let json = getJSON()
-    if let highScoreJSON = json[difficulty][id].dictionary {
-      let highScore = HighScoreInfo(score: highScoreJSON["score"]?.int ?? 0,
-                                    maxScore: highScoreJSON["maxScore"]?.int ?? 1,
-                                    notesHit: highScoreJSON["notesHit"]?.int ?? 0,
-                                    totalNotes: highScoreJSON["totalNotes"]?.int ?? 1)
-      return highScore
-    }
-    return nil
+    return json[difficulty.rawValue]?[id]
   }
   
-  static func updateHighestScoreForSong(id: String, difficulty: String, highScore: HighScoreInfo) -> Bool {
+  static func updateHighestScoreForSong(id: String, difficulty: SongSpeed, highScore: HighScoreInfo) -> Bool {
     let oldHighScore = highestScoreForSong(id: id, difficulty: difficulty)
     if oldHighScore == nil || highScore.score > oldHighScore!.score {
       var json = getJSON()
-      if json[difficulty].dictionary == nil {
-        json[difficulty] = JSON([:])
+      if json[difficulty.rawValue] == nil {
+        json[difficulty.rawValue] = [:]
       }
-      json[difficulty][id] = JSON(["score": highScore.score,
-                                   "maxScore": highScore.maxScore,
-                                   "notesHit": highScore.notesHit,
-                                   "totalNotes": highScore.totalNotes])
+      json[difficulty.rawValue]?[id] = highScore
       writeJSON(json: json)
       return true
     }
@@ -52,19 +44,25 @@ class HighScoreManager {
     return documentsPath.path + "/" + highScoreFileName
   }
   
-  private static func getJSON() -> JSON {
-    if let data = FileManager.default.contents(atPath: highScoreFilePath) {
-      return JSON(data: data)
+  private static func getJSON() -> HighScoreCollection {
+    do {
+      let data = try Data(contentsOf: URL(fileURLWithPath: highScoreFilePath))
+      let decoder = JSONDecoder()
+      let json = try decoder.decode(HighScoreCollection.self, from: data)
+      return json
+    } catch let error {
+      debugPrint(error)
+      return [:]
     }
-    return JSON([:])
   }
   
-  private static func writeJSON(json: JSON) {
+  private static func writeJSON(json: HighScoreCollection) {
     do {
-      let data = try json.rawData()
+      let encoder = JSONEncoder()
+      let data = try encoder.encode(json)
       try data.write(to: URL(fileURLWithPath: highScoreFilePath))
-    } catch {
-      return
+    } catch let error {
+      debugPrint(error)
     }
   }
 }

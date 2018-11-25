@@ -8,20 +8,18 @@
 
 import Foundation
 
-struct SongInfo {
+enum SongSpeed: String, Codable, CaseIterable {
+  case hard
+  case easy
+}
+
+struct SongInfo: Codable {
   let filename: String
   let title: String
-  let artist: String
-  let hardSpeed: Int
-  let easySpeed: Int
+  let artist: String?
+  let speeds: [String: Int]
   
-  init(json: JSON) {
-    guard let filename = json["filename"].string else { fatalError() }
-    guard let title = json["title"].string else { fatalError() }
-    let artist = json["artist"].string ?? ""
-    guard let hardSpeed = json["speeds"]["hard"].int else { fatalError() }
-    guard let easySpeed = json["speeds"]["easy"].int else { fatalError() }
-    
-    (self.filename, self.title, self.artist, self.hardSpeed, self.easySpeed) = (filename, title, artist, hardSpeed, easySpeed)
+  func speedValue(for speed: SongSpeed) -> Int? {
+    return speeds[speed.rawValue]
   }
 }

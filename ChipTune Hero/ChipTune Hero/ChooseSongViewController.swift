@@ -9,26 +9,38 @@
 import Foundation
 import UIKit
 
+struct SongCollection: Codable {
+  let songOrder: [String]
+  let songs: [String: SongInfo]
+  var songsInOrder: [SongInfo] {
+    return songOrder.compactMap {
+      return songs[$0]
+    }
+  }
+}
+
 class ChooseSongViewController: UIViewController {
   var songs = [SongInfo]()
   var selectedSong: SongInfo?
   
-  let difficulties = ["easy", "hard"]
+  let difficulties: [SongSpeed] = [.easy, .hard]
   
   @IBOutlet var tableView: UITableView!
   @IBOutlet var difficultySelector: UISegmentedControl!
 
-  var difficulty: String {
+  var difficulty: SongSpeed {
     return difficulties[difficultySelector.selectedSegmentIndex]
   }
   
   override func viewDidLoad() {
     guard let path = Bundle.main.path(forResource: "song_list", ofType: "json") else { fatalError() }
-    if let data = FileManager.default.contents(atPath: path) {
-      let json = JSON(data: data)
-      let songOrder = json["song_order"].arrayValue.map { $0.stringValue }
-      let songInfos = json["songs"].dictionaryValue
-      self.songs = songOrder.map { SongInfo(json: songInfos[$0]!) }
+    do {
+      let data = try Data(contentsOf: URL(fileURLWithPath: path))
+      let decoder = JSONDecoder()
+      let songCollection = try decoder.decode(SongCollection.self, from: data)
+      songs = songCollection.songsInOrder
+    } catch let error {
+      debugPrint(error)
     }
   }
   
@@ -75,7 +87,7 @@ extension ChooseSongViewController: UITableViewDataSource {
       songCell.scoreLabel.text = String(highScore.score)
       let stars = min(Int(round(Float(highScore.score) / Float(highScore.maxScore) * 5)), 5)
       songCell.starsLabel.text = [String](repeating: "★", count: stars).joined()
-      songCell.starsLabel.textColor = ["easy": .orange, "hard": .purple][difficulty]
+      songCell.starsLabel.textColor = ["easy": .orange, "hard": .purple][difficulty.rawValue]
     } else {
       songCell.scoreLabel.text = ""
       songCell.starsLabel.text = ""

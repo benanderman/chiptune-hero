@@ -1,11 +1,11 @@
 {
-  "song_order": ["a_winter_kiss",
+  "songOrder": ["a_winter_kiss",
                  "girl_from_mars",
                  "past_never_came_back",
                  "vpdsp",
                  "felix8",
                  "outer_space",
-                 "korobeiniki",],
+                 "korobeiniki"],
   "songs": {
     "a_winter_kiss": {
       "title": "A Winter Kiss",

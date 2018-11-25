@@ -13,14 +13,14 @@ class GameViewController: UIViewController {
   var game: Game!
   var gameScene: GameScene?
   var songInfo: SongInfo?
-  var songDifficulty: String?
+  var songDifficulty: SongSpeed?
   
   override func viewWillAppear(_ animated: Bool) {
     guard let song = songInfo else { fatalError() }
     guard let difficulty = songDifficulty else { fatalError() }
     guard let skview = view as? SKView else { fatalError() }
     guard let path = Bundle.main.path(forResource: song.filename, ofType: nil) else { fatalError() }
-    let speed = ["easy": song.easySpeed, "hard": song.hardSpeed][difficulty]
+    let speed: Int? = song.speedValue(for: difficulty)
     game = Game(songPath: path, speed: speed!)
     gameScene = GameScene(size: view.bounds.size, game: game)
     
