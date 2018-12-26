@@ -21,15 +21,19 @@ extension NotesLayer {
 
 class SongInfoManager: SongDataDelegate {
   
-  struct Note {
+  struct Note: Codable {
     let length: Int
     let channel: Int
   }
   
-  struct SongSample {
+  struct SongSample: Codable {
     let pattern: Int
     let row: Int
     let notes: [Note]
+  }
+  
+  struct SongSamples: Codable {
+    let samples: [SongSample]
   }
   
   // Because of how MikMod works, and how closures being used as C function pointers work,
@@ -90,21 +94,14 @@ class SongInfoManager: SongDataDelegate {
   }
   
   func writeData() {
-    let samples = SongInfoManager.samples.map {
-      [
-        "pattern": $0.pattern,
-        "row": $0.row,
-        "notes": $0.notes.map { ["length": $0.length, "channel": $0.channel] }
-      ]
-    }
-    let json = JSON(["samples": samples])
     do {
-      let data = try json.rawData()
+      let encoder = JSONEncoder()
+      let data = try encoder.encode(SongSamples(samples: SongInfoManager.samples))
       if let path = songInfoPathForSong(path: songPath) {
         try data.write(to: URL(fileURLWithPath: path))
       }
-    } catch {
-      return
+    } catch let error {
+      debugPrint(error)
     }
   }
   
@@ -143,14 +140,14 @@ class SongInfoManager: SongDataDelegate {
     guard let data = FileManager.default.contents(atPath: path) else {
       return
     }
-    let json = JSON(data: data)
-    if let samples = json["samples"].array {
-      self.samples = samples.map {
-        SongSample(pattern: $0["pattern"].intValue, row: $0["row"].intValue, notes: $0["notes"].arrayValue.map {
-          Note(length: $0["length"].intValue, channel: $0["channel"].intValue)
-          })
-      }
+    
+    let decoder = JSONDecoder()
+    do {
+      samples = try decoder.decode(SongSamples.self, from: data).samples
+    } catch let error {
+      debugPrint(error)
     }
+    
     totalChannels = 0
     for sample in self.samples {
       for note in sample.notes {
