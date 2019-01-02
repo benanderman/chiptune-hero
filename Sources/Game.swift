@@ -202,7 +202,7 @@ class Game: SongPlayerDelegate {
     let now = NSDate().timeIntervalSince1970
     lastRowChange = now
     let lastRow = Int(position - 1)
-    if notes[lastRow].count > 0 && lastRowPlayed != lastRow {
+    if notes[lastRow].count > 0 && lastRowPlayed < lastRow {
       handleFailedToPlayRow(row: lastRow)
     }
     
